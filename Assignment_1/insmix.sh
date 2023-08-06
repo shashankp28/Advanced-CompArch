@@ -1,1 +1,0 @@
-~/pin-3.28-98749-g6643ecee5-gcc-linux/pin -t ~/pin-3.28-98749-g6643ecee5-gcc-linux/source/tools/Insmix/obj-intel64/insmix.so -- $1

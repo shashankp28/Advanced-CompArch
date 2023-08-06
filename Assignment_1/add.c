@@ -2,7 +2,10 @@
 
 int main()
 {
-    float c = 1.23 + 8.96;
-    printf("%f\n", c);
+    int a=12389, b=9871, c, d, e, f;
+    c = a + b;
+    d = a - b;
+    e = a * b;
+    f = a / b;
     return 0;
 }
