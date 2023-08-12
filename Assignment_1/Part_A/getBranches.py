@@ -1,27 +1,17 @@
 import sys
 
 
-def data(filename, n):
-    with open(filename, 'r') as file:
-        lines = file.readlines()
+def data(filename):
 
-    comment_count = 0
-    new_lines = []
+    with open(filename,'r') as file:
+        lines=file.readlines()
 
-    data = []
+    filteredlines = [ x for x in lines if not x.startswith("#")]
 
-    for line in lines:
-        if line.strip().startswith('#'):
-            comment_count += 1
-            if comment_count > n:
-                new_lines.append(line)
-        else:
-            if comment_count > n:
-                new_lines.append(line)
-                data.append([item for item in line.split(' ') if item != '' and item != '0\n'][1:])
+    data=[]
 
-    # with open(filename, 'w') as file:
-    #     file.writelines(new_lines)
+    for line in filteredlines:
+        data.append([item for item in line.split(' ') if item != '' and item != '0\n'][1:])
 
     return data
 
@@ -39,17 +29,16 @@ if __name__=="__main__":
     # with open(filename,'w') as file:
     #     file.writelines(filteredlines)
 
-    abstracted_data = data(filename, 5)
+    abstracted_data = data(filename)
     # jumpinstr = ["JA","JAE","JB","JBE","JBE","JC","JCXZ","JE","JECXZ","JG","JGE","JLE","JMP","JNAE","JNB","JNBE","JNC","JNE","JNG","JNGE","JNL","JNLE","JNO","JNP","JNS","JNZ","JO","JP","JPE","JPO","JS","JZ"]
-    branch_taken = 
 
     float_counter = 0
     int_counter = 0
 
-    # print(abstracted_data)
-    for x in abstracted_data:
-        if x[0] in branch_taken:
-            int_counter+=int(x[1])
+    print(abstracted_data)
+    # for x in abstracted_data:
+    #     if x[0] in branch_taken:
+    #         int_counter+=int(x[1])
     
     print(int_counter*100/inst_count,"%")
     print(float_counter*100/inst_count,"%")
