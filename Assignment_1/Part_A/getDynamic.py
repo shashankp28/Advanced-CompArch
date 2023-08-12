@@ -42,11 +42,14 @@ if __name__=="__main__":
     abstracted_data = data(filename, 5)
     arithmeticOperands = ["ADC","ADD","SUB","CMP","DEC","DIV","IDIV","IMUL","INC","MUL","NEG","SBB","AAA","AAD","AAM","AAS","DAA","DAS"]
     logicalOperands = ["AND","NOT","OR","XOR","RCL","RCR","ROL","ROR","SAL","SAR","SHL","SHLD","SHR","SHRD"]
-    # jumpinstr = ["JA","JAE","JB","JBE","JBE","JC","JCXZ","JE","JECXZ","JG","JGE","JLE","JMP","JNAE","JNB","JNBE","JNC","JNE","JNG","JNGE","JNL","JNLE","JNO","JNP","JNS","JNZ","JO","JP","JPE","JPO","JS","JZ"]
+    cond_jumpinstr = ["JA","JAE","JB","JBE","JBE","JC","JCXZ","JE","JECXZ","JG","JGE","JLE","JNAE","JNB","JNBE","JNC","JNE","JNG","JNGE","JNL","JNLE","JNO","JNP","JNS","JNZ","JO","JP","JPE","JPO","JS","JZ"]
+    jumpinstr = ["JMP"]
     floatOperands = ["ADDSS","ADDSD","SUBSS","SUBSD","MULSS","MULSD","DIVSS","DIVSD","SQRTSS","SQRTSD"]
 
     float_counter = 0
     int_counter = 0
+    unc_jump_counter = 0
+    c_jump_counter = 0
 
     # print(abstracted_data)
     for x in abstracted_data:
@@ -54,7 +57,14 @@ if __name__=="__main__":
             int_counter+=int(x[1])
         if x[0] in floatOperands:
             float_counter+=int(x[1])
+        if x[0] in jumpinstr:
+            unc_jump_counter+=int(x[1])
+        if x[0] in cond_jumpinstr:
+            c_jump_counter+=int(x[1])
+
     
-    print(int_counter*100/inst_count,"%")
-    print(float_counter*100/inst_count,"%")
+    print("Int - ",int_counter*100/inst_count,"%")
+    print("Float - ",float_counter*100/inst_count,"%")
+    print("Cond_Branch - ",c_jump_counter*100/inst_count,"%")
+    print("Uncond_Branch - ",unc_jump_counter*100/inst_count,"%")
 
