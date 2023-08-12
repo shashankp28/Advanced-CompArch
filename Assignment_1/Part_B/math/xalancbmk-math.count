@@ -431,31 +431,7 @@
      1.812841247            174,953      L2-loads                                                      (36.57%)
      1.812841247              5,269      L2-load-misses            #    2.90% of all LL-cache accesses  (36.57%)
      1.812841247            188,091      LLC-loads                                                     (36.57%)
-     1.812841247              4,640      LLC-load-misses           #    2.56% of all LL-cache accesses  (33.14%)
-     1.863296116         11,210,338      mem_inst_retired.any                                          (55.52%)
-     1.863296116          5,146,250      branch-instructions                                           (1.60%)
-     1.863296116      <not counted>      branch-misses                                                 (0.00%)
-     1.863296116      <not counted>      instructions                                                  (0.00%)
-     1.863296116      <not counted>      cycles                                                        (0.00%)
-     1.863296116      <not counted>      L1-icache-load-misses                                         (0.00%)
-     1.863296116      <not counted>      L1-dcache-loads                                               (0.00%)
-     1.863296116      <not counted>      L1-dcache-load-misses                                         (0.00%)
-     1.863296116             27,176      L2-loads                                                      (44.37%)
-     1.863296116              1,164      L2-load-misses            #    4.03% of all LL-cache accesses  (98.39%)
-     1.863296116             30,575      LLC-loads                                                   
-     1.863296116              1,215      LLC-load-misses           #    4.21% of all LL-cache accesses
-     1.913605796      <not counted>      mem_inst_retired.any                                        
-     1.913605796      <not counted>      branch-instructions                                         
-     1.913605796      <not counted>      branch-misses                                               
-     1.913605796      <not counted>      instructions                                                
-     1.913605796      <not counted>      cycles                                                      
-     1.913605796      <not counted>      L1-icache-load-misses                                       
-     1.913605796      <not counted>      L1-dcache-loads                                             
-     1.913605796      <not counted>      L1-dcache-load-misses                                       
-     1.913605796      <not counted>      L2-loads                                                    
-     1.913605796      <not counted>      L2-load-misses                                              
-     1.913605796      <not counted>      LLC-loads                                                   
-     1.913605796      <not counted>      LLC-load-misses                                             
+     1.812841247              4,640      LLC-load-misses           #    2.56% of all LL-cache accesses  (33.14%)                                      
      1.963918210        107,468,546      mem_inst_retired.any                                          (34.74%)
      1.963918210         52,300,704      branch-instructions                                           (34.74%)
      1.963918210            232,788      branch-misses             #    0.45% of all branches          (32.62%)
@@ -504,18 +480,6 @@
      2.115194656              4,464      L2-load-misses            #    3.26% of all LL-cache accesses  (31.70%)
      2.115194656            134,736      LLC-loads                                                     (31.70%)
      2.115194656              2,794      LLC-load-misses           #    2.04% of all LL-cache accesses  (36.61%)
-     2.165749893             44,931      mem_inst_retired.any                                        
-     2.165749893             35,543      branch-instructions                                         
-     2.165749893                465      branch-misses             #    1.31% of all branches        
-     2.165749893            123,278      instructions                                                
-     2.165749893      <not counted>      cycles                                                        (0.00%)
-     2.165749893      <not counted>      L1-icache-load-misses                                         (0.00%)
-     2.165749893      <not counted>      L1-dcache-loads                                               (0.00%)
-     2.165749893      <not counted>      L1-dcache-load-misses                                         (0.00%)
-     2.165749893      <not counted>      L2-loads                                                      (0.00%)
-     2.165749893      <not counted>      L2-load-misses                                                (0.00%)
-     2.165749893      <not counted>      LLC-loads                                                     (0.00%)
-     2.165749893                249      LLC-load-misses           #    0.00% of all LL-cache accesses
      2.216186792         75,794,963      mem_inst_retired.any                                          (15.97%)
      2.216186792         33,120,474      branch-instructions                                           (28.01%)
      2.216186792            170,347      branch-misses             #    0.51% of all branches          (39.63%)
@@ -13447,18 +13411,6 @@
     56.334787627              3,083      L2-load-misses            #    2.54% of all LL-cache accesses  (34.54%)
     56.334787627            118,879      LLC-loads                                                     (23.48%)
     56.334787627              2,800      LLC-load-misses           #    2.31% of all LL-cache accesses  (12.43%)
-    56.385136103      <not counted>      mem_inst_retired.any                                        
-    56.385136103      <not counted>      branch-instructions                                         
-    56.385136103      <not counted>      branch-misses                                               
-    56.385136103      <not counted>      instructions                                                
-    56.385136103      <not counted>      cycles                                                      
-    56.385136103      <not counted>      L1-icache-load-misses                                       
-    56.385136103      <not counted>      L1-dcache-loads                                             
-    56.385136103      <not counted>      L1-dcache-load-misses                                       
-    56.385136103      <not counted>      L2-loads                                                    
-    56.385136103      <not counted>      L2-load-misses                                              
-    56.385136103      <not counted>      LLC-loads                                                   
-    56.385136103      <not counted>      LLC-load-misses                                             
     56.435466739         83,805,986      mem_inst_retired.any                                          (33.16%)
     56.435466739         40,203,475      branch-instructions                                           (36.22%)
     56.435466739            231,634      branch-misses             #    0.58% of all branches          (33.16%)
@@ -16626,15 +16578,3 @@
     69.650370444            725,015      L2-load-misses            #   89.77% of all LL-cache accesses  (31.72%)
     69.650370444            646,393      LLC-loads                                                     (31.90%)
     69.650370444            268,101      LLC-load-misses           #   33.19% of all LL-cache accesses  (31.73%)
-    69.656670797      <not counted>      mem_inst_retired.any                                          (0.00%)
-    69.656670797      <not counted>      branch-instructions                                           (0.00%)
-    69.656670797              3,244      branch-misses             #    0.00% of all branches          (27.34%)
-    69.656670797         21,596,034      instructions              #    1.35  insn per cycle           (92.15%)
-    69.656670797         15,949,751      cycles                                                      
-    69.656670797             13,382      L1-icache-load-misses                                       
-    69.656670797          5,301,036      L1-dcache-loads                                             
-    69.656670797            237,859      L1-dcache-load-misses     #    4.49% of all L1-dcache accesses  (72.79%)
-    69.656670797      <not counted>      L2-loads                                                      (0.00%)
-    69.656670797      <not counted>      L2-load-misses                                                (0.00%)
-    69.656670797      <not counted>      LLC-loads                                                     (0.00%)
-    69.656670797      <not counted>      LLC-load-misses                                               (0.00%)
