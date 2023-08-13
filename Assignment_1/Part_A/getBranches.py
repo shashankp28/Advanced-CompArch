@@ -17,10 +17,7 @@ def data(filename):
 
 if __name__=="__main__":
     filename=sys.argv[1]
-    if sys.argv[2]:
-        inst_count=int(open(sys.argv[2],'r').readline().split(' ')[1])
-    else:
-        inst_count = float("+inf")
+    inst_count=int(open(sys.argv[2],'r').readline().split(' ')[1])
 
     with open(filename,'r') as file:
         lines=file.readlines()
