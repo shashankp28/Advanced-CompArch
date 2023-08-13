@@ -9,6 +9,7 @@ commands=(
     "xalancbmk ./523.xalancbmk_r/cpuxalan_r_base.mytest-m64 -v ./523.xalancbmk_r/allbooks.xml ./523.xalancbmk_r/xalanc.xsl"
 )
 
+count=1
 # Loop through the hardcoded commands
 for cmd in "${commands[@]}"; do
     # Extract name and command using awk
@@ -19,9 +20,10 @@ for cmd in "${commands[@]}"; do
     echo "Running $name..."
     echo "Command: $command"
     
-    ~/pin-3.28-98749-g6643ecee5-gcc-linux/pin -t ~/pin-3.28-98749-g6643ecee5-gcc-linux/source/tools/SimpleExamples/obj-intel64/opcodemix.so -- $cmd
-    ~/pin-3.28-98749-g6643ecee5-gcc-linux/pin -t ~/pin-3.28-98749-g6643ecee5-gcc-linux/source/tools/SimpleExamples/obj-intel64/ldstmix.so -- $cmd
-    ~/pin-3.28-98749-g6643ecee5-gcc-linux/pin -t ~/pin-3.28-98749-g6643ecee5-gcc-linux/source/tools/ManualExamples/obj-intel64/inscount1.so -- $cmd
+    ./pin-3.28-98749-g6643ecee5-gcc-linux/pin -t ./pin-3.28-98749-g6643ecee5-gcc-linux/source/tools/SimpleExamples/obj-intel64/opcodemix.so -- $command
+    ./pin-3.28-98749-g6643ecee5-gcc-linux/pin -t ./pin-3.28-98749-g6643ecee5-gcc-linux/source/tools/SimpleExamples/obj-intel64/ldstmix.so -- $command
+    ./pin-3.28-98749-g6643ecee5-gcc-linux/pin -t ./pin-3.28-98749-g6643ecee5-gcc-linux/source/tools/ManualExamples/obj-intel64/inscount1.so -- $command
 
-    python3 getDynamic.py opcodemix.out inscount.out ldstmix.out
+    python3 getDynamic.py opcodemix.out inscount.out ldstmix.out $count
+    ((count+=1))
 done
