@@ -1,7 +1,7 @@
-,Category,Percentage %
-0,Int,22.31519957158302
-1,Float,0.0
-2,Cond_Branch,15.869853082497942
-3,Uncond_Branch,1.867627413699407
-4,Load,34.05
-5,Store,9.569
+Category,Percentage %
+Int,22.31519957158302
+Float,0.0
+Cond_Branch,15.869853082497942
+Uncond_Branch,1.867627413699407
+Load,34.05
+Store,9.569

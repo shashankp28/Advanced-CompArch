@@ -70,7 +70,8 @@ if __name__=="__main__":
     logicalOperands = ["AND","NOT","OR","XOR","RCL","RCR","ROL","ROR","SAL","SAR","SHL","SHLD","SHR","SHRD"]
     cond_jumpinstr = ["JA","JAE","JB","JBE","JBE","JC","JCXZ","JE","JECXZ","JG","JGE","JLE","JNAE","JNB","JNBE","JNC","JNE","JNG","JNGE","JNL","JNLE","JNO","JNP","JNS","JNZ","JO","JP","JPE","JPO","JS","JZ"]
     jumpinstr = ["JMP"]
-    floatOperands = ["ADDSS","ADDSD","SUBSS","SUBSD","MULSS","MULSD","DIVSS","DIVSD","SQRTSS","SQRTSD","FABS","FADD","FADDP","FCHS","FDIV","FDIVP","FDIVR","FDIVRP","FIADD","FIDIV","FIDIVR","FIMUL","FISUB","FISUBR","FMUL","FMULP","FPREM","FPREM1","FRNDINT","FSCALE","FSQRT","FSUB","FSUBP","FSUBR","FSUBRP","FXTRACT"]
+    floatOperands = ["ADDSS","ADDSD","SUBSS","SUBSD","MULSS","MULSD","DIVSS","DIVSD","SQRTSS","SQRTSD","FABS","FADD","FADDP","FCHS","FDIV","FDIVP","FDIVR","FDIVRP","FIADD","FIDIV","FIDIVR","FIMUL","FISUB",
+                     "FISUBR","FMUL","FMULP","FPREM","FPREM1","FRNDINT","FSCALE","FSQRT","FSUB","FSUBP","FSUBR","FSUBRP","FXTRACT"]
 
     float_counter = 0
     int_counter = 0
