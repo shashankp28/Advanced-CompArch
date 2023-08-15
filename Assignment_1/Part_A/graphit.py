@@ -5,7 +5,7 @@ file_paths = ['1', '2', '3', '4', '5']
 
 # Load CSV files into DataFrames
 dataframes = [pd.read_csv('./Outputs/'+file_path, usecols=['Category', 'Percentage %']) for file_path in file_paths]
-fig, axs = plt.subplots(nrows=len(file_paths), ncols=1, figsize=(1* len(file_paths), 12 * len(file_paths)))
+fig, axs = plt.subplots(nrows=len(file_paths), ncols=1, figsize=( 3*len(file_paths), 2* len(file_paths)))
 
 # Load CSV files into DataFrames and plot histograms
 for i, (ax, file_path) in enumerate(zip(axs, file_paths)):
@@ -15,8 +15,9 @@ for i, (ax, file_path) in enumerate(zip(axs, file_paths)):
     ax.set_title(f"Histogram for File {i+1}")
     ax.set_xlabel('Category')
     ax.set_ylabel('Percentage')
-    ax.tick_params(axis='x', rotation=45, labelsize=10)  # Rotate x-axis labels
+    ax.tick_params(axis='x', labelsize=5)  # Rotate x-axis labels
     ax.grid(True)
 
 plt.tight_layout()
 plt.show()
+
