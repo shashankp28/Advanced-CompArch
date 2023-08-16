@@ -99,6 +99,10 @@ if __name__=="__main__":
     # print("Store - ",ld_store_data['MEM_W'][1],"%")
     # print(int(ld_store_data['MEM_R'][0])/inst_count)
 
+    # print(ld_store_data)
+    # print(ld_store_data['MEM_R'][0][:-1])
+    int_counter = (inst_count-c_jump_counter-unc_jump_counter-eval(ld_store_data['MEM_R'][0][:-1])-eval(ld_store_data['MEM_R'][0][:-1]))
+
     int_percentage = int_counter * 100 / inst_count
     float_percentage = float_counter * 100 / inst_count
     c_jump_percentage = c_jump_counter * 100 / inst_count
@@ -112,4 +116,6 @@ if __name__=="__main__":
     df = pandas.DataFrame(data)
 
     # Print the DataFrame
-    print(df)
+    # print(df)
+
+    df.to_csv(sys.argv[4])
