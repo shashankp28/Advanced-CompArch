@@ -18,6 +18,6 @@ for cmd in "${commands[@]}"; do
     # Print the name and command
     echo "Running $name..."
     echo "Command: $command"
-    perf stat -I $1 -e mem_inst_retired.any,branch-instructions,branch-misses,instructions,cycles,L1-icache-load-misses,L1-dcache-loads,L1-dcache-load-misses,L2-loads,L2-load-misses,LLC-loads,LLC-load-misses $command 2>$name-math.count
+    perf stat -I $1 -e mem-loads,mem-stores,mem_inst_retired.any,branch-instructions,branch-misses,instructions,cycles,L1-dcache-loads,L1-dcache-load-misses,L2-loads,L2-load-misses,L2-stores,L2-store-misses,LLC-loads,LLC-load-misses,LLC-stores,LLC-store-misses $command 2>$name-math.count
     perf stat -I $1 -e power/energy-cores/ $command 2>$name-phy.count
 done
