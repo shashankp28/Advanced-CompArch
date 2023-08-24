@@ -66,8 +66,36 @@ class DependencyDetector {
             }
         }
         void printRAW(){
-            for(auto x: RAW){
-                cerr<<x.first<<" "<<x.second<<endl;
+            std::vector<std::pair<int, int>> sortedPairs(RAW.begin(), RAW.end());
+            std::sort(sortedPairs.begin(), sortedPairs.end(),
+              [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+                  return a.first < b.first; // Sort in descending order
+              });
+            // Print the sorted pairs
+            for (const auto& pair : sortedPairs) {
+                OutFile << pair.first << ", " << pair.second << endl;
+            }
+        }
+        void printWAW(){
+            std::vector<std::pair<int, int>> sortedPairs(WAW.begin(), WAW.end());
+            std::sort(sortedPairs.begin(), sortedPairs.end(),
+              [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+                  return a.first < b.first; // Sort in descending order
+              });
+            // Print the sorted pairs
+            for (const auto& pair : sortedPairs) {
+                OutFile << pair.first << ", " << pair.second << endl;
+            }
+        }
+        void printWAR(){
+            std::vector<std::pair<int, int>> sortedPairs(WAR.begin(), WAR.end());
+            std::sort(sortedPairs.begin(), sortedPairs.end(),
+              [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+                  return a.first < b.first; // Sort in descending order
+              });
+            // Print the sorted pairs
+            for (const auto& pair : sortedPairs) {
+                OutFile << pair.first << ", " << pair.second << endl;
             }
         }
     
@@ -138,8 +166,14 @@ VOID Fini(INT32 code, VOID* v)
 {
     // Write to a file since cout and cerr maybe closed by the application
     OutFile.setf(ios::showbase);
-    OutFile << "Count " << icount << endl;
-    OutFile<<"Counter "<<dpdDetector->instr_count<<endl;
+    // OutFile << "Count " << icount << endl;
+    // OutFile<<"Counter "<<dpdDetector->instr_count<<endl;
+    OutFile << "# RAW Data " << endl;
+    dpdDetector->printRAW();
+    OutFile << "# WAR Data " << endl;
+    dpdDetector->printWAR();
+    OutFile << "# WAW Data " << endl;
+    dpdDetector->printWAW();
     OutFile.close();
 }
 
