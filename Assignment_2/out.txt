@@ -1,0 +1,34 @@
+A: /tmp_proj/pin_jenkins/workspace/pypl-pin-nightly/GitPin/Source/pin/core_ia32/operand_ia32.cpp: INS_MemoryOperandIsRead: 705: assertion failed: memopIdx < xed_decoded_inst_number_of_memory_operands(xedd)
+
+################################################################################
+## STACK TRACE
+################################################################################
+Opcode: MOV
+Operand Count: 2
+Operand 0: 3 (register-written)
+Operand 1: 6 (register-read)
+------------------
+Opcode: CALL_NEAR
+Operand Count: 5
+Operand 0: 0 (non-register)
+Operand 1: 0 (non-register)
+Operand 2: 26 (register-read)
+Operand 3: 0 (memory-??? at /home/shashankp/pin-3.28-98749-g6643ecee5-gcc-linux/source/tools/ManualExamples/obj-intel64/inscount0.so+0x000043a80 
+
+??? at /home/shashankp/pin-3.28-98749-g6643ecee5-gcc-linux/source/tools/ManualExamples/obj-intel64/inscount0.so+0x00001c250 
+
+??? at /home/shashankp/pin-3.28-98749-g6643ecee5-gcc-linux/source/tools/ManualExamples/obj-intel64/inscount0.so+0x000050f34 
+
+LEVEL_VM::REGION::RecordInstrumentation+0x000000077 at /home/shashankp/pin-3.28-98749-g6643ecee5-gcc-linux/intel64/bin/pinbin+0x0001c6847 
+
+LEVEL_VM::REGION::MakeApplication+0x000000158 at /home/shashankp/pin-3.28-98749-g6643ecee5-gcc-linux/intel64/bin/pinbin+0x000209b48 
+
+??? at /home/shashankp/pin-3.28-98749-g6643ecee5-gcc-linux/intel64/bin/pinbin+0x0001c0b6d 
+
+LEVEL_VM::JIT::CompileInternal+0x000000242 at /home/shashankp/pin-3.28-98749-g6643ecee5-gcc-linux/intel64/bin/pinbin+0x0001c2572 
+
+LEVEL_VM::CompileInternalWrapper+0x000000021 at /home/shashankp/pin-3.28-98749-g6643ecee5-gcc-linux/intel64/bin/pinbin+0x0001c4341 
+
+Pin: pin-3.28-98749-6643ecee5
+Copyright 2002-2023 Intel Corporation.
+
