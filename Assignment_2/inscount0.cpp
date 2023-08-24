@@ -4,6 +4,7 @@
  */
 
 #include <iostream>
+#include <unordered_map> 
 #include <fstream>
 #include "pin.H"
 using std::cerr;
@@ -13,7 +14,66 @@ using std::ios;
 using std::ofstream;
 using std::string;
 
+using namespace std;
+
 ofstream OutFile;
+
+class DependencyDetector {
+    public:
+        long long int instr_count;
+        unordered_map<int,int> write_history;
+        unordered_map<int,int> read_history;
+        unordered_map<int,int> RAW;
+        unordered_map<int,int> WAW;
+        unordered_map<int,int> WAR;
+        DependencyDetector(){
+            instr_count=0;
+        }
+        void update(INS ins){
+            instr_count++;
+            int op_count = INS_OperandCount(ins);
+            for (int i = 0; i<op_count; i++){
+                if(INS_OperandIsReg(ins, i)){
+                    int reg_val=INS_OperandReg(ins, i) ;
+                    if(INS_OperandRead(ins, i)){
+                        if(write_history[reg_val]!=0){
+                            RAW[instr_count-write_history[reg_val]]++;
+                        }
+                        read_history[reg_val]=instr_count;
+                    }
+                    // if(INS_OperandWritten(ins, i)){
+                    //     cout<<"written)\n";
+                    // }
+                }
+            }
+            for (int i = 0; i<op_count; i++){
+                if(INS_OperandIsReg(ins, i)){
+                    int reg_val=INS_OperandReg(ins, i) ;
+                    if(INS_OperandWritten(ins, i)){
+                        if(read_history[reg_val]!=0){
+                            WAR[instr_count-read_history[reg_val]]++;
+                        }
+                        if(write_history[reg_val]!=0){
+                            WAW[instr_count-write_history[reg_val]]++;
+                        }
+                        write_history[reg_val]=instr_count;
+                    }
+                    // if(INS_OperandWritten(ins, i)){
+                    //     cout<<"written)\n";
+                    // }
+                }
+            }
+        }
+
+        void printRAW(){
+            for(auto x: RAW){
+                cerr<<x.first<<" "<<x.second<<endl;
+            }
+        }
+    
+};
+
+DependencyDetector *dpdDetector = new DependencyDetector();
 
 // The running count of instructions is kept here
 // make it static to help the compiler optimize docount
@@ -27,44 +87,45 @@ VOID Instruction(INS ins, VOID* v)
 {
     // Insert a call to docount before every instruction, no arguments are passed
     INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)docount, IARG_END);
-    cout << "Opcode: " << INS_Mnemonic(ins) << "\n";
-    cout << "Operand Count: " << INS_OperandCount(ins) << "\n";
-    int op_count = INS_OperandCount(ins);
-    for (int i = 0; i<op_count; i++){
-        cout << "Operand " << i << ": " << INS_OperandReg(ins, i) << " ";
-        if(INS_OperandIsReg(ins, i)){
-            cout<<"(register-";
-            if(INS_OperandRead(ins, i)){
-                cout<<"read)\n";
-            } 
-            else if(INS_OperandWritten(ins, i)){
-                cout<<"written)\n";
-            }
-        }
-        // INS_IsMemoryRead(ins) and INS_MemoryOperandIsRead(ins, i) diff.?
-        // What does INS_OperandIsMemory(ins, i) give?
-        // What does INS_MemoryOperandIsWritten(ins, i) give?
-        // Check pinatrace.so to get exact memory address
-        // INS_OperandElementCount(ins, op) > 1)   // Operand must have elements what does this mean?
-        // INS_MemoryOperandCount(ins) and INS_OperandCount(ins) this diff.?
-        // check safecopy.cpp for some conditional counts
-        else if (INS_OperandIsMemory(ins, i)){
-            cout<<"(memory-";
-            if (INS_MemoryOperandIsRead(ins, i))
-            {
-                cout<<"read)\n";
-            }
-            else if(INS_MemoryOperandIsWritten(ins, i)){
-                cout << "write)\n";
-            }
-        }
-        else
-        {
-            cout << "(non-register)\n";
-        }
-}
-    cout << "------------------\n";
-    // cout << "Operand Source: " << INS_OperandRead(ins, INS_OperandCount(ins) - 1) << "\n";
+    dpdDetector->update(ins);
+//     cout << "Opcode: " << INS_Mnemonic(ins) << "\n";
+//     cout << "Operand Count: " << INS_OperandCount(ins) << "\n";
+//     int op_count = INS_OperandCount(ins);
+//     for (int i = 0; i<op_count; i++){
+//         cout << "Operand " << i << ": " << INS_OperandReg(ins, i) << " ";
+//         if(INS_OperandIsReg(ins, i)){
+//             cout<<"(register-";
+//             if(INS_OperandRead(ins, i)){
+//                 cout<<"read)\n";
+//             } 
+//             else if(INS_OperandWritten(ins, i)){
+//                 cout<<"written)\n";
+//             }
+//         }
+//         // INS_IsMemoryRead(ins) and INS_MemoryOperandIsRead(ins, i) diff.?
+//         // What does INS_OperandIsMemory(ins, i) give?
+//         // What does INS_MemoryOperandIsWritten(ins, i) give?
+//         // Check pinatrace.so to get exact memory address
+//         // INS_OperandElementCount(ins, op) > 1)   // Operand must have elements what does this mean?
+//         // INS_MemoryOperandCount(ins) and INS_OperandCount(ins) this diff.?
+//         // check safecopy.cpp for some conditional counts
+//         else if (INS_OperandIsMemory(ins, i)){
+//             cout<<"(memory-";
+//             if (INS_MemoryOperandIsRead(ins, i))
+//             {
+//                 cout<<"read)\n";
+//             }
+//             else if(INS_MemoryOperandIsWritten(ins, i)){
+//                 cout << "write)\n";
+//             }
+//         }
+//         else
+//         {
+//             cout << "(non-register)\n";
+//         }
+// }
+//     cout << "------------------\n";
+//     // cout << "Operand Source: " << INS_OperandRead(ins, INS_OperandCount(ins) - 1) << "\n";
 }
 
 KNOB< string > KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "inscount.out", "specify output file name");
@@ -74,7 +135,7 @@ VOID Fini(INT32 code, VOID* v)
 {
     // Write to a file since cout and cerr maybe closed by the application
     OutFile.setf(ios::showbase);
-    OutFile << "Count " << icount << endl;
+    // OutFile << "Count " << icount << endl;
     OutFile.close();
 }
 

@@ -14,3 +14,4 @@ no. of operands count - done
 get all those registers - 
 read & write registers - INS_OperandMemoryIndexReg()
 ld st : translated mem address -
+IARG_TYPE
