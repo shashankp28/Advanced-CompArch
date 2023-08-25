@@ -21,6 +21,7 @@ ofstream OutFile;
 class DependencyDetector {
     public:
         long long int instr_count;
+        INS ins;
         unordered_map<int,int> write_history;
         unordered_map<int,int> read_history;
         unordered_map<int,int> RAW;
@@ -29,7 +30,7 @@ class DependencyDetector {
         DependencyDetector(){
             instr_count=0;
         }
-        void update(INS ins){
+        void update(){
             instr_count++;
             int op_count = INS_OperandCount(ins);
             for (int i = 0; i<op_count; i++){
@@ -64,10 +65,37 @@ class DependencyDetector {
                 }
             }
         }
-
         void printRAW(){
-            for(auto x: RAW){
-                cerr<<x.first<<" "<<x.second<<endl;
+            std::vector<std::pair<int, int>> sortedPairs(RAW.begin(), RAW.end());
+            std::sort(sortedPairs.begin(), sortedPairs.end(),
+              [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+                  return a.first < b.first; // Sort in descending order
+              });
+            // Print the sorted pairs
+            for (const auto& pair : sortedPairs) {
+                OutFile << pair.first << ", " << pair.second << endl;
+            }
+        }
+        void printWAW(){
+            std::vector<std::pair<int, int>> sortedPairs(WAW.begin(), WAW.end());
+            std::sort(sortedPairs.begin(), sortedPairs.end(),
+              [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+                  return a.first < b.first; // Sort in descending order
+              });
+            // Print the sorted pairs
+            for (const auto& pair : sortedPairs) {
+                OutFile << pair.first << ", " << pair.second << endl;
+            }
+        }
+        void printWAR(){
+            std::vector<std::pair<int, int>> sortedPairs(WAR.begin(), WAR.end());
+            std::sort(sortedPairs.begin(), sortedPairs.end(),
+              [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+                  return a.first < b.first; // Sort in descending order
+              });
+            // Print the sorted pairs
+            for (const auto& pair : sortedPairs) {
+                OutFile << pair.first << ", " << pair.second << endl;
             }
         }
     
@@ -80,14 +108,17 @@ DependencyDetector *dpdDetector = new DependencyDetector();
 static UINT64 icount = 0;
 
 // This function is called before every instruction is executed
-VOID docount() { icount++; }
+VOID docount() { 
+    icount++;
+    dpdDetector->update();
+}
 
 // Pin calls this function every time a new instruction is encountered
 VOID Instruction(INS ins, VOID* v)
 {
     // Insert a call to docount before every instruction, no arguments are passed
+    dpdDetector->ins=ins;
     INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)docount, IARG_END);
-    dpdDetector->update(ins);
 //     cout << "Opcode: " << INS_Mnemonic(ins) << "\n";
 //     cout << "Operand Count: " << INS_OperandCount(ins) << "\n";
 //     int op_count = INS_OperandCount(ins);
@@ -136,6 +167,13 @@ VOID Fini(INT32 code, VOID* v)
     // Write to a file since cout and cerr maybe closed by the application
     OutFile.setf(ios::showbase);
     // OutFile << "Count " << icount << endl;
+    // OutFile<<"Counter "<<dpdDetector->instr_count<<endl;
+    OutFile << "# RAW Data " << endl;
+    dpdDetector->printRAW();
+    OutFile << "# WAR Data " << endl;
+    dpdDetector->printWAR();
+    OutFile << "# WAW Data " << endl;
+    dpdDetector->printWAW();
     OutFile.close();
 }
 
