@@ -21,10 +21,22 @@ static UINT64 icount = 0;
 // This function is called before every instruction is executed
 VOID docount() { icount++; }
 
+
 // Pin calls this function every time a new instruction is encountered
 VOID Instruction(INS ins, VOID* v)
 {
     // Insert a call to docount before every instruction, no arguments are passed
+    int read_cnt = 0;
+    int write_cnt = 0;
+    for (int i = 0; i < int(INS_MemoryOperandCount(ins)); i++)
+    {
+        if (INS_MemoryOperandIsRead(ins, i))
+            read_cnt++;
+        if (INS_MemoryOperandIsWritten(ins, i))
+            write_cnt++;
+    }
+    cerr << "Read: " << read_cnt << endl;
+    cerr << "Write: " << write_cnt << endl;
     INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)docount, IARG_END);
 }
 
