@@ -41,9 +41,9 @@ for cmd in "${commands[@]}"; do
     echo "--------------------------------"
     echo ""
 
-    $pin -t $tool -- $command 2> $current/err/$name.out
+    $pin -t $tool -- $command 2> $current/err/$name.err
 
     # Copy the output to current directory
-    mv dpdcount.out $current/data/$name.out
+    mv dpdcount.out $current/data/$name.count
     ((count+=1))
 done
