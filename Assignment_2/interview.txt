@@ -1,0 +1,1 @@
+Tushar: Python knows OOPS, overloading, datatypes, algorithms good, no pip, venv, etc. no django
