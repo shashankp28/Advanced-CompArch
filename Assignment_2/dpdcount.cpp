@@ -42,7 +42,7 @@ public:
     unordered_map<long long unsigned int, long long unsigned int> WAR;
     unordered_map<long long unsigned int, long long unsigned int> MEMDEP;
 
-    const long long unsigned STEP_SIZE = 1e9, RANGE = 1e6, MAX_CHECK=1e10;
+    const long long unsigned STEP_SIZE = 1e9, RANGE = 1e6;
 
     DependencyDetector()
     {
@@ -51,27 +51,13 @@ public:
 
     void update(long long unsigned instr_ptr, vector<long long unsigned> &effective_mem_addresses)
     {
-        if(instr_count%(RANGE*100)==0)
-        {
-            cerr<<"Instruction count: "<<instr_count<<endl;
-        }
-        if(instr_count>MAX_CHECK)
-        {
-            return;
-        }
-        instr_count++;
-
-        if (instr_count % STEP_SIZE > RANGE)
-        {
-            return;
-        }
         if (instr_count % STEP_SIZE == 1)
         {
             write_history.clear();
             read_history.clear();
             store_history.clear();
+            cerr << "Instruction count: " << instr_count / STEP_SIZE << " billion" << endl;
         }
-
         InstructionInfo *ins = static_instr_info[instr_ptr];
 
         for (auto x : ins->reg_read)
@@ -110,7 +96,7 @@ public:
         }
         if (ins->write_1)
         {
-            store_history[effective_mem_addresses[0]] = instr_count;
+            store_history[effective_mem_addresses[2]] = instr_count;
         }
     }
 
@@ -177,34 +163,65 @@ public:
 
 DependencyDetector *dpdDetector = new DependencyDetector();
 
-// This function is called before every instruction is executed
+// These function is called before every instruction is executed
+// 6 functions for 6 cases of memory read write (As, there is no default values for ema_r1, ema_r2, ema_w1)
 VOID doUpdate_1(long long unsigned instruction_address, long long unsigned ema_r1)
 {
+    dpdDetector->instr_count++;
+    if (dpdDetector->instr_count % dpdDetector->STEP_SIZE >= dpdDetector->RANGE)
+    {
+        return;
+    }
     vector<long long unsigned> eff_mem_address = {ema_r1, 0, 0};
     dpdDetector->update(instruction_address, eff_mem_address);
 }
 VOID doUpdate_2(long long unsigned instruction_address, long long unsigned ema_r1, long long unsigned ema_r2)
 {
+    dpdDetector->instr_count++;
+    if (dpdDetector->instr_count % dpdDetector->STEP_SIZE >= dpdDetector->RANGE)
+    {
+        return;
+    }
     vector<long long unsigned> eff_mem_address = {ema_r1, ema_r2, 0};
     dpdDetector->update(instruction_address, eff_mem_address);
 }
 VOID doUpdate_3(long long unsigned instruction_address, long long unsigned ema_r1, long long unsigned ema_w1)
 {
+    dpdDetector->instr_count++;
+    if (dpdDetector->instr_count % dpdDetector->STEP_SIZE >= dpdDetector->RANGE)
+    {
+        return;
+    }
     vector<long long unsigned> eff_mem_address = {ema_r1, 0, ema_w1};
     dpdDetector->update(instruction_address, eff_mem_address);
 }
 VOID doUpdate_4(long long unsigned instruction_address, long long unsigned ema_r1, long long unsigned ema_r2, long long unsigned ema_w1)
 {
+    dpdDetector->instr_count++;
+    if (dpdDetector->instr_count % dpdDetector->STEP_SIZE >= dpdDetector->RANGE)
+    {
+        return;
+    }
     vector<long long unsigned> eff_mem_address = {ema_r1, ema_r2, ema_w1};
     dpdDetector->update(instruction_address, eff_mem_address);
 }
 VOID doUpdate_5(long long unsigned instruction_address, long long unsigned ema_w1)
 {
+    dpdDetector->instr_count++;
+    if (dpdDetector->instr_count % dpdDetector->STEP_SIZE >= dpdDetector->RANGE)
+    {
+        return;
+    }
     vector<long long unsigned> eff_mem_address = {0, 0, ema_w1};
     dpdDetector->update(instruction_address, eff_mem_address);
 }
 VOID doUpdate_6(long long unsigned instruction_address)
 {
+    dpdDetector->instr_count++;
+    if (dpdDetector->instr_count % dpdDetector->STEP_SIZE >= dpdDetector->RANGE)
+    {
+        return;
+    }
     vector<long long unsigned> eff_mem_address = {0, 0, 0};
     dpdDetector->update(instruction_address, eff_mem_address);
 }
