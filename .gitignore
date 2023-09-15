@@ -51,6 +51,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-cs810_resources/
+cs810_resources
 .vscode
 env
