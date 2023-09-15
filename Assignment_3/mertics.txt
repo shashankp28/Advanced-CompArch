@@ -1,0 +1,18 @@
+L1d Hit rate
+L1i Hit rate
+L2 Hit rate
+L3 Hit rate
+L1i TLB hit rate
+L1d TLB hit rate
+
+IPC
+Branch Prediction Accuracy
+Time taken
+micro-op cache hit rate
+target predictor accuracy
+predicate predictor accuracy
+core energy total
+LeakageEnergy
+DynamicEnergy
+TotalEnergy
+NumDynamicAccesses
