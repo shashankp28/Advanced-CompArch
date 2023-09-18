@@ -30,13 +30,14 @@ for x in data_list:
     s=" "
     for y in x[0]:
         s=y+s
+    s=s[:-1]
     if x[0] in metrics:
         if abstractedList.get(s) is None:
-            abstractedList[s[:-1]] = [x[1:]]
+            abstractedList[s] = [x[1:]]
         else:
-            l = abstractedList
-            print(l)
-            abstractedList[s[:-1]] = x[1:]
+            l = abstractedList[s]
+            l.append(x[1:])
+            abstractedList[s] = l
 
 print(abstractedList)
 
