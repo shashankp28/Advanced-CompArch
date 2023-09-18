@@ -1,0 +1,14 @@
+L1 Hit rate
+L2 Hit-Rate
+L3 Hit-Rate
+iTLB[0] Hit-Rate
+dTLB[0] Hit-Rate
+iTLB[1] Hit-Rate
+dTLB[1] Hit-Rate
+IPC
+branch predictor accuracy
+Time Taken
+micro-op cache hit rate
+target predictor accuracy
+predicate predictor accuracy
+[ComponentName LeakageEnergy DynamicEnergy TotalEnergy NumDynamicAccesses] :

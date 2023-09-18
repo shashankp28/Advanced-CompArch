@@ -2,6 +2,12 @@ import json
 # Initialize an empty list to store the data
 data_list = []
 
+metrics=[]
+
+with open("metrics.txt", "r") as file:
+    for line in file:
+        metrics.append(line[:-1].split(" "))
+
 # Open the text file for reading
 with open("gcc.stat", "r") as file:
     # Read each line in the file
@@ -14,8 +20,18 @@ with open("gcc.stat", "r") as file:
         if words!=None:
             data_list.append(words)
 
-print(json.dumps(data_list,indent=2))
+# print(data_list[0][0])
+abstractedList = {}
 
 
+# print(metrics)
 
+for x in data_list:
+    s=" "
+    for y in x[0]:
+        s=y+s
+    if x[0] in metrics:
+        abstractedList[s[:-1]]=x[1:]
+
+print(abstractedList)
 
