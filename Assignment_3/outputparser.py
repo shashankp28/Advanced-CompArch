@@ -26,7 +26,7 @@ with open("gcc.stat", "r") as file:
 abstractedList = {}
 
 
-print(metrics)
+# print(metrics)
 
 for x in data_list:
     s=" "
@@ -41,8 +41,10 @@ for x in data_list:
             l.append([y[0] for y in x[1:]][0])
             abstractedList[s] = l
 
-    if len(x[0])!=0 and [x[0][0]] in metrics:
+    elif len(x[0])!=0 and [x[0][0]] in metrics:
         abstractedList[x[0][0]] = [y for y in x[0][1:]]
+
+abstractedList = {x: abstractedList[x] if len(abstractedList[x])>1 else abstractedList[x][0] for x in abstractedList}
 
 print(abstractedList)
 
