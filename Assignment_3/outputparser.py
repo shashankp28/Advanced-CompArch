@@ -6,7 +6,9 @@ metrics=[]
 
 with open("metrics.txt", "r") as file:
     for line in file:
-        metrics.append(line[:-1].split(" "))
+        l=line[:-1].split(" ")
+        metrics.append([x for x in l if x!=''])
+
 
 # Open the text file for reading
 with open("gcc.stat", "r") as file:
@@ -20,11 +22,11 @@ with open("gcc.stat", "r") as file:
         if words!=None:
             data_list.append(words)
 
-# print(data_list[0][0])
+# print(data_list)
 abstractedList = {}
 
 
-# print(metrics)
+print(metrics)
 
 for x in data_list:
     s=" "
@@ -33,11 +35,14 @@ for x in data_list:
     s=s[:-1]
     if x[0] in metrics:
         if abstractedList.get(s) is None:
-            abstractedList[s] = [x[1:]]
+            abstractedList[s] = [y[0] if s!="TakenTime" else y for y in x[1:] ]
         else:
             l = abstractedList[s]
-            l.append(x[1:])
+            l.append([y[0] for y in x[1:]][0])
             abstractedList[s] = l
+
+    if len(x[0])!=0 and [x[0][0]] in metrics:
+        abstractedList[x[0][0]] = [y for y in x[0][1:]]
 
 print(abstractedList)
 
