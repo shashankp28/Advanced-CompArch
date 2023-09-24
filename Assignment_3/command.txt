@@ -1,0 +1,1 @@
+java -jar /home/shashankp/Desktop/GitHub_S/Advanced-CompArch/cs810_resources/Tejas/jars/tejas.jar /home/shashankp/Desktop/GitHub_S/Advanced-CompArch/Assignment_3/config/gcc_BranchPredictor-Predictor_Mode_NoPredictor.xml ./stats/gcc_BranchPredictor-Predictor_Mode_NoPredictor.stat /home/shashankp/Desktop/GitHub_S/Advanced-CompArch/cs810_resources/CPU2017_benchmarks/tejas_traces/gcc

@@ -109,7 +109,7 @@
 			</LSQ>
 
 			<ITLB>
-				<Size>2</Size>				
+				<Size>50</Size>				
 				<Latency>1</Latency>			
 				<MissPenalty>-1</MissPenalty>			
 				<PortType>UL</PortType>			

@@ -55,3 +55,8 @@ cs810_resources
 .vscode
 env
 .env
+
+config
+metrics
+stats
+commands.txt
