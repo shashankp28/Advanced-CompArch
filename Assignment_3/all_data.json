@@ -2879,7 +2879,50 @@
           0.0
         ]
       },
-      "NoPredictor": null,
+      "NoPredictor": {
+        "L1d Hit rate": 0.7684395,
+        "L1i Hit rate": 0.5046512,
+        "L2 Hit rate": 0.8988175,
+        "L3 Hit rate": 0.4374868,
+        "L1i TLB hit rate": 0.9535,
+        "L1d TLB hit rate": 0.999,
+        "IPC": 1.9577,
+        "Branch Prediction Accuracy": 0.0,
+        "Time Taken": 2042.0,
+        "Micro-op Cache Hit Rate": 0.9999,
+        "Target Predictor Accuracy": 99.945,
+        "Predicate Predictor Accuracy": 0,
+        "Core Energy": [
+          357672210.9151,
+          22065294.442,
+          379737505.3571,
+          0.0
+        ],
+        "Shared Cache Energy": [
+          23190678.4032,
+          265481.0835,
+          23456159.4867,
+          0.0
+        ],
+        "Main Memory Controller Energy": [
+          894777.7608,
+          12624.336,
+          907402.0968,
+          0.0
+        ],
+        "Coherence Energy": [
+          13384894.7232,
+          0.0,
+          13384894.7232,
+          0.0
+        ],
+        "Total Energy": [
+          533183481.5575,
+          25906549.7375,
+          559090031.295,
+          0.0
+        ]
+      },
       "PAg": {
         "L1d Hit rate": 0.7696622,
         "L1i Hit rate": 0.5046512,
@@ -10066,7 +10109,50 @@
           0.0
         ]
       },
-      "200": null,
+      "100": {
+        "L1d Hit rate": 0.9540143,
+        "L1i Hit rate": 0.7907995,
+        "L2 Hit rate": 0.98486054,
+        "L3 Hit rate": 0.20578004,
+        "L1i TLB hit rate": 0.9988,
+        "L1d TLB hit rate": 0.9954,
+        "IPC": 1.8327,
+        "Branch Prediction Accuracy": 89.7718,
+        "Time Taken": 2182.0,
+        "Micro-op Cache Hit Rate": 0.828,
+        "Target Predictor Accuracy": 82.4855,
+        "Predicate Predictor Accuracy": 97.4274,
+        "Core Energy": [
+          382081030.5423,
+          15769500.4656,
+          397850531.0079,
+          0.0
+        ],
+        "Shared Cache Energy": [
+          24773292.5088,
+          24982.546,
+          24798275.0548,
+          0.0
+        ],
+        "Main Memory Controller Energy": [
+          955840.5672,
+          1212.7936,
+          957053.3608,
+          0.0
+        ],
+        "Coherence Energy": [
+          14298327.3888,
+          0.0,
+          14298327.3888,
+          0.0
+        ],
+        "Total Energy": [
+          569569812.4839,
+          16137858.4261,
+          585707670.9099,
+          0.0
+        ]
+      },
       "500": {
         "L1d Hit rate": 0.9539099,
         "L1i Hit rate": 0.79157543,
@@ -10201,7 +10287,50 @@
           0.0
         ]
       },
-      "200": null,
+      "100": {
+        "L1d Hit rate": 0.8421097,
+        "L1i Hit rate": 0.5945946,
+        "L2 Hit rate": 0.9413586,
+        "L3 Hit rate": 0.42334938,
+        "L1i TLB hit rate": 0.9788,
+        "L1d TLB hit rate": 0.9666,
+        "IPC": 1.7914,
+        "Branch Prediction Accuracy": 87.3286,
+        "Time Taken": 2232.0,
+        "Micro-op Cache Hit Rate": 0.9998,
+        "Target Predictor Accuracy": 96.4212,
+        "Predicate Predictor Accuracy": 98.2506,
+        "Core Energy": [
+          390886798.0284,
+          15581606.0958,
+          406468404.1241,
+          0.0
+        ],
+        "Shared Cache Energy": [
+          25344239.0784,
+          104345.2162,
+          25448584.2946,
+          0.0
+        ],
+        "Main Memory Controller Energy": [
+          977869.6896,
+          4664.8544,
+          982534.544,
+          0.0
+        ],
+        "Coherence Energy": [
+          14627858.9184,
+          0.0,
+          14627858.9184,
+          0.0
+        ],
+        "Total Energy": [
+          582696607.4172,
+          17051935.4399,
+          599748542.8571,
+          0.0
+        ]
+      },
       "500": {
         "L1d Hit rate": 0.8419125,
         "L1i Hit rate": 0.5945946,
@@ -10336,7 +10465,50 @@
           0.0
         ]
       },
-      "200": null,
+      "100": {
+        "L1d Hit rate": 0.9662222,
+        "L1i Hit rate": 0.4562178,
+        "L2 Hit rate": 0.99586225,
+        "L3 Hit rate": 0.28881612,
+        "L1i TLB hit rate": 0.9831,
+        "L1d TLB hit rate": 0.9999,
+        "IPC": 4.5274,
+        "Branch Prediction Accuracy": 94.3613,
+        "Time Taken": 883.0,
+        "Micro-op Cache Hit Rate": 0.9997,
+        "Target Predictor Accuracy": 86.3292,
+        "Predicate Predictor Accuracy": 99.9794,
+        "Core Energy": [
+          154680000.7192,
+          19204521.4567,
+          173884522.1759,
+          0.0
+        ],
+        "Shared Cache Energy": [
+          10029110.5728,
+          7669.3045,
+          10036779.8773,
+          0.0
+        ],
+        "Main Memory Controller Energy": [
+          386958.2832,
+          368.6688,
+          387326.952,
+          0.0
+        ],
+        "Coherence Energy": [
+          5788471.8528,
+          0.0,
+          5788471.8528,
+          0.0
+        ],
+        "Total Energy": [
+          230582133.0088,
+          19318459.8532,
+          249900592.862,
+          0.0
+        ]
+      },
       "500": {
         "L1d Hit rate": 0.9664556,
         "L1i Hit rate": 0.45768946,
@@ -10471,7 +10643,50 @@
           0.0
         ]
       },
-      "200": null,
+      "100": {
+        "L1d Hit rate": 0.76872534,
+        "L1i Hit rate": 0.51627904,
+        "L2 Hit rate": 0.8989272,
+        "L3 Hit rate": 0.43159905,
+        "L1i TLB hit rate": 0.9535,
+        "L1d TLB hit rate": 0.999,
+        "IPC": 2.2686,
+        "Branch Prediction Accuracy": 97.0059,
+        "Time Taken": 1763.0,
+        "Micro-op Cache Hit Rate": 0.9999,
+        "Target Predictor Accuracy": 99.945,
+        "Predicate Predictor Accuracy": 0,
+        "Core Energy": [
+          308675566.7402,
+          22066696.5669,
+          330742263.3071,
+          0.0
+        ],
+        "Shared Cache Energy": [
+          20013843.9072,
+          264959.839,
+          20278803.7462,
+          0.0
+        ],
+        "Main Memory Controller Energy": [
+          772204.3368,
+          12561.9936,
+          784766.3304,
+          0.0
+        ],
+        "Coherence Energy": [
+          11551330.6272,
+          0.0,
+          11551330.6272,
+          0.0
+        ],
+        "Total Energy": [
+          460143976.3106,
+          25909962.9819,
+          486053939.2925,
+          0.0
+        ]
+      },
       "500": {
         "L1d Hit rate": 0.7701115,
         "L1i Hit rate": 0.5,
@@ -10606,7 +10821,50 @@
           0.0
         ]
       },
-      "200": null,
+      "100": {
+        "L1d Hit rate": 0.72860986,
+        "L1i Hit rate": 0.66735095,
+        "L2 Hit rate": 0.43191203,
+        "L3 Hit rate": 0.20423484,
+        "L1i TLB hit rate": 0.9919,
+        "L1d TLB hit rate": 0.991,
+        "IPC": 0.4888,
+        "Branch Prediction Accuracy": 99.0171,
+        "Time Taken": 8181.0,
+        "Micro-op Cache Hit Rate": 0.9935,
+        "Target Predictor Accuracy": 97.8173,
+        "Predicate Predictor Accuracy": 99.8814,
+        "Core Energy": [
+          1432477912.4007,
+          15215819.6247,
+          1447693732.0254,
+          0.0
+        ],
+        "Shared Cache Energy": [
+          92878712.8896,
+          397846.0854,
+          93276558.975,
+          0.0
+        ],
+        "Main Memory Controller Energy": [
+          3583586.7024,
+          19739.04,
+          3603325.7424,
+          0.0
+        ],
+        "Coherence Energy": [
+          53606529.8496,
+          0.0,
+          53606529.8496,
+          0.0
+        ],
+        "Total Energy": [
+          2135400898.5879,
+          21138245.8061,
+          2156539144.394,
+          0.0
+        ]
+      },
       "500": {
         "L1d Hit rate": 0.7290353,
         "L1i Hit rate": 0.6682161,
