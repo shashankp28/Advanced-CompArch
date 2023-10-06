@@ -33,6 +33,9 @@ public:
     long long unsigned int instr_count;
     unordered_map<long long unsigned, InstructionInfo *> static_instr_info;
 
+    int local_count = 0;
+    string output = "";
+
     vector<InstructionInfo *> instruction_list;
 
     const long long unsigned STEP_SIZE = 1e9, RANGE = 1e6;
@@ -48,11 +51,16 @@ public:
         // InstructionInfo *ins = static_instr_info[instr_ptr];
         if (instr_count % STEP_SIZE == 0)
         {
-            OutFile << "Graph Detection Started!!" << endl;
+            OutFile << "Graph Detection Started!!\n";
+            local_count = 1;
         }
         else if (instr_count % STEP_SIZE == RANGE - 1)
         {
-            OutFile << "Graph Detection Ended!!" << endl;
+            OutFile << "Graph Detection Ended!!: " + to_string(local_count) + "\n";
+        }
+        else
+        {
+            local_count++;
         }
     }
 };
@@ -127,12 +135,9 @@ int static_count = 0;
 VOID Instruction(INS ins, VOID *v)
 {
     static_count++;
-    if(static_count%10000 == 0){
-        cerr<<"Static Count: "<<static_count<<endl;
-    }
-    if (static_count>= 150000)
+    if (static_count % 10000 == 0)
     {
-        return;
+        cerr << "Static Counts: " << static_count << endl;
     }
     struct InstructionInfo *inst_info = new InstructionInfo;
     int operand_count = INS_OperandCount(ins);
