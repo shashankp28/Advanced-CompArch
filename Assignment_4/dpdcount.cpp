@@ -33,130 +33,26 @@ public:
     long long unsigned int instr_count;
     unordered_map<long long unsigned, InstructionInfo *> static_instr_info;
 
-    unordered_map<long long unsigned int, long long unsigned int> write_history;
-    unordered_map<long long unsigned int, long long unsigned int> read_history;
-    unordered_map<long long unsigned int, long long unsigned int> store_history;
-
-    unordered_map<long long unsigned int, long long unsigned int> RAW;
-    unordered_map<long long unsigned int, long long unsigned int> WAW;
-    unordered_map<long long unsigned int, long long unsigned int> WAR;
-    unordered_map<long long unsigned int, long long unsigned int> MEMDEP;
+    vector<InstructionInfo *> instruction_list;
 
     const long long unsigned STEP_SIZE = 1e9, RANGE = 1e6;
 
     DependencyDetector()
     {
-        instr_count = 0;
+        instr_count = -1;
     }
 
     void update(long long unsigned instr_ptr, vector<long long unsigned> &effective_mem_addresses)
     {
-        if (instr_count % STEP_SIZE == 1)
-        {
-            write_history.clear();
-            read_history.clear();
-            store_history.clear();
-            cerr << "Instruction count: " << instr_count / STEP_SIZE << " billion" << endl;
-        }
-        InstructionInfo *ins = static_instr_info[instr_ptr];
 
-        for (auto x : ins->reg_read)
+        // InstructionInfo *ins = static_instr_info[instr_ptr];
+        if (instr_count % STEP_SIZE == 0)
         {
-            if (write_history[x] != 0)
-            {
-                RAW[instr_count - write_history[x]]++;
-            }
-            read_history[x] = instr_count;
+            OutFile << "Graph Detection Started!!" << endl;
         }
-        for (auto x : ins->reg_write)
+        else if (instr_count % STEP_SIZE == RANGE - 1)
         {
-            if (read_history[x] != 0)
-            {
-                WAR[instr_count - read_history[x]]++;
-            }
-            if (write_history[x] != 0)
-            {
-                WAW[instr_count - write_history[x]]++;
-            }
-            write_history[x] = instr_count;
-        }
-        if (ins->read_1)
-        {
-            if (store_history[effective_mem_addresses[0]] != 0)
-            {
-                MEMDEP[instr_count - store_history[effective_mem_addresses[0]]]++;
-            }
-        }
-        if (ins->read_2)
-        {
-            if (store_history[effective_mem_addresses[1]] != 0)
-            {
-                MEMDEP[instr_count - store_history[effective_mem_addresses[1]]]++;
-            }
-        }
-        if (ins->write_1)
-        {
-            store_history[effective_mem_addresses[2]] = instr_count;
-        }
-    }
-
-    void printRAW()
-    {
-        std::vector<std::pair<long long unsigned int, long long unsigned int>> sortedPairs(RAW.begin(), RAW.end());
-        std::sort(sortedPairs.begin(), sortedPairs.end(),
-                  [](const std::pair<long long unsigned int, long long unsigned int> &a, const std::pair<long long unsigned int, long long unsigned int> &b)
-                  {
-                      return a.first < b.first; // Sort in descending order
-                  });
-        // Print the sorted pairs
-        for (const auto &pair : sortedPairs)
-        {
-            OutFile << pair.first << ", " << pair.second << endl;
-        }
-    }
-
-    void printWAW()
-    {
-        std::vector<std::pair<long long unsigned int, long long unsigned int>> sortedPairs(WAW.begin(), WAW.end());
-        std::sort(sortedPairs.begin(), sortedPairs.end(),
-                  [](const std::pair<long long unsigned int, long long unsigned int> &a, const std::pair<long long unsigned int, long long unsigned int> &b)
-                  {
-                      return a.first < b.first; // Sort in descending order
-                  });
-        // Print the sorted pairs
-        for (const auto &pair : sortedPairs)
-        {
-            OutFile << pair.first << ", " << pair.second << endl;
-        }
-    }
-
-    void printWAR()
-    {
-        std::vector<std::pair<long long unsigned int, long long unsigned int>> sortedPairs(WAR.begin(), WAR.end());
-        std::sort(sortedPairs.begin(), sortedPairs.end(),
-                  [](const std::pair<long long unsigned int, long long unsigned int> &a, const std::pair<long long unsigned int, long long unsigned int> &b)
-                  {
-                      return a.first < b.first; // Sort in descending order
-                  });
-        // Print the sorted pairs
-        for (const auto &pair : sortedPairs)
-        {
-            OutFile << pair.first << ", " << pair.second << endl;
-        }
-    }
-
-    void printMEM()
-    {
-        std::vector<std::pair<long long unsigned int, long long unsigned int>> sortedPairs(MEMDEP.begin(), MEMDEP.end());
-        std::sort(sortedPairs.begin(), sortedPairs.end(),
-                  [](const std::pair<long long unsigned int, long long unsigned int> &a, const std::pair<long long unsigned int, long long unsigned int> &b)
-                  {
-                      return a.first < b.first; // Sort in descending order
-                  });
-        // Print the sorted pairs
-        for (const auto &pair : sortedPairs)
-        {
-            OutFile << pair.first << ", " << pair.second << endl;
+            OutFile << "Graph Detection Ended!!" << endl;
         }
     }
 };
@@ -226,9 +122,18 @@ VOID doUpdate_6(long long unsigned instruction_address)
     dpdDetector->update(instruction_address, eff_mem_address);
 }
 
+int static_count = 0;
 // Pin calls this function every time a new instruction is encountered
 VOID Instruction(INS ins, VOID *v)
 {
+    static_count++;
+    if(static_count%10000 == 0){
+        cerr<<"Static Count: "<<static_count<<endl;
+    }
+    if (static_count>= 150000)
+    {
+        return;
+    }
     struct InstructionInfo *inst_info = new InstructionInfo;
     int operand_count = INS_OperandCount(ins);
     for (int i = 0; i < operand_count; i++)
@@ -316,14 +221,6 @@ VOID Fini(INT32 code, VOID *v)
     // Write to a file since cout and cerr maybe closed by the application
     OutFile.setf(ios::showbase);
     OutFile << "Counter " << dpdDetector->instr_count << endl;
-    OutFile << "# RAW Data " << endl;
-    dpdDetector->printRAW();
-    OutFile << "# WAR Data " << endl;
-    dpdDetector->printWAR();
-    OutFile << "# WAW Data " << endl;
-    dpdDetector->printWAW();
-    OutFile << "# Store-Load Data " << endl;
-    dpdDetector->printMEM();
     OutFile.close();
 }
 

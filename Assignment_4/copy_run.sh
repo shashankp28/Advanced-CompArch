@@ -1,16 +1,15 @@
 # Copy and Build
 version=pin-3.28-98749-g6643ecee5-gcc-linux
+home=/home/shashankp
 current=$(pwd)
-cp ./dpdcount.cpp ~/$version/source/tools/ManualExamples/dpdcount.cpp
-cp ./makefile.rules ~/$version/source/tools/ManualExamples/makefile.rules
-cd ~/$version/source/tools/ManualExamples
+cp ./dpdcount.cpp $home/$version/source/tools/ManualExamples/dpdcount.cpp
+cp ./makefile.rules $home/$version/source/tools/ManualExamples/makefile.rules
+cd $home/$version/source/tools/ManualExamples
 make
 
-home=$(eval echo ~)
 tool="$home/pin-3.28-98749-g6643ecee5-gcc-linux/source/tools/ManualExamples/obj-intel64/dpdcount.so"
-# tool="$home/pin-3.28-98749-g6643ecee5-gcc-linux/source/tools/ManualExamples/obj-intel64/inscount0.so"
 pin="$home/pin-3.28-98749-g6643ecee5-gcc-linux/pin"
-resource="$home/cs810_resources/CPU2017_benchmarks/linux_executables"
+resource="~/Desktop/GitHub_S/Advanced-CompArch/cs810_resources/CPU2017_benchmarks/linux_executables"
 
 
 # Go to resources
