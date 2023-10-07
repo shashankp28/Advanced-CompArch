@@ -143,8 +143,7 @@ VOID Instruction(INS ins, VOID *v)
     }
     struct InstructionInfo *inst_info = new InstructionInfo;
     // Extract PC store in Instr struct
-    int PC = INS_Address(ins);
-    inst_info->PC = PC;
+    inst_info->PC = INS_Address(ins);
     // end
     int operand_count = INS_OperandCount(ins);
     for (int i = 0; i < operand_count; i++)
