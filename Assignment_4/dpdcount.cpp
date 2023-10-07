@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2004-2021 Intel Corporation.
  * SPDX-License-Identifier: MIT
+ *  moi nub
  */
 
 #include <iostream>
@@ -25,6 +26,7 @@ struct InstructionInfo
     bool read_1;
     bool read_2;
     bool write_1;
+    ADDRINT PC;
 };
 
 class DependencyDetector
@@ -140,6 +142,10 @@ VOID Instruction(INS ins, VOID *v)
         cerr << "Static Counts: " << static_count << endl;
     }
     struct InstructionInfo *inst_info = new InstructionInfo;
+    // Extract PC store in Instr struct
+    int PC = INS_Address(ins);
+    inst_info->PC = PC;
+    // end
     int operand_count = INS_OperandCount(ins);
     for (int i = 0; i < operand_count; i++)
     {
