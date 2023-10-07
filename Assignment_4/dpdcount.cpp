@@ -8,6 +8,8 @@
 #include <unordered_map>
 #include <fstream>
 #include <pin.H>
+#include <unordered_set>
+#include <vector>
 using std::cerr;
 using std::cout;
 using std::endl;
@@ -29,107 +31,147 @@ struct InstructionInfo
     ADDRINT PC;
 };
 
-class DependencyDetector
+class InconsequentCounter
 {
 public:
     long long unsigned int instr_count;
     unordered_map<long long unsigned, InstructionInfo *> static_instr_info;
-
-    int local_count = 0;
     string output = "";
 
     vector<InstructionInfo *> instruction_list;
+    long long register_root;
+    long long register_inconsequent;
+    long long memory_root;
+    long long memory_inconsequent;
+    long long branch_root;
+    long long branch_inconsequent;
+    const long long unsigned STEP_SIZE = 1e4, RANGE = 1e3;
 
-    const long long unsigned STEP_SIZE = 1e9, RANGE = 1e6;
-
-    DependencyDetector()
+    InconsequentCounter()
     {
         instr_count = -1;
+        register_root = 0;
+        register_inconsequent = 0;
+        memory_root = 0;
+        memory_inconsequent = 0;
+        branch_root = 0;
+        branch_inconsequent = 0;
     }
 
-    void update(long long unsigned instr_ptr, vector<long long unsigned> &effective_mem_addresses)
+    void registerInconsequentCounter(vector<InstructionInfo *> ins_list)
     {
+        unordered_set<int> unused;
+        for (auto ins : ins_list)
+        {
+            for (auto &x : ins->reg_read)
+            {
+                if (unused.find(x) != unused.end())
+                {
+                    unused.erase(unused.find(x));
+                }
+            }
+            int flag = 0;
+            for (auto &x : ins->reg_write)
+            {
+                if (unused.find(x) == unused.end())
+                {
+                    flag = 1;
+                    break;
+                }
+            }
+            if (flag == 0)
+            {
+                register_root++;
+            }
+            for (auto &x : ins->reg_write)
+            {
+                unused.insert(x);
+            }
+        }
+    }
 
-        // InstructionInfo *ins = static_instr_info[instr_ptr];
+    void collect(long long unsigned instr_ptr, vector<long long unsigned> &effective_mem_addresses)
+    {
+        InstructionInfo *ins = static_instr_info[instr_ptr];
         if (instr_count % STEP_SIZE == 0)
         {
-            OutFile << "Graph Detection Started!!\n";
-            local_count = 1;
+            instruction_list.erase(instruction_list.begin(), instruction_list.end());
         }
         else if (instr_count % STEP_SIZE == RANGE - 1)
         {
-            OutFile << "Graph Detection Ended!!: " + to_string(local_count) + "\n";
+            registerInconsequentCounter(instruction_list);
+            cerr << "Register Root Count: " << register_root << endl;
         }
         else
         {
-            local_count++;
+            instruction_list.push_back(ins);
         }
     }
 };
 
-DependencyDetector *dpdDetector = new DependencyDetector();
+InconsequentCounter *insconsCounter = new InconsequentCounter();
 
 // These function is called before every instruction is executed
 // 6 functions for 6 cases of memory read write (As, there is no default values for ema_r1, ema_r2, ema_w1)
 VOID doUpdate_1(long long unsigned instruction_address, long long unsigned ema_r1)
 {
-    dpdDetector->instr_count++;
-    if (dpdDetector->instr_count % dpdDetector->STEP_SIZE >= dpdDetector->RANGE)
+    insconsCounter->instr_count++;
+    if (insconsCounter->instr_count % insconsCounter->STEP_SIZE >= insconsCounter->RANGE)
     {
         return;
     }
     vector<long long unsigned> eff_mem_address = {ema_r1, 0, 0};
-    dpdDetector->update(instruction_address, eff_mem_address);
+    insconsCounter->collect(instruction_address, eff_mem_address);
 }
 VOID doUpdate_2(long long unsigned instruction_address, long long unsigned ema_r1, long long unsigned ema_r2)
 {
-    dpdDetector->instr_count++;
-    if (dpdDetector->instr_count % dpdDetector->STEP_SIZE >= dpdDetector->RANGE)
+    insconsCounter->instr_count++;
+    if (insconsCounter->instr_count % insconsCounter->STEP_SIZE >= insconsCounter->RANGE)
     {
         return;
     }
     vector<long long unsigned> eff_mem_address = {ema_r1, ema_r2, 0};
-    dpdDetector->update(instruction_address, eff_mem_address);
+    insconsCounter->collect(instruction_address, eff_mem_address);
 }
 VOID doUpdate_3(long long unsigned instruction_address, long long unsigned ema_r1, long long unsigned ema_w1)
 {
-    dpdDetector->instr_count++;
-    if (dpdDetector->instr_count % dpdDetector->STEP_SIZE >= dpdDetector->RANGE)
+    insconsCounter->instr_count++;
+    if (insconsCounter->instr_count % insconsCounter->STEP_SIZE >= insconsCounter->RANGE)
     {
         return;
     }
     vector<long long unsigned> eff_mem_address = {ema_r1, 0, ema_w1};
-    dpdDetector->update(instruction_address, eff_mem_address);
+    insconsCounter->collect(instruction_address, eff_mem_address);
 }
 VOID doUpdate_4(long long unsigned instruction_address, long long unsigned ema_r1, long long unsigned ema_r2, long long unsigned ema_w1)
 {
-    dpdDetector->instr_count++;
-    if (dpdDetector->instr_count % dpdDetector->STEP_SIZE >= dpdDetector->RANGE)
+    insconsCounter->instr_count++;
+    if (insconsCounter->instr_count % insconsCounter->STEP_SIZE >= insconsCounter->RANGE)
     {
         return;
     }
     vector<long long unsigned> eff_mem_address = {ema_r1, ema_r2, ema_w1};
-    dpdDetector->update(instruction_address, eff_mem_address);
+    insconsCounter->collect(instruction_address, eff_mem_address);
 }
 VOID doUpdate_5(long long unsigned instruction_address, long long unsigned ema_w1)
 {
-    dpdDetector->instr_count++;
-    if (dpdDetector->instr_count % dpdDetector->STEP_SIZE >= dpdDetector->RANGE)
+    insconsCounter->instr_count++;
+    if (insconsCounter->instr_count % insconsCounter->STEP_SIZE >= insconsCounter->RANGE)
     {
         return;
     }
     vector<long long unsigned> eff_mem_address = {0, 0, ema_w1};
-    dpdDetector->update(instruction_address, eff_mem_address);
+    insconsCounter->collect(instruction_address, eff_mem_address);
 }
 VOID doUpdate_6(long long unsigned instruction_address)
 {
-    dpdDetector->instr_count++;
-    if (dpdDetector->instr_count % dpdDetector->STEP_SIZE >= dpdDetector->RANGE)
+    insconsCounter->instr_count++;
+    if (insconsCounter->instr_count % insconsCounter->STEP_SIZE >= insconsCounter->RANGE)
     {
         return;
     }
     vector<long long unsigned> eff_mem_address = {0, 0, 0};
-    dpdDetector->update(instruction_address, eff_mem_address);
+    insconsCounter->collect(instruction_address, eff_mem_address);
 }
 
 int static_count = 0;
@@ -140,10 +182,6 @@ VOID Instruction(INS ins, VOID *v)
     struct InstructionInfo *inst_info = new InstructionInfo;
     // Inst PC function : TO DO -
     inst_info->PC = static_count;
-    if (static_count % 5000 == 0)
-    {
-        cerr << "Static Counts: " << static_count << endl;
-    }
     int operand_count = INS_OperandCount(ins);
     for (int i = 0; i < operand_count; i++)
     {
@@ -182,7 +220,7 @@ VOID Instruction(INS ins, VOID *v)
         }
     }
 
-    dpdDetector->static_instr_info[INS_Address(ins)] = inst_info;
+    insconsCounter->static_instr_info[INS_Address(ins)] = inst_info;
 
     if (inst_info->read_1)
     {
@@ -229,7 +267,8 @@ VOID Fini(INT32 code, VOID *v)
 {
     // Write to a file since cout and cerr maybe closed by the application
     OutFile.setf(ios::showbase);
-    OutFile << "Counter " << dpdDetector->instr_count << endl;
+    OutFile << "Register Root Inconsequent Count: " << insconsCounter->register_root << endl;
+    OutFile << "Total Count " << insconsCounter->instr_count << endl;
     OutFile.close();
 }
 

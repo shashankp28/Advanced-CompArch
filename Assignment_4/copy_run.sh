@@ -47,4 +47,5 @@ pin="$home/$version/pin"
 #     ((count+=1))
 # done
 
+cd $current
 /home/shashankp/pin-3.28-98749-g6643ecee5-gcc-linux/pin -t /home/shashankp/pin-3.28-98749-g6643ecee5-gcc-linux/source/tools/ManualExamples/obj-intel64/dpdcount.so -- /home/shashankp/Desktop/GitHub_S/Advanced-CompArch/Assignment_4/hello
