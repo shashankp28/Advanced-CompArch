@@ -25,6 +25,7 @@ struct InstructionInfo
     bool read_1;
     bool read_2;
     bool write_1;
+    ADDRINT PC;
 };
 
 class DependencyDetector
@@ -135,11 +136,13 @@ int static_count = 0;
 VOID Instruction(INS ins, VOID *v)
 {
     static_count++;
-    if (static_count % 10000 == 0)
+    struct InstructionInfo *inst_info = new InstructionInfo;
+    // Inst PC function : TO DO -
+    inst_info->PC = static_count;
+    if (static_count % 5000 == 0)
     {
         cerr << "Static Counts: " << static_count << endl;
     }
-    struct InstructionInfo *inst_info = new InstructionInfo;
     int operand_count = INS_OperandCount(ins);
     for (int i = 0; i < operand_count; i++)
     {
