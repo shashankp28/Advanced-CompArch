@@ -153,13 +153,13 @@ public:
                     if (is_root)
                     {
                         string output = getInstructionRange(ins_list, unused[x], it);
-                        if (print_count < 1000)
-                        {
-                            cerr << "---------- Block Start ----------\n";
-                            cerr << output;
-                            cerr << "---------- Block End ------------\n";
-                            print_count++;
-                        }
+                        // if (print_count < 1000)
+                        // {
+                        //     cerr << "---------- Block Start ----------\n";
+                        //     cerr << output;
+                        //     cerr << "---------- Block End ------------\n";
+                        //     print_count++;
+                        // }
                         inconsequence_info[output]++;
                     }
                 }
