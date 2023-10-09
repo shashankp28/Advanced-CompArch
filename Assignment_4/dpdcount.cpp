@@ -161,7 +161,7 @@ public:
                 for (auto &x : ins->reg_write)
                 {
                     bool found = false;
-                    for(auto i : inconsequent_iterators)
+                    for (auto i : inconsequent_iterators)
                     {
                         if (unused[x] == i)
                         {
@@ -169,7 +169,8 @@ public:
                             break;
                         }
                     }
-                    if(!found) {
+                    if (!found)
+                    {
                         inconsequent_iterators.push_back(unused[x]);
                     }
                     if (is_root)
@@ -222,13 +223,13 @@ public:
         }
     }
 
-    void memoryInconsequentCounter(list<InstructionInfo *> ins_list)
+    void memoryInconsequentCounter(list<InstructionInfo *> ins_list,
+                                   vector<long long unsigned> &effective_mem_addresses)
     {
         // TODO: Fill Here !
     }
 
-    void branchInconsequentCounter(list<InstructionInfo *> ins_list,
-                                   vector<long long unsigned> &effective_mem_addresses)
+    void branchInconsequentCounter(list<InstructionInfo *> ins_list)
     {
         // TODO: Fill Here !
     }
