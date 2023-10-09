@@ -128,7 +128,7 @@ public:
         return output;
     }
 
-    list<InstructionInfo *> removeRegisterInconsequent(list<InstructionInfo *> &ins_list, bool is_root)
+    void removeRegisterInconsequent(list<InstructionInfo *> &ins_list, bool is_root)
     {
         unordered_map<string, Iterator> unused;
         vector<Iterator> inconsequent_iterators;
@@ -158,9 +158,20 @@ public:
 
             if (flag == 0)
             {
-                inconsequent_iterators.push_back(it);
                 for (auto &x : ins->reg_write)
                 {
+                    bool found = false;
+                    for(auto i : inconsequent_iterators)
+                    {
+                        if (unused[x] == i)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if(!found) {
+                        inconsequent_iterators.push_back(unused[x]);
+                    }
                     if (is_root)
                     {
                         string output = getInstructionRange(ins_list, unused[x], it);
@@ -176,7 +187,6 @@ public:
             ++it;
         }
         removeInstructions(ins_list, inconsequent_iterators);
-        return ins_list;
     }
 
     /*
@@ -196,14 +206,14 @@ public:
     void registerInconsequentCounter(list<InstructionInfo *> ins_list)
     {
         long long prev_size = ins_list.size();
-        ins_list = removeRegisterInconsequent(ins_list, true);
+        removeRegisterInconsequent(ins_list, true);
         long long changed_size = prev_size - ins_list.size();
         register_root += changed_size;
         register_inconsequent += changed_size;
         while (true)
         {
             prev_size = ins_list.size();
-            ins_list = removeRegisterInconsequent(ins_list, false);
+            removeRegisterInconsequent(ins_list, false);
             if (prev_size == (long long)ins_list.size())
             {
                 break;
@@ -238,6 +248,8 @@ public:
         else if (instr_count % STEP_SIZE == RANGE - 1)
         {
             // Filling Branch Predictions
+            cerr << "-------------------------------\n";
+            cerr << "Register Root Count Starting... " << endl;
             registerInconsequentCounter(instructions);
             // memoryInconsequentCounter(instructions, effective_mem_addresses);
             // branchInconsequentCounter(instructions);
@@ -328,7 +340,7 @@ VOID Instruction(INS ins, VOID *v)
     inst_info->PC = static_count;
     inst_info->decode = INS_Disassemble(ins);
     inst_info->instruction = ins;
-    inst->is_branch = INS_IsBranch(ins);
+    inst_info->is_branch = INS_IsBranch(ins);
     long operand_count = INS_OperandCount(ins);
     for (int i = 0; i < operand_count; i++)
     {
