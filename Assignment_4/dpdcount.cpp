@@ -70,6 +70,7 @@ public:
         {
             return;
         }
+        cerr << "-------------------BLOCK Start--------------\n";
         while (true)
         {
             cerr << (*start)->decode << "  --->  ";
@@ -90,7 +91,7 @@ public:
             }
             ++start;
         }
-        cerr << "-------------------------------------\n";
+        cerr << "-------------------BLOCK End--------------\n";
         print_count++;
     }
 
@@ -275,11 +276,13 @@ VOID Instruction(INS ins, VOID *v)
                 inst_info->reg_write.push_back(reg_name);
             }
         }
-        if (INS_OperandMemoryBaseReg(ins, i) != REG_INVALID()){
+        if (INS_OperandMemoryBaseReg(ins, i) != REG_INVALID())
+        {
             string reg_name = REG_StringShort(INS_OperandMemoryBaseReg(ins, i));
             inst_info->reg_read.push_back(reg_name);
         }
-        if (INS_OperandMemoryIndexReg(ins, i) != REG_INVALID()){
+        if (INS_OperandMemoryIndexReg(ins, i) != REG_INVALID())
+        {
             string reg_name = REG_StringShort(INS_OperandMemoryIndexReg(ins, i));
             inst_info->reg_read.push_back(reg_name);
         }
