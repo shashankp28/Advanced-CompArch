@@ -31,6 +31,7 @@ struct InstructionInfo
 };
 
 using Iterator = list<InstructionInfo *>::iterator;
+using MemIterator = list<vector<long long unsigned>>::iterator;
 const float BRANCH_PREDICTION_ACCURACY = 0.95;
 
 class InconsequentCounter
@@ -42,6 +43,8 @@ public:
     string output = "";
 
     list<InstructionInfo *> instructions;
+    list<vector<long long unsigned>> resolved_mem_addresses;
+
     long long register_root;
     long long register_inconsequent;
     long long memory_root;
@@ -66,6 +69,21 @@ public:
         for (const auto &it : indices)
         {
             arr.erase(it);
+        }
+    }
+
+    void removeInstructionsMem(list<InstructionInfo *> &ins, const vector<Iterator> &indices, list<vector<long long unsigned>> &mem)
+    {
+        auto iit = ins.begin();
+        auto mit =  mem.begin();
+        while(iit != ins.end()){
+            auto found = find(indices.begin(), indices.end(),iit) !=  indices.end();
+            if(found){
+                ins.erase(iit);
+                mem.erase(mit);
+            }
+            mit++;
+            iit++;
         }
     }
 
@@ -192,16 +210,72 @@ public:
 
     /*
     TODO: FILL THESE AND UNCOMMENT
-    list<InstructionInfo *> removeMemoryInconsequent(list<InstructionInfo *> &ins_list, bool is_root)
+    */
+    list<InstructionInfo *> removeMemoryInconsequent(list<InstructionInfo *> &ins_list, list<vector<long long unsigned>> &mem_adds , bool is_root)
     {
         // TODO: Fill Here!
+        unordered_map<long long unsigned, Iterator> unused;
+        vector<Iterator> ins_inconsequent_iterators;
+        // vector<MemIterator> mem_inconsequent_iterators;
+        Iterator iit = ins_list.begin();
+        MemIterator mit = resolved_mem_addresses.begin();
+
+
+
+        while (iit != ins_list.end())
+        {
+            auto ins = *iit;
+            auto mem_resolved = *mit;
+
+            if(ins->read_1){
+                if (unused.find(mem_resolved[0]) != unused.end())
+                {
+                    unused.erase(mem_resolved[0]);
+                }
+            }
+            if(ins->read_2){
+                if (unused.find(mem_resolved[1]) != unused.end())
+                {
+                    unused.erase(mem_resolved[1]);
+                }
+            }
+
+            int flag = 0;
+
+            if(ins->write_1){
+                if (unused.find(mem_resolved[2]) != unused.end())
+                {
+                    auto prev_ins = unused[mem_resolved[2]];
+
+                    int found = 0;
+                    for(auto i: ins_inconsequent_iterators){
+                        if(i==prev_ins){
+                            flag=1;
+                            break;
+                        }
+                    }
+                    if(!flag){
+                        ins_inconsequent_iterators.push_back(prev_ins);
+                        // mem_inconsequent_iterators.push_back(prev_mem);
+                    }
+                    if (is_root)
+                    {
+                        string output = getInstructionRange(ins_list, prev_ins, iit);
+                        inconsequence_info[output]++;
+                    }
+                }
+                unused.insert({mem_resolved[2],iit});
+            }
+            ++iit;
+            ++mit;
+        }
+        removeInstructionsMem(ins_list, ins_inconsequent_iterators, mem_adds);
     }
 
     list<InstructionInfo *> removeBranchInconsequent(list<InstructionInfo *> &ins_list, bool is_root)
     {
         // TODO: Fill Here!
     }
-    */
 
     void registerInconsequentCounter(list<InstructionInfo *> ins_list)
     {
@@ -223,9 +297,25 @@ public:
     }
 
     void memoryInconsequentCounter(list<InstructionInfo *> ins_list,
-                                   vector<long long unsigned> &effective_mem_addresses)
+                                   list<vector<long long unsigned>> resolved_mem_addresses)
     {
         // TODO: Fill Here !
+        
+        long long prev_size = ins_list.size();
+        removeMemoryInconsequent(ins_list, resolved_mem_addresses, true);
+        long long changed_size = prev_size - ins_list.size();
+        memory_root += changed_size;
+        memory_inconsequent += changed_size;
+        while (true)
+        {
+            prev_size = ins_list.size();
+            removeMemoryInconsequent(ins_list, resolved_mem_addresses, false);
+            if (prev_size == (long long)ins_list.size())
+            {
+                break;
+            }
+            memory_inconsequent += prev_size - ins_list.size();
+        }
     }
 
     void branchInconsequentCounter(list<InstructionInfo *> ins_list)
@@ -244,6 +334,7 @@ public:
         if (instr_count % STEP_SIZE == 0)
         {
             instructions.erase(instructions.begin(), instructions.end());
+            resolved_mem_addresses.erase(resolved_mem_addresses.begin(), resolved_mem_addresses.end());
         }
         else if (instr_count % STEP_SIZE == RANGE - 1)
         {
@@ -251,7 +342,7 @@ public:
             cerr << "-------------------------------\n";
             cerr << "Register Root Count Starting... " << endl;
             registerInconsequentCounter(instructions);
-            // memoryInconsequentCounter(instructions, effective_mem_addresses);
+            memoryInconsequentCounter(instructions, resolved_mem_addresses);
             // branchInconsequentCounter(instructions);
             // inconsequentCounter(instructions);
             cerr << "Register Root Count: " << register_root << endl;
@@ -261,6 +352,8 @@ public:
         else
         {
             instructions.push_back(ins);
+            resolved_mem_addresses.push_back(effective_mem_addresses);
+
         }
     }
 };
