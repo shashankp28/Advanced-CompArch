@@ -25,6 +25,7 @@ struct InstructionInfo
     long long PC;
     string decode;
     INS instruction;
+    bool is_branch;
 };
 
 using Iterator = list<InstructionInfo *>::iterator;
@@ -205,12 +206,13 @@ public:
         // TODO: Fill Here !
     }
 
-    void branchInconsequentCounter(list<InstructionInfo *> ins_list)
+    void branchInconsequentCounter(list<InstructionInfo *> ins_list,
+                                   vector<long long unsigned> &effective_mem_addresses)
     {
         // TODO: Fill Here !
     }
 
-    void innconsequentCounter(list<InstructionInfo *> ins_list)
+    void inconsequentCounter(list<InstructionInfo *> ins_list)
     {
         // TODO: Fill Here !
     }
@@ -224,7 +226,11 @@ public:
         }
         else if (instr_count % STEP_SIZE == RANGE - 1)
         {
+            // Filling Branch Predictions
             registerInconsequentCounter(instructions);
+            // memoryInconsequentCounter(instructions, effective_mem_addresses);
+            // branchInconsequentCounter(instructions);
+            // inconsequentCounter(instructions);
             cerr << "Register Root Count: " << register_root << endl;
             cerr << "Register Inconsequent Count: " << register_inconsequent << endl;
             cerr << "-------------------------------\n";
@@ -311,6 +317,7 @@ VOID Instruction(INS ins, VOID *v)
     inst_info->PC = static_count;
     inst_info->decode = INS_Disassemble(ins);
     inst_info->instruction = ins;
+    inst->is_branch = INS_IsBranch(ins);
     long operand_count = INS_OperandCount(ins);
     for (int i = 0; i < operand_count; i++)
     {
