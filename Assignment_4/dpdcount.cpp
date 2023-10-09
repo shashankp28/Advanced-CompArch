@@ -10,27 +10,24 @@
 #include <pin.H>
 #include <unordered_set>
 #include <vector>
-using std::cerr;
-using std::cout;
-using std::endl;
-using std::ios;
-using std::ofstream;
-using std::string;
-
+#include <list>
 using namespace std;
 
 ofstream OutFile;
 
 struct InstructionInfo
 {
-    vector<int> reg_read;
-    vector<int> reg_write;
+    vector<string> reg_read;
+    vector<string> reg_write;
     bool read_1;
     bool read_2;
     bool write_1;
     ADDRINT PC;
+    string decode;
+    INS instruction;
 };
 
+using Iterator = list<InstructionInfo *>::iterator;
 class InconsequentCounter
 {
 public:
@@ -38,13 +35,14 @@ public:
     unordered_map<long long unsigned, InstructionInfo *> static_instr_info;
     string output = "";
 
-    vector<InstructionInfo *> instruction_list;
+    list<InstructionInfo *> instructions;
     long long register_root;
     long long register_inconsequent;
     long long memory_root;
     long long memory_inconsequent;
     long long branch_root;
     long long branch_inconsequent;
+    int print_count = 0;
     const long long unsigned STEP_SIZE = 1e4, RANGE = 1e3;
 
     InconsequentCounter()
@@ -58,18 +56,62 @@ public:
         branch_inconsequent = 0;
     }
 
-    void registerInconsequentCounter(vector<InstructionInfo *> ins_list)
+    void removeInstructions(list<InstructionInfo *> &arr, const vector<Iterator> &indices)
     {
-        unordered_set<int> unused;
-        for (auto ins : ins_list)
+        for (const auto &it : indices)
         {
+            arr.erase(it);
+        }
+    }
+
+    void printInstructionRange(list<InstructionInfo *> &ins_list, Iterator start, Iterator end)
+    {
+        if (print_count == 1000)
+        {
+            return;
+        }
+        while (true)
+        {
+            cerr << (*start)->decode << "  --->  ";
+            cerr << "Read: [";
+            for (auto &x : (*start)->reg_read)
+            {
+                cerr << x << ", ";
+            }
+            cerr << "]  Write: [";
+            for (auto &x : (*start)->reg_write)
+            {
+                cerr << x << ", ";
+            }
+            cerr << "]\n";
+            if (start == end)
+            {
+                break;
+            }
+            ++start;
+        }
+        cerr << "-------------------------------------\n";
+        print_count++;
+    }
+
+    list<InstructionInfo *> removeRegisterInconsequent(list<InstructionInfo *> &ins_list)
+    {
+        unordered_map<string, Iterator> unused;
+        vector<Iterator> inconsequent_iterators;
+        Iterator it = ins_list.begin();
+
+        while (it != ins_list.end())
+        {
+            auto ins = *it;
+
             for (auto &x : ins->reg_read)
             {
                 if (unused.find(x) != unused.end())
                 {
-                    unused.erase(unused.find(x));
+                    unused.erase(x);
                 }
             }
+
             int flag = 0;
             for (auto &x : ins->reg_write)
             {
@@ -79,14 +121,42 @@ public:
                     break;
                 }
             }
+
             if (flag == 0)
             {
-                register_root++;
+                inconsequent_iterators.push_back(it);
+                for (auto &x : ins->reg_write)
+                {
+                    printInstructionRange(ins_list, unused[x], it);
+                }
             }
+
             for (auto &x : ins->reg_write)
             {
-                unused.insert(x);
+                unused.insert(make_pair(x, it));
             }
+            ++it;
+        }
+        removeInstructions(ins_list, inconsequent_iterators);
+        return ins_list;
+    }
+
+    void registerInconsequentCounter(list<InstructionInfo *> ins_list)
+    {
+        int prev_size = ins_list.size();
+        ins_list = removeRegisterInconsequent(ins_list);
+        int changed_size = prev_size - ins_list.size();
+        register_root += changed_size;
+        register_inconsequent += changed_size;
+        while (true)
+        {
+            prev_size = ins_list.size();
+            ins_list = removeRegisterInconsequent(ins_list);
+            if (prev_size == (int)ins_list.size())
+            {
+                break;
+            }
+            register_inconsequent += prev_size - ins_list.size();
         }
     }
 
@@ -95,16 +165,18 @@ public:
         InstructionInfo *ins = static_instr_info[instr_ptr];
         if (instr_count % STEP_SIZE == 0)
         {
-            instruction_list.erase(instruction_list.begin(), instruction_list.end());
+            instructions.erase(instructions.begin(), instructions.end());
         }
         else if (instr_count % STEP_SIZE == RANGE - 1)
         {
-            registerInconsequentCounter(instruction_list);
+            registerInconsequentCounter(instructions);
             cerr << "Register Root Count: " << register_root << endl;
+            cerr << "Register Inconsequent Count: " << register_inconsequent << endl;
+            cerr << "-------------------------------\n";
         }
         else
         {
-            instruction_list.push_back(ins);
+            instructions.push_back(ins);
         }
     }
 };
@@ -182,19 +254,34 @@ VOID Instruction(INS ins, VOID *v)
     struct InstructionInfo *inst_info = new InstructionInfo;
     // Inst PC function : TO DO -
     inst_info->PC = static_count;
+    inst_info->decode = INS_Disassemble(ins);
+    inst_info->instruction = ins;
     int operand_count = INS_OperandCount(ins);
     for (int i = 0; i < operand_count; i++)
     {
         if (INS_OperandIsReg(ins, i) && INS_OperandReg(ins, i) != REG_INVALID())
         {
+            string reg_name = REG_StringShort(INS_OperandReg(ins, i));
+            if (reg_name == "rflags")
+            {
+                continue;
+            }
             if (INS_OperandRead(ins, i))
             {
-                inst_info->reg_read.push_back(INS_OperandReg(ins, i));
+                inst_info->reg_read.push_back(reg_name);
             }
-            else if (INS_OperandWritten(ins, i))
+            if (INS_OperandWritten(ins, i))
             {
-                inst_info->reg_write.push_back(INS_OperandReg(ins, i));
+                inst_info->reg_write.push_back(reg_name);
             }
+        }
+        if (INS_OperandMemoryBaseReg(ins, i) != REG_INVALID()){
+            string reg_name = REG_StringShort(INS_OperandMemoryBaseReg(ins, i));
+            inst_info->reg_read.push_back(reg_name);
+        }
+        if (INS_OperandMemoryIndexReg(ins, i) != REG_INVALID()){
+            string reg_name = REG_StringShort(INS_OperandMemoryIndexReg(ins, i));
+            inst_info->reg_read.push_back(reg_name);
         }
     }
     int mem_op_count = INS_MemoryOperandCount(ins);
@@ -267,8 +354,12 @@ VOID Fini(INT32 code, VOID *v)
 {
     // Write to a file since cout and cerr maybe closed by the application
     OutFile.setf(ios::showbase);
-    OutFile << "Register Root Inconsequent Count: " << insconsCounter->register_root << endl;
-    OutFile << "Total Count " << insconsCounter->instr_count << endl;
+    OutFile << "Register Root Count: " << insconsCounter->register_root << endl;
+    OutFile << "Register Inconsequent Count: " << insconsCounter->register_inconsequent << endl;
+    OutFile << "-----------------------------------------------\n";
+    OutFile << "Dynamic Instructions Count: " << insconsCounter->instr_count << endl;
+    OutFile << "Static Instructions Count: " << static_count << endl;
+    OutFile << "-----------------------------------------------\n";
     OutFile.close();
 }
 

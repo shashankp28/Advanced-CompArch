@@ -11,7 +11,6 @@ make
 tool="$home/$version/source/tools/ManualExamples/obj-intel64/dpdcount.so"
 pin="$home/$version/pin"
 
-
 # Go to resources
 # eval cd $resource
 # pwd
