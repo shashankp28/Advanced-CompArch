@@ -167,15 +167,19 @@ public:
         return ins_list;
     }
 
-    list<InstructionInfo *> removeMemoryInconsequent(list<InstructionInfo *> &ins_list, bool is_root)
-    {
-        // TODO: Fill Here!
-    }
+    /*
+    TODO: FILL THESE AND UNCOMMENT
+        list<InstructionInfo *> removeMemoryInconsequent(list<InstructionInfo *> &ins_list, bool is_root)
+        {
+            // TODO: Fill Here!
+        }
 
-    list<InstructionInfo *> branchMemoryInconsequent(list<InstructionInfo *> &ins_list, bool is_root)
-    {
-        // TODO: Fill Here!
-    }
+        list<InstructionInfo *> removeBranchInconsequent(list<InstructionInfo *> &ins_list, bool is_root)
+        {
+            // TODO: Fill Here!
+        }
+
+    */
 
     void registerInconsequentCounter(list<InstructionInfo *> ins_list)
     {
