@@ -11,6 +11,8 @@
 #include <unordered_set>
 #include <vector>
 #include <list>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 ofstream OutFile;
@@ -29,6 +31,7 @@ struct InstructionInfo
 };
 
 using Iterator = list<InstructionInfo *>::iterator;
+const float BRANCH_PREDICTION_ACCURACY = 0.95;
 
 class InconsequentCounter
 {
@@ -64,6 +67,14 @@ public:
         {
             arr.erase(it);
         }
+    }
+
+    bool isPredictedCorrect()
+    {
+        const float BRANCH_PREDICTION_ACCURACY = 0.95;
+        srand(time(nullptr));
+        float randomValue = static_cast<float>(rand()) / RAND_MAX;
+        return randomValue < BRANCH_PREDICTION_ACCURACY;
     }
 
     string getTopRoots(int top)
