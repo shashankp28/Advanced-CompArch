@@ -44,7 +44,6 @@ public:
     long long memory_inconsequent;
     long long branch_root;
     long long branch_inconsequent;
-    int print_count = 0;
     const long long unsigned STEP_SIZE = 1e4, RANGE = 1e3;
 
     InconsequentCounter()
@@ -153,13 +152,6 @@ public:
                     if (is_root)
                     {
                         string output = getInstructionRange(ins_list, unused[x], it);
-                        // if (print_count < 1000)
-                        // {
-                        //     cerr << "---------- Block Start ----------\n";
-                        //     cerr << output;
-                        //     cerr << "---------- Block End ------------\n";
-                        //     print_count++;
-                        // }
                         inconsequence_info[output]++;
                     }
                 }
@@ -173,6 +165,16 @@ public:
         }
         removeInstructions(ins_list, inconsequent_iterators);
         return ins_list;
+    }
+
+    list<InstructionInfo *> removeMemoryInconsequent(list<InstructionInfo *> &ins_list, bool is_root)
+    {
+        // TODO: Fill Here!
+    }
+
+    list<InstructionInfo *> branchMemoryInconsequent(list<InstructionInfo *> &ins_list, bool is_root)
+    {
+        // TODO: Fill Here!
     }
 
     void registerInconsequentCounter(list<InstructionInfo *> ins_list)
@@ -192,6 +194,21 @@ public:
             }
             register_inconsequent += prev_size - ins_list.size();
         }
+    }
+
+    void memoryInconsequentCounter(list<InstructionInfo *> ins_list)
+    {
+        // TODO: Fill Here !
+    }
+
+    void branchInconsequentCounter(list<InstructionInfo *> ins_list)
+    {
+        // TODO: Fill Here !
+    }
+
+    void innconsequentCounter(list<InstructionInfo *> ins_list)
+    {
+        // TODO: Fill Here !
     }
 
     void collect(long long unsigned instr_ptr, vector<long long unsigned> &effective_mem_addresses)
