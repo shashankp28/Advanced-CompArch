@@ -154,71 +154,44 @@ public:
 
     void removeRegisterInconsequent(list<InstructionInfo *> &ins_list, bool is_root)
     {
-        unordered_map<string, Iterator> unused;
+        unordered_set<string> unused;
+        unordered_map<string, Iterator> last_produced;
         vector<Iterator> inconsequent_iterators;
-        Iterator it = ins_list.begin();
-
-        while (it != ins_list.end())
+        Iterator it = ins_list.end();
+        while (it != ins_list.begin())
         {
+            --it;
             auto ins = *it;
-
-            for (auto &x : ins->reg_read)
+            bool all_unused = true;
+            for (auto &reg_write : ins->reg_write)
             {
-                if (unused.find(x) != unused.end())
-                {
-                    Iterator prev_ins = unused[x];
-                    vector<string> items_to_remove;
-                    for(auto object: unused){
-                        if(object.second == prev_ins){
-                            items_to_remove.push_back(object.first);
-                        }
-                    }
-                    for(auto item: items_to_remove){
-                        unused.erase(item);
-                    }
-                }
+                all_unused &= unused.find(reg_write) != unused.end();
             }
-
-            int flag = 0;
-            for (auto &x : ins->reg_write)
+            if (all_unused)
             {
-                if (unused.find(x) == unused.end())
+                for (auto &reg_write : ins->reg_write)
                 {
-                    flag = 1;
-                    break;
-                }
-            }
-
-            if (flag == 0)
-            {
-                for (auto &x : ins->reg_write)
-                {
-                    bool found = false;
-                    for (auto i : inconsequent_iterators)
-                    {
-                        if (unused[x] == i)
-                        {
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (!found)
-                    {
-                        inconsequent_iterators.push_back(unused[x]);
-                    }
+                    auto prev_ins = last_produced[reg_write];
                     if (is_root)
                     {
-                        string output = getInstructionRange(ins_list, unused[x], it);
+                        string output = getInstructionRange(ins_list, it, prev_ins);
                         inconsequence_info[output]++;
+                        cerr << "Register Root Inconsequent " << endl;
+                        cerr << output << endl;
+                        cerr << "-----------------------------------------------\n";
                     }
                 }
+                inconsequent_iterators.push_back(it);
             }
-
-            for (auto &x : ins->reg_write)
+            for (auto &reg_write : ins->reg_write)
             {
-                unused.insert(make_pair(x, it));
+                last_produced[reg_write] = it;
+                unused.insert(reg_write);
             }
-            ++it;
+            for (auto &reg_read : ins->reg_read)
+            {
+                unused.erase(reg_read);
+            }
         }
         removeInstructions(ins_list, inconsequent_iterators);
     }
