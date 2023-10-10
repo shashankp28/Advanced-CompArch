@@ -49,15 +49,15 @@ final_dic = {
             #  'Register Root Count': [], 
             #  'Memory Root Count': [],
             #  'Memory Inconsequent Count': [],
-             'Branch Root Count': [],
-             'Branch Inconsequent Count': [],
-            #  'Inconsequent Count': []
+            #  'Branch Root Count': [],
+            #  'Branch Inconsequent Count': [],
+             'Inconsequent Count': []
              }
 
 for a in traversal:
     dic = get_data(a)
-    final_dic['Branch Root Count'].append(dic['Branch Root Count'])
-    final_dic['Branch Inconsequent Count'].append(dic['Branch Inconsequent Count'])
+    # final_dic['Branch Root Count'].append(dic['Branch Root Count'])
+    final_dic['Inconsequent Count'].append(dic['Inconsequent Count'])
     # final_dic['Memory Root Count'].append(dic['Memory Root Count'])
     # final_dic['Memory Inconsequent Count'].append(dic['Memory Inconsequent Count'])
     # final_dic['Branch Root Count'].append(dic['Branch Root Count'])
