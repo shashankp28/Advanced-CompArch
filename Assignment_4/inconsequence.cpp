@@ -54,7 +54,7 @@ public:
     long long branch_root;
     long long branch_inconsequent;
     long long inconsequent_count;
-    const long long unsigned STEP_SIZE = 1e9, RANGE = 5 * 1e4;
+    const long long unsigned STEP_SIZE = 1e10, RANGE = 1e4;
 
     InconsequentCounter()
     {
@@ -357,7 +357,7 @@ public:
         else if (instr_count % STEP_SIZE == RANGE - 1)
         {
             cerr << "-------------------------------\n";
-            cerr << "Count Starting... Dynamic Instruction: " << (instr_count / STEP_SIZE) << " Billion" << endl;
+            cerr << "Count Starting... Dynamic Instruction: " << 10*(instr_count / STEP_SIZE) << " Billion" << endl;
             registerInconsequentCounter(instructions);
             memoryInconsequentCounter(instructions, resolved_mem_addresses);
             branchInconsequentCounter(instructions, branch_predictions);
