@@ -1,7 +1,7 @@
 import sys
 
 
-base_path = "./data/" 
+base_path = "./data/"
 file_name = sys.argv[1]
 
 path = base_path+file_name
@@ -24,14 +24,15 @@ ele = []
 f = []
 flag = 0
 for data in data_list:
-    if data[0:7]=="-------":
+    if data[0:7] == "-------":
         final_data.append(ele)
         ele = []
     else:
         ele.append(data)
 
-dictionary['Top 10 Reg Root']=final_data[-7]
-dictionary['Top 10 Mem Root']=final_data[-6]
-dictionary['Statistics']=final_data[-5:-1]
+dictionary['Top 10 Reg Root'] = final_data[-7]
+dictionary['Top 10 Mem Root'] = final_data[-6]
+dictionary['Statistics'] = final_data[-5:-1]
 
 # Print the list to verify the data has been read and stored correctly
+print(dictionary['Statistics'])
