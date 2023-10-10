@@ -32,7 +32,7 @@ struct InstructionInfo
 using Iterator = list<InstructionInfo *>::iterator;
 using MemIterator = list<vector<long long unsigned>>::iterator;
 using BranchIterator = list<bool>::iterator;
-const float BRANCH_PREDICTION_ACCURACY = 0.95;
+const float BRANCH_PREDICTION_ACCURACY = 0.80;
 
 class InconsequentCounter
 {
@@ -53,7 +53,8 @@ public:
     long long memory_inconsequent;
     long long branch_root;
     long long branch_inconsequent;
-    const long long unsigned STEP_SIZE = 1e4, RANGE = 1e3;
+    long long inconsequent_count;
+    const long long unsigned STEP_SIZE = 1e9, RANGE = 5 * 1e4;
 
     InconsequentCounter()
     {
@@ -93,8 +94,6 @@ public:
 
     bool isPredictedCorrect()
     {
-        const float BRANCH_PREDICTION_ACCURACY = 0.95;
-        srand(time(nullptr));
         float randomValue = static_cast<float>(rand()) / RAND_MAX;
         return randomValue < BRANCH_PREDICTION_ACCURACY;
     }
@@ -242,26 +241,22 @@ public:
         removeInstructionsMem(ins_list, ins_inconsequent_iterators, mem_adds);
     }
 
-    void removeBranchInconsequent(list<InstructionInfo *> &ins_list, list<bool> predicted, bool is_root)
+    void removeBranchInconsequent(list<InstructionInfo *> &ins_list, list<bool> &predicted, bool is_root)
     {
-        if (root)
+        if (is_root)
         {
             Iterator iit = ins_list.begin();
             BranchIterator bit = predicted.begin();
-            while(iit != ins_list.end())
+            vector<Iterator> inconsequent_iterators;
+            while (iit != ins_list.end())
             {
-                if(*bit)
+                if (*bit)
                 {
-                    iit++;
-                    bit++;
+                    ins_list.erase(iit);
+                    predicted.erase(bit);
                 }
-                else
-                {
-                    string output = getInstructionRange(ins_list, iit, iit);
-                    inconsequence_info_branch[output]++;
-                    iit++;
-                    bit++;
-                }
+                iit++;
+                bit++;
             }
         }
         else
@@ -311,12 +306,43 @@ public:
 
     void branchInconsequentCounter(list<InstructionInfo *> ins_list, list<bool> predicted)
     {
-        // TODO: Fill Here !
+        long long prev_size = ins_list.size();
+        removeBranchInconsequent(ins_list, predicted, true);
+        long long changed_size = prev_size - ins_list.size();
+        branch_root += changed_size;
+        branch_inconsequent += changed_size;
+        while (true)
+        {
+            prev_size = ins_list.size();
+            removeBranchInconsequent(ins_list, predicted, false);
+            if (prev_size == (long long)ins_list.size())
+            {
+                break;
+            }
+            branch_inconsequent += prev_size - ins_list.size();
+        }
     }
 
-    void inconsequentCounter(list<InstructionInfo *> ins_list)
+    void inconsequentCounter(list<InstructionInfo *> ins_list,
+                             list<vector<long long unsigned>> resolved_mem_addresses,
+                             list<bool> predicted)
     {
-        // TODO: Fill Here !
+        long long prev_size = ins_list.size();
+        removeBranchInconsequent(ins_list, predicted, true);
+        long long changed_size = prev_size - ins_list.size();
+        inconsequent_count += changed_size;
+        while (true)
+        {
+            long long prev_size = ins_list.size();
+            removeRegisterInconsequent(ins_list, false);
+            removeMemoryInconsequent(ins_list, resolved_mem_addresses, false);
+            long long changed_size = prev_size - ins_list.size();
+            if (changed_size == 0)
+            {
+                break;
+            }
+            inconsequent_count += changed_size;
+        }
     }
 
     void collect(ADDRINT instr_ptr, vector<long long unsigned> &effective_mem_addresses)
@@ -326,19 +352,23 @@ public:
         {
             instructions.erase(instructions.begin(), instructions.end());
             resolved_mem_addresses.erase(resolved_mem_addresses.begin(), resolved_mem_addresses.end());
+            branch_predictions.erase(branch_predictions.begin(), branch_predictions.end());
         }
         else if (instr_count % STEP_SIZE == RANGE - 1)
         {
             cerr << "-------------------------------\n";
-            cerr << "Count Starting... " << endl;
+            cerr << "Count Starting... Dynamic Instruction: " << (instr_count / STEP_SIZE) << " Billion" << endl;
             registerInconsequentCounter(instructions);
             memoryInconsequentCounter(instructions, resolved_mem_addresses);
-            // branchInconsequentCounter(instructions);
-            // inconsequentCounter(instructions);
+            branchInconsequentCounter(instructions, branch_predictions);
+            inconsequentCounter(instructions, resolved_mem_addresses, branch_predictions);
             cerr << "Register Root Count: " << register_root << endl;
             cerr << "Register Inconsequent Count: " << register_inconsequent << endl;
             cerr << "Memory Root Count: " << memory_root << endl;
             cerr << "Memory Inconsequent Count: " << memory_inconsequent << endl;
+            cerr << "Branch Root Count: " << branch_root << endl;
+            cerr << "Branch Inconsequent Count: " << branch_inconsequent << endl;
+            cerr << "Inconsequent Count: " << inconsequent_count << endl;
             cerr << "-------------------------------\n";
         }
         else
@@ -507,7 +537,7 @@ VOID Instruction(INS ins, VOID *v)
     }
 }
 
-KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "dpdcount.out", "specify output file name");
+KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "inconsequence.out", "specify output file name");
 
 // This function is called when the application exits
 VOID Fini(INT32 code, VOID *v)
@@ -524,6 +554,11 @@ VOID Fini(INT32 code, VOID *v)
     OutFile << "-----------------------------------------------\n";
     OutFile << "Memory Root Count: " << insconsCounter->memory_root << endl;
     OutFile << "Memory Inconsequent Count: " << insconsCounter->memory_inconsequent << endl;
+    OutFile << "-----------------------------------------------\n";
+    OutFile << "Branch Root Count: " << insconsCounter->branch_root << endl;
+    OutFile << "Branch Inconsequent Count: " << insconsCounter->branch_inconsequent << endl;
+    OutFile << "-----------------------------------------------\n";
+    OutFile << "Inconsequent Count: " << insconsCounter->inconsequent_count << endl;
     OutFile << "-----------------------------------------------\n";
     OutFile << "Dynamic Instructions Count: " << insconsCounter->instr_count << endl;
     OutFile << "Static Instructions Count: " << static_count << endl;
