@@ -171,14 +171,11 @@ public:
             {
                 for (auto &reg_write : ins->reg_write)
                 {
-                    auto prev_ins = last_produced[reg_write];
                     if (is_root)
                     {
+                        auto prev_ins = last_produced[reg_write];
                         string output = getInstructionRange(ins_list, it, prev_ins);
                         inconsequence_info[output]++;
-                        cerr << "Register Root Inconsequent " << endl;
-                        cerr << output << endl;
-                        cerr << "-----------------------------------------------\n";
                     }
                 }
                 inconsequent_iterators.push_back(it);
@@ -198,16 +195,35 @@ public:
 
     void removeMemoryInconsequent(list<InstructionInfo *> &ins_list, list<vector<long long unsigned>> &mem_adds, bool is_root)
     {
-        unordered_map<long long unsigned, Iterator> unused;
+        unordered_set<long long unsigned> unused;
+        unordered_map<long long unsigned, Iterator> last_produced;
         vector<Iterator> ins_inconsequent_iterators;
-        Iterator iit = ins_list.begin();
-        MemIterator mit = resolved_mem_addresses.begin();
-
-        while (iit != ins_list.end())
+        Iterator iit = ins_list.end();
+        MemIterator mit = mem_adds.end();
+        while (iit != ins_list.begin())
         {
+            --iit;
+            --mit;
             auto ins = *iit;
             auto mem_resolved = *mit;
-
+            if (ins->write_1)
+            {
+                if (unused.find(mem_resolved[2]) != unused.end())
+                {
+                    if (is_root)
+                    {
+                        auto prev_ins = last_produced[mem_resolved[2]];
+                        string output = getInstructionRange(ins_list, iit, prev_ins);
+                        cerr << "Memory Address: " << mem_resolved[2] << endl;
+                        cerr << output << endl;
+                        cerr << "\n";
+                        inconsequence_info[output]++;
+                    }
+                    ins_inconsequent_iterators.push_back(iit);
+                }
+                unused.insert(mem_resolved[2]);
+                last_produced[mem_resolved[2]] = iit;
+            }
             if (ins->read_1)
             {
                 if (unused.find(mem_resolved[0]) != unused.end())
@@ -222,46 +238,13 @@ public:
                     unused.erase(mem_resolved[1]);
                 }
             }
-
-            int flag = 0;
-
-            if (ins->write_1)
-            {
-                if (unused.find(mem_resolved[2]) != unused.end())
-                {
-                    auto prev_ins = unused[mem_resolved[2]];
-                    for (auto i : ins_inconsequent_iterators)
-                    {
-                        if (i == prev_ins)
-                        {
-                            flag = 1;
-                            break;
-                        }
-                    }
-                    if (!flag)
-                    {
-                        ins_inconsequent_iterators.push_back(prev_ins);
-                    }
-                    if (is_root)
-                    {
-                        string output = getInstructionRange(ins_list, prev_ins, iit);
-                        inconsequence_info[output]++;
-                        cerr << "Memory Address: " << mem_resolved[2] << endl;
-                        cerr << output << endl;
-                        cerr << "-----------------------------------------------\n";
-                    }
-                }
-                unused.insert({mem_resolved[2], iit});
-            }
-            ++iit;
-            ++mit;
         }
         removeInstructionsMem(ins_list, ins_inconsequent_iterators, mem_adds);
     }
 
-    // list<InstructionInfo *> removeBranchInconsequent(list<InstructionInfo *> &ins_list, bool is_root)
+    // void removeBranchInconsequent(list<InstructionInfo *> &ins_list, list<bool> predicted, bool is_root)
     // {
-    //     // TODO: Fill Here!
+        
     // }
 
     void registerInconsequentCounter(list<InstructionInfo *> ins_list)
