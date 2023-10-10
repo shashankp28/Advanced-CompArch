@@ -6,7 +6,6 @@ file_name = sys.argv[1]
 
 path = base_path+file_name
 
-
 try:
     with open(path, 'r') as file:
         # Read the lines from the file and store them in a list
