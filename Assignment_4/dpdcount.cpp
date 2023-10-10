@@ -31,6 +31,7 @@ struct InstructionInfo
 
 using Iterator = list<InstructionInfo *>::iterator;
 using MemIterator = list<vector<long long unsigned>>::iterator;
+using BranchIterator = list<bool>::iterator;
 const float BRANCH_PREDICTION_ACCURACY = 0.95;
 
 class InconsequentCounter
@@ -38,7 +39,8 @@ class InconsequentCounter
 public:
     long long unsigned int instr_count;
     unordered_map<ADDRINT, InstructionInfo *> static_instr_info;
-    unordered_map<string, long long> inconsequence_info;
+    unordered_map<string, long long> inconsequence_info_reg;
+    unordered_map<string, long long> inconsequence_info_mem;
     string output = "";
 
     list<InstructionInfo *> instructions;
@@ -97,14 +99,14 @@ public:
         return randomValue < BRANCH_PREDICTION_ACCURACY;
     }
 
-    string getTopRoots(int top)
+    string getTopRoots(int top, unordered_map<string, long long> &data)
     {
-        if (top > (long long)inconsequence_info.size())
+        if (top > (long long)data.size())
         {
-            top = inconsequence_info.size();
+            top = data.size();
         }
         vector<pair<string, long long>> elements;
-        for (const auto &entry : inconsequence_info)
+        for (const auto &entry : data)
         {
             elements.push_back(entry);
         }
@@ -175,7 +177,7 @@ public:
                     {
                         auto prev_ins = last_produced[reg_write];
                         string output = getInstructionRange(ins_list, it, prev_ins);
-                        inconsequence_info[output]++;
+                        inconsequence_info_reg[output]++;
                     }
                 }
                 inconsequent_iterators.push_back(it);
@@ -214,10 +216,8 @@ public:
                     {
                         auto prev_ins = last_produced[mem_resolved[2]];
                         string output = getInstructionRange(ins_list, iit, prev_ins);
-                        cerr << "Memory Address: " << mem_resolved[2] << endl;
-                        cerr << output << endl;
-                        cerr << "\n";
-                        inconsequence_info[output]++;
+                        output = "Memory Address: " + to_string(mem_resolved[2]) + "\n" + output;
+                        inconsequence_info_mem[output]++;
                     }
                     ins_inconsequent_iterators.push_back(iit);
                 }
@@ -242,10 +242,33 @@ public:
         removeInstructionsMem(ins_list, ins_inconsequent_iterators, mem_adds);
     }
 
-    // void removeBranchInconsequent(list<InstructionInfo *> &ins_list, list<bool> predicted, bool is_root)
-    // {
-        
-    // }
+    void removeBranchInconsequent(list<InstructionInfo *> &ins_list, list<bool> predicted, bool is_root)
+    {
+        if (root)
+        {
+            Iterator iit = ins_list.begin();
+            BranchIterator bit = predicted.begin();
+            while(iit != ins_list.end())
+            {
+                if(*bit)
+                {
+                    iit++;
+                    bit++;
+                }
+                else
+                {
+                    string output = getInstructionRange(ins_list, iit, iit);
+                    inconsequence_info_branch[output]++;
+                    iit++;
+                    bit++;
+                }
+            }
+        }
+        else
+        {
+            removeRegisterInconsequent(ins_list, false);
+        }
+    }
 
     void registerInconsequentCounter(list<InstructionInfo *> ins_list)
     {
@@ -286,7 +309,7 @@ public:
         }
     }
 
-    void branchInconsequentCounter(list<InstructionInfo *> ins_list)
+    void branchInconsequentCounter(list<InstructionInfo *> ins_list, list<bool> predicted)
     {
         // TODO: Fill Here !
     }
@@ -306,7 +329,6 @@ public:
         }
         else if (instr_count % STEP_SIZE == RANGE - 1)
         {
-            // Filling Branch Predictions
             cerr << "-------------------------------\n";
             cerr << "Count Starting... " << endl;
             registerInconsequentCounter(instructions);
@@ -443,25 +465,9 @@ VOID Instruction(INS ins, VOID *v)
         {
             inst_info->write_1 = true;
         }
-        // if (INS_OperandMemoryBaseReg(ins, i) != REG_INVALID())
-        // {
-        //     string reg_name = REG_StringShort(INS_OperandMemoryBaseReg(ins, i));
-        //     inst_info->reg_read.push_back(reg_name);
-        // }
-        // if (INS_OperandMemoryIndexReg(ins, i) != REG_INVALID())
-        // {
-        //     string reg_name = REG_StringShort(INS_OperandMemoryIndexReg(ins, i));
-        //     inst_info->reg_read.push_back(reg_name);
-        // }
     }
 
     insconsCounter->static_instr_info[INS_Address(ins)] = inst_info;
-    if (inst_info->PC == 184)
-    {
-        cerr << "-----------------------------------------------\n";
-        cerr << "Instruction: " << INS_Disassemble(ins) << endl;
-        cerr << "-----------------------------------------------\n";
-    }
 
     if (inst_info->read_1)
     {
@@ -508,7 +514,10 @@ VOID Fini(INT32 code, VOID *v)
 {
     // Write to a file since cout and cerr maybe closed by the application
     OutFile.setf(ios::showbase);
-    OutFile << insconsCounter->getTopRoots(20);
+    OutFile << "----------------------- Top 10 Reg Root -------------------\n";
+    OutFile << insconsCounter->getTopRoots(10, insconsCounter->inconsequence_info_reg);
+    OutFile << "----------------------- Top 10 Mem Root -------------------\n";
+    OutFile << insconsCounter->getTopRoots(10, insconsCounter->inconsequence_info_mem);
     OutFile << "----------------------- Statistics -------------------\n";
     OutFile << "Register Root Count: " << insconsCounter->register_root << endl;
     OutFile << "Register Inconsequent Count: " << insconsCounter->register_inconsequent << endl;
