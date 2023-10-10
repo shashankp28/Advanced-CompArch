@@ -357,7 +357,7 @@ public:
         else if (instr_count % STEP_SIZE == RANGE - 1)
         {
             cerr << "-------------------------------\n";
-            cerr << "Count Starting... Dynamic Instruction: " << 10*(instr_count / STEP_SIZE) << " Billion" << endl;
+            cerr << "Count Starting... Dynamic Instruction: " << 10 * (instr_count / STEP_SIZE) << " Billion" << endl;
             registerInconsequentCounter(instructions);
             memoryInconsequentCounter(instructions, resolved_mem_addresses);
             branchInconsequentCounter(instructions, branch_predictions);
