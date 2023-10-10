@@ -1,0 +1,779 @@
+----------------------- Top 10 Reg Root -------------------
+Count: 277
+10700 -> movzx ecx, word ptr [rax+0x20]  ->  Read: [rax, ]  Write: [ecx, ] Read1: 1 Read2: 0 Write1: 0 
+10701 -> test cx, cx  ->  Read: [cx, cx, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+10702 -> jle 0x4049cb  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+10703 -> mov rdx, qword ptr [rax+0x10]  ->  Read: [rax, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+10704 -> mov rdi, qword ptr [rax+0x8]  ->  Read: [rax, ]  Write: [rdi, ] Read1: 1 Read2: 0 Write1: 0 
+10705 -> sub rdi, qword ptr [rdx]  ->  Read: [rdi, rdx, ]  Write: [rdi, rflags, ] Read1: 1 Read2: 0 Write1: 0 
+10706 -> mov rdx, rdi  ->  Read: [rdi, ]  Write: [rdx, ] Read1: 0 Read2: 0 Write1: 0 
+10707 -> mov rdi, qword ptr [rax+0x18]  ->  Read: [rax, ]  Write: [rdi, ] Read1: 1 Read2: 0 Write1: 0 
+10708 -> add rdx, qword ptr [rdi]  ->  Read: [rdx, rdi, ]  Write: [rdx, rflags, ] Read1: 1 Read2: 0 Write1: 0 
+10709 -> jns 0x4049c0  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+10710 -> cmp cx, 0x1  ->  Read: [cx, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+10711 -> jnz 0x4049cb  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+10737 -> mov rdi, qword ptr [r9]  ->  Read: [r9, ]  Write: [rdi, ] Read1: 1 Read2: 0 Write1: 0 
+10738 -> mov rsi, rdx  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+10739 -> sar rsi, 0x3f  ->  Read: [rsi, ]  Write: [rsi, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+10740 -> lea rcx, ptr [rdi+0x1]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 0 Read2: 0 Write1: 0 
+10741 -> mov qword ptr [r9], rcx  ->  Read: [r9, rcx, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+10742 -> mov rcx, qword ptr [r8+rcx*8]  ->  Read: [r8, rcx, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+10743 -> mov qword ptr [rcx], rax  ->  Read: [rcx, rax, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+10744 -> mov rcx, qword ptr [r9]  ->  Read: [r9, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+10745 -> add rax, r10  ->  Read: [rax, r10, ]  Write: [rax, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+10746 -> mov rcx, qword ptr [r8+rcx*8]  ->  Read: [r8, rcx, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+10747 -> mov qword ptr [rcx+0x8], rdx  ->  Read: [rcx, rdx, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+10748 -> mov rcx, qword ptr [r9]  ->  Read: [r9, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+10749 -> xor rdx, rsi  ->  Read: [rdx, rsi, ]  Write: [rdx, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+10750 -> mov rcx, qword ptr [r8+rcx*8]  ->  Read: [r8, rcx, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+10751 -> mov qword ptr [rcx+0x10], rdx  ->  Read: [rcx, rdx, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+10752 -> sub qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+10753 -> mov rdx, qword ptr [r9]  ->  Read: [r9, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+10754 -> mov rdx, qword ptr [r8+rdx*8]  ->  Read: [r8, rdx, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+10755 -> mov qword ptr [rdx+0x18], 0x0  ->  Read: [rdx, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+10756 -> mov rsi, qword ptr [rbx]  ->  Read: [rbx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+10757 -> cmp rax, rsi  ->  Read: [rax, rsi, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+10758 -> jb 0x4049d3  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+10700 -> movzx ecx, word ptr [rax+0x20]  ->  Read: [rax, ]  Write: [ecx, ] Read1: 1 Read2: 0 Write1: 0 
+
+Count: 277
+10752 -> sub qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+10753 -> mov rdx, qword ptr [r9]  ->  Read: [r9, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+10754 -> mov rdx, qword ptr [r8+rdx*8]  ->  Read: [r8, rdx, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+10755 -> mov qword ptr [rdx+0x18], 0x0  ->  Read: [rdx, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+10756 -> mov rsi, qword ptr [rbx]  ->  Read: [rbx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+10757 -> cmp rax, rsi  ->  Read: [rax, rsi, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+
+Count: 225
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+
+Count: 225
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+
+Count: 186
+10700 -> movzx ecx, word ptr [rax+0x20]  ->  Read: [rax, ]  Write: [ecx, ] Read1: 1 Read2: 0 Write1: 0 
+10701 -> test cx, cx  ->  Read: [cx, cx, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+10702 -> jle 0x4049cb  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+10703 -> mov rdx, qword ptr [rax+0x10]  ->  Read: [rax, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+10704 -> mov rdi, qword ptr [rax+0x8]  ->  Read: [rax, ]  Write: [rdi, ] Read1: 1 Read2: 0 Write1: 0 
+10705 -> sub rdi, qword ptr [rdx]  ->  Read: [rdi, rdx, ]  Write: [rdi, rflags, ] Read1: 1 Read2: 0 Write1: 0 
+10706 -> mov rdx, rdi  ->  Read: [rdi, ]  Write: [rdx, ] Read1: 0 Read2: 0 Write1: 0 
+10707 -> mov rdi, qword ptr [rax+0x18]  ->  Read: [rax, ]  Write: [rdi, ] Read1: 1 Read2: 0 Write1: 0 
+10708 -> add rdx, qword ptr [rdi]  ->  Read: [rdx, rdi, ]  Write: [rdx, rflags, ] Read1: 1 Read2: 0 Write1: 0 
+10709 -> jns 0x4049c0  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+10690 -> cmp cx, 0x2  ->  Read: [cx, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+10691 -> jnz 0x4049cb  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+10697 -> add rax, r10  ->  Read: [rax, r10, ]  Write: [rax, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+10698 -> cmp rax, rsi  ->  Read: [rax, rsi, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+10699 -> jnb 0x404a48  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+10700 -> movzx ecx, word ptr [rax+0x20]  ->  Read: [rax, ]  Write: [ecx, ] Read1: 1 Read2: 0 Write1: 0 
+
+Count: 151
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+
+Count: 26
+3804 -> sub eax, 0x3a  ->  Read: [eax, ]  Write: [eax, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+3805 -> cmp al, 0x2  ->  Read: [al, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+
+Count: 26
+3804 -> sub eax, 0x3a  ->  Read: [eax, ]  Write: [eax, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+3805 -> cmp al, 0x2  ->  Read: [al, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+3806 -> setb al  ->  Read: [rflags, ]  Write: [al, ] Read1: 0 Read2: 0 Write1: 0 
+3807 -> add rdx, 0x1  ->  Read: [rdx, ]  Write: [rdx, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+3808 -> movzx eax, al  ->  Read: [al, ]  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+
+Count: 26
+3808 -> movzx eax, al  ->  Read: [al, ]  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+3809 -> add rcx, rax  ->  Read: [rcx, rax, ]  Write: [rcx, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+3810 -> movzx eax, byte ptr [rdx]  ->  Read: [rdx, ]  Write: [eax, ] Read1: 1 Read2: 0 Write1: 0 
+
+Count: 18
+10700 -> movzx ecx, word ptr [rax+0x20]  ->  Read: [rax, ]  Write: [ecx, ] Read1: 1 Read2: 0 Write1: 0 
+10701 -> test cx, cx  ->  Read: [cx, cx, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+10702 -> jle 0x4049cb  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+10697 -> add rax, r10  ->  Read: [rax, r10, ]  Write: [rax, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+10698 -> cmp rax, rsi  ->  Read: [rax, rsi, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+10699 -> jnb 0x404a48  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+10700 -> movzx ecx, word ptr [rax+0x20]  ->  Read: [rax, ]  Write: [ecx, ] Read1: 1 Read2: 0 Write1: 0 
+
+----------------------- Top 10 Mem Root -------------------
+Count: 136
+Memory Address: 140728755464064
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11402 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11403 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11666 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11667 -> mov rdi, rbp  ->  Read: [rbp, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11668 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11332 -> cmp eax, 0x0  ->  Read: [eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11333 -> jnle 0x404ca5  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11334 -> jmp 0x404e3c  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11116 -> jnz 0x404d53  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11184 -> add rbp, r15  ->  Read: [rbp, r15, ]  Write: [rbp, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11185 -> jmp 0x404c58  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+
+Count: 51
+Memory Address: 140728755464064
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11402 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11403 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11666 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11667 -> mov rdi, rbp  ->  Read: [rbp, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11668 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11332 -> cmp eax, 0x0  ->  Read: [eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11333 -> jnle 0x404ca5  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11173 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11174 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11175 -> mov esi, dword ptr [rsp]  ->  Read: [rsp, ]  Write: [esi, ] Read1: 1 Read2: 0 Write1: 0 
+11176 -> test esi, esi  ->  Read: [esi, esi, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11177 -> jnz 0x404d60  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11178 -> mov rax, qword ptr [rbp]  ->  Read: [rbp, ]  Write: [rax, ] Read1: 1 Read2: 0 Write1: 0 
+11179 -> mov rsi, qword ptr [r13]  ->  Read: [r13, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+11180 -> mov qword ptr [rbp], rsi  ->  Read: [rbp, rsi, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11181 -> mov qword ptr [r13], rax  ->  Read: [r13, rax, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11182 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11183 -> mov dword ptr [rsp+0x8], 0x1  ->  Read: [rsp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11184 -> add rbp, r15  ->  Read: [rbp, r15, ]  Write: [rbp, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11185 -> jmp 0x404c58  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+
+Count: 28
+Memory Address: 140728755464056
+11183 -> mov dword ptr [rsp+0x8], 0x1  ->  Read: [rsp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11184 -> add rbp, r15  ->  Read: [rbp, r15, ]  Write: [rbp, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11185 -> jmp 0x404c58  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11402 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11403 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11666 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11667 -> mov rdi, rbp  ->  Read: [rbp, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11668 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11332 -> cmp eax, 0x0  ->  Read: [eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11333 -> jnle 0x404ca5  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11173 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11174 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11175 -> mov esi, dword ptr [rsp]  ->  Read: [rsp, ]  Write: [esi, ] Read1: 1 Read2: 0 Write1: 0 
+11176 -> test esi, esi  ->  Read: [esi, esi, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11177 -> jnz 0x404d60  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11178 -> mov rax, qword ptr [rbp]  ->  Read: [rbp, ]  Write: [rax, ] Read1: 1 Read2: 0 Write1: 0 
+11179 -> mov rsi, qword ptr [r13]  ->  Read: [r13, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+11180 -> mov qword ptr [rbp], rsi  ->  Read: [rbp, rsi, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11181 -> mov qword ptr [r13], rax  ->  Read: [r13, rax, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11182 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11183 -> mov dword ptr [rsp+0x8], 0x1  ->  Read: [rsp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+
+Count: 16
+Memory Address: 140728755464064
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11402 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11403 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11666 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11667 -> mov rdi, rbp  ->  Read: [rbp, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11668 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11332 -> cmp eax, 0x0  ->  Read: [eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11333 -> jnle 0x404ca5  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11188 -> jnz 0x404c99  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11161 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11162 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11163 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11173 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11174 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11175 -> mov esi, dword ptr [rsp]  ->  Read: [rsp, ]  Write: [esi, ] Read1: 1 Read2: 0 Write1: 0 
+11176 -> test esi, esi  ->  Read: [esi, esi, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11177 -> jnz 0x404d60  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11178 -> mov rax, qword ptr [rbp]  ->  Read: [rbp, ]  Write: [rax, ] Read1: 1 Read2: 0 Write1: 0 
+11179 -> mov rsi, qword ptr [r13]  ->  Read: [r13, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+11180 -> mov qword ptr [rbp], rsi  ->  Read: [rbp, rsi, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11181 -> mov qword ptr [r13], rax  ->  Read: [r13, rax, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11182 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11183 -> mov dword ptr [rsp+0x8], 0x1  ->  Read: [rsp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11184 -> add rbp, r15  ->  Read: [rbp, r15, ]  Write: [rbp, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11185 -> jmp 0x404c58  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+
+Count: 13
+Memory Address: 140728755464056
+11183 -> mov dword ptr [rsp+0x8], 0x1  ->  Read: [rsp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11184 -> add rbp, r15  ->  Read: [rbp, r15, ]  Write: [rbp, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11185 -> jmp 0x404c58  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11402 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11403 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11666 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11667 -> mov rdi, rbp  ->  Read: [rbp, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11668 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11332 -> cmp eax, 0x0  ->  Read: [eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11333 -> jnle 0x404ca5  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11334 -> jmp 0x404e3c  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11116 -> jnz 0x404d53  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11184 -> add rbp, r15  ->  Read: [rbp, r15, ]  Write: [rbp, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11185 -> jmp 0x404c58  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11402 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11403 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11666 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11667 -> mov rdi, rbp  ->  Read: [rbp, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11668 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11332 -> cmp eax, 0x0  ->  Read: [eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11333 -> jnle 0x404ca5  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11173 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11174 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11175 -> mov esi, dword ptr [rsp]  ->  Read: [rsp, ]  Write: [esi, ] Read1: 1 Read2: 0 Write1: 0 
+11176 -> test esi, esi  ->  Read: [esi, esi, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11177 -> jnz 0x404d60  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11178 -> mov rax, qword ptr [rbp]  ->  Read: [rbp, ]  Write: [rax, ] Read1: 1 Read2: 0 Write1: 0 
+11179 -> mov rsi, qword ptr [r13]  ->  Read: [r13, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+11180 -> mov qword ptr [rbp], rsi  ->  Read: [rbp, rsi, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11181 -> mov qword ptr [r13], rax  ->  Read: [r13, rax, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11182 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11183 -> mov dword ptr [rsp+0x8], 0x1  ->  Read: [rsp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+
+Count: 11
+Memory Address: 140728755464064
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11402 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11403 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11666 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11667 -> mov rdi, rbp  ->  Read: [rbp, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11668 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11332 -> cmp eax, 0x0  ->  Read: [eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11333 -> jnle 0x404ca5  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11188 -> jnz 0x404c99  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11161 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11162 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11163 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11188 -> jnz 0x404c99  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11161 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11162 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11163 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11173 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11174 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11175 -> mov esi, dword ptr [rsp]  ->  Read: [rsp, ]  Write: [esi, ] Read1: 1 Read2: 0 Write1: 0 
+11176 -> test esi, esi  ->  Read: [esi, esi, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11177 -> jnz 0x404d60  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11178 -> mov rax, qword ptr [rbp]  ->  Read: [rbp, ]  Write: [rax, ] Read1: 1 Read2: 0 Write1: 0 
+11179 -> mov rsi, qword ptr [r13]  ->  Read: [r13, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+11180 -> mov qword ptr [rbp], rsi  ->  Read: [rbp, rsi, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11181 -> mov qword ptr [r13], rax  ->  Read: [r13, rax, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11182 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11183 -> mov dword ptr [rsp+0x8], 0x1  ->  Read: [rsp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11184 -> add rbp, r15  ->  Read: [rbp, r15, ]  Write: [rbp, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11185 -> jmp 0x404c58  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+
+Count: 9
+Memory Address: 140728755464056
+11183 -> mov dword ptr [rsp+0x8], 0x1  ->  Read: [rsp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11184 -> add rbp, r15  ->  Read: [rbp, r15, ]  Write: [rbp, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11185 -> jmp 0x404c58  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11402 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11403 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11666 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11667 -> mov rdi, rbp  ->  Read: [rbp, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11668 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11332 -> cmp eax, 0x0  ->  Read: [eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11333 -> jnle 0x404ca5  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11188 -> jnz 0x404c99  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11161 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11162 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11163 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11173 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11174 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11175 -> mov esi, dword ptr [rsp]  ->  Read: [rsp, ]  Write: [esi, ] Read1: 1 Read2: 0 Write1: 0 
+11176 -> test esi, esi  ->  Read: [esi, esi, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11177 -> jnz 0x404d60  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11178 -> mov rax, qword ptr [rbp]  ->  Read: [rbp, ]  Write: [rax, ] Read1: 1 Read2: 0 Write1: 0 
+11179 -> mov rsi, qword ptr [r13]  ->  Read: [r13, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+11180 -> mov qword ptr [rbp], rsi  ->  Read: [rbp, rsi, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11181 -> mov qword ptr [r13], rax  ->  Read: [r13, rax, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11182 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11183 -> mov dword ptr [rsp+0x8], 0x1  ->  Read: [rsp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+
+Count: 6
+Memory Address: 140728755464056
+11183 -> mov dword ptr [rsp+0x8], 0x1  ->  Read: [rsp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11184 -> add rbp, r15  ->  Read: [rbp, r15, ]  Write: [rbp, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11185 -> jmp 0x404c58  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11402 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11403 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11666 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11667 -> mov rdi, rbp  ->  Read: [rbp, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11668 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11332 -> cmp eax, 0x0  ->  Read: [eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11333 -> jnle 0x404ca5  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11188 -> jnz 0x404c99  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11161 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11162 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11163 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11188 -> jnz 0x404c99  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11161 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11162 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11163 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11173 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11174 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11175 -> mov esi, dword ptr [rsp]  ->  Read: [rsp, ]  Write: [esi, ] Read1: 1 Read2: 0 Write1: 0 
+11176 -> test esi, esi  ->  Read: [esi, esi, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11177 -> jnz 0x404d60  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11178 -> mov rax, qword ptr [rbp]  ->  Read: [rbp, ]  Write: [rax, ] Read1: 1 Read2: 0 Write1: 0 
+11179 -> mov rsi, qword ptr [r13]  ->  Read: [r13, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+11180 -> mov qword ptr [rbp], rsi  ->  Read: [rbp, rsi, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11181 -> mov qword ptr [r13], rax  ->  Read: [r13, rax, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11182 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11183 -> mov dword ptr [rsp+0x8], 0x1  ->  Read: [rsp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+
+Count: 5
+Memory Address: 140728755464056
+11183 -> mov dword ptr [rsp+0x8], 0x1  ->  Read: [rsp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11184 -> add rbp, r15  ->  Read: [rbp, r15, ]  Write: [rbp, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11185 -> jmp 0x404c58  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11402 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11403 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11666 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11667 -> mov rdi, rbp  ->  Read: [rbp, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11668 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11332 -> cmp eax, 0x0  ->  Read: [eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11333 -> jnle 0x404ca5  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11334 -> jmp 0x404e3c  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11116 -> jnz 0x404d53  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11184 -> add rbp, r15  ->  Read: [rbp, r15, ]  Write: [rbp, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11185 -> jmp 0x404c58  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11402 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11403 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11666 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11667 -> mov rdi, rbp  ->  Read: [rbp, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11668 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11332 -> cmp eax, 0x0  ->  Read: [eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11333 -> jnle 0x404ca5  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11188 -> jnz 0x404c99  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11161 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11162 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11163 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11173 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11174 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11175 -> mov esi, dword ptr [rsp]  ->  Read: [rsp, ]  Write: [esi, ] Read1: 1 Read2: 0 Write1: 0 
+11176 -> test esi, esi  ->  Read: [esi, esi, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11177 -> jnz 0x404d60  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11178 -> mov rax, qword ptr [rbp]  ->  Read: [rbp, ]  Write: [rax, ] Read1: 1 Read2: 0 Write1: 0 
+11179 -> mov rsi, qword ptr [r13]  ->  Read: [r13, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+11180 -> mov qword ptr [rbp], rsi  ->  Read: [rbp, rsi, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11181 -> mov qword ptr [r13], rax  ->  Read: [r13, rax, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11182 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11183 -> mov dword ptr [rsp+0x8], 0x1  ->  Read: [rsp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+
+Count: 4
+Memory Address: 140728755464056
+11183 -> mov dword ptr [rsp+0x8], 0x1  ->  Read: [rsp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11184 -> add rbp, r15  ->  Read: [rbp, r15, ]  Write: [rbp, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11185 -> jmp 0x404c58  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11402 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11403 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11666 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11667 -> mov rdi, rbp  ->  Read: [rbp, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11668 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11332 -> cmp eax, 0x0  ->  Read: [eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11333 -> jnle 0x404ca5  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11334 -> jmp 0x404e3c  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11116 -> jnz 0x404d53  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11184 -> add rbp, r15  ->  Read: [rbp, r15, ]  Write: [rbp, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11185 -> jmp 0x404c58  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11402 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11403 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11666 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11667 -> mov rdi, rbp  ->  Read: [rbp, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11668 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11332 -> cmp eax, 0x0  ->  Read: [eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11333 -> jnle 0x404ca5  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11334 -> jmp 0x404e3c  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11116 -> jnz 0x404d53  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11184 -> add rbp, r15  ->  Read: [rbp, r15, ]  Write: [rbp, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11185 -> jmp 0x404c58  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11402 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11403 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11666 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11667 -> mov rdi, rbp  ->  Read: [rbp, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11668 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11332 -> cmp eax, 0x0  ->  Read: [eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11333 -> jnle 0x404ca5  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11334 -> jmp 0x404e3c  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11116 -> jnz 0x404d53  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11184 -> add rbp, r15  ->  Read: [rbp, r15, ]  Write: [rbp, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11185 -> jmp 0x404c58  ->  Read: [rip, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11401 -> mov qword ptr [rsp+0x10], rbp  ->  Read: [rsp, rbp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11402 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11403 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11666 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11667 -> mov rdi, rbp  ->  Read: [rbp, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11668 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11332 -> cmp eax, 0x0  ->  Read: [eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11333 -> jnle 0x404ca5  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11164 -> mov rsi, r12  ->  Read: [r12, ]  Write: [rsi, ] Read1: 0 Read2: 0 Write1: 0 
+11165 -> mov rdi, r13  ->  Read: [r13, ]  Write: [rdi, ] Read1: 0 Read2: 0 Write1: 0 
+11166 -> call r14  ->  Read: [r14, rip, rsp, ]  Write: [rip, rsp, ] Read1: 0 Read2: 0 Write1: 1 
+12320 -> mov rdx, qword ptr [rsi]  ->  Read: [rsi, ]  Write: [rdx, ] Read1: 1 Read2: 0 Write1: 0 
+12321 -> mov eax, 0x1  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+12322 -> mov rcx, qword ptr [rdi]  ->  Read: [rdi, ]  Write: [rcx, ] Read1: 1 Read2: 0 Write1: 0 
+12323 -> mov rsi, qword ptr [rdx+0x10]  ->  Read: [rdx, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+12324 -> cmp qword ptr [rcx+0x10], rsi  ->  Read: [rcx, rsi, ]  Write: [rflags, ] Read1: 1 Read2: 0 Write1: 0 
+12325 -> jl 0x404835  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+12326 -> jnle 0x404830  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11004 -> mov eax, 0xffffffff  ->  Read: []  Write: [eax, ] Read1: 0 Read2: 0 Write1: 0 
+11154 -> ret   ->  Read: [rsp, ]  Write: [rip, rsp, ] Read1: 1 Read2: 0 Write1: 0 
+11186 -> test eax, eax  ->  Read: [eax, eax, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11187 -> js 0x404d28  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11173 -> cmp rbp, r13  ->  Read: [rbp, r13, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11174 -> jnbe 0x404b30  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11175 -> mov esi, dword ptr [rsp]  ->  Read: [rsp, ]  Write: [esi, ] Read1: 1 Read2: 0 Write1: 0 
+11176 -> test esi, esi  ->  Read: [esi, esi, ]  Write: [rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11177 -> jnz 0x404d60  ->  Read: [rip, rflags, ]  Write: [rip, ] Read1: 0 Read2: 0 Write1: 0 
+11178 -> mov rax, qword ptr [rbp]  ->  Read: [rbp, ]  Write: [rax, ] Read1: 1 Read2: 0 Write1: 0 
+11179 -> mov rsi, qword ptr [r13]  ->  Read: [r13, ]  Write: [rsi, ] Read1: 1 Read2: 0 Write1: 0 
+11180 -> mov qword ptr [rbp], rsi  ->  Read: [rbp, rsi, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11181 -> mov qword ptr [r13], rax  ->  Read: [r13, rax, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+11182 -> sub r13, r15  ->  Read: [r13, r15, ]  Write: [r13, rflags, ] Read1: 0 Read2: 0 Write1: 0 
+11183 -> mov dword ptr [rsp+0x8], 0x1  ->  Read: [rsp, ]  Write: [] Read1: 0 Read2: 0 Write1: 1 
+
+----------------------- Statistics -------------------
+Register Root Count: 4622
+Register Inconsequent Count: 14747
+-----------------------------------------------
+Memory Root Count: 451
+Memory Inconsequent Count: 451
+-----------------------------------------------
+Branch Root Count: 24004
+Branch Inconsequent Count: 27345
+-----------------------------------------------
+Inconsequent Count: 27959
+-----------------------------------------------
+Dynamic Instructions Count: 26714126401
+Static Instructions Count: 18158
+-----------------------------------------------
