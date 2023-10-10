@@ -6,7 +6,6 @@ file_name = sys.argv[1]
 
 path = base_path+file_name
 
-
 try:
     with open(path, 'r') as file:
         # Read the lines from the file and store them in a list
@@ -33,5 +32,3 @@ for data in data_list:
 dictionary['Top 10 Reg Root']=final_data[-7]
 dictionary['Top 10 Mem Root']=final_data[-6]
 dictionary['Statistics']=final_data[-5:-1]
-
-# Print the list to verify the data has been read and stored correctly
