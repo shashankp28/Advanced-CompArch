@@ -294,19 +294,11 @@ public:
         long long changed_size = prev_size - ins_list.size();
         memory_root += changed_size;
         memory_inconsequent += changed_size;
-        while (true)
-        {
-            prev_size = ins_list.size();
-            // Once memory roots are removed, remove all memory as well as register
-            // dependencies due to that memory instruction
-            removeMemoryInconsequent(ins_list, resolved_mem_addresses, false);
-            removeRegisterInconsequent(ins_list, false);
-            if (prev_size == (long long)ins_list.size())
-            {
-                break;
-            }
-            memory_inconsequent += prev_size - ins_list.size();
-        }
+        prev_size = ins_list.size();
+        // Once memory roots are removed, remove all memory as well as register
+        // dependencies due to that memory instruction
+        removeRegisterInconsequent(ins_list, false);
+        memory_inconsequent += prev_size - ins_list.size();
     }
 
     void branchInconsequentCounter(list<InstructionInfo *> ins_list,
@@ -329,19 +321,12 @@ public:
         long long changed_size = prev_size - ins_list.size();
         branch_root += changed_size;
         branch_inconsequent += changed_size;
-        while (true)
-        {
-            prev_size = ins_list.size();
-            // Remove all register and memory inconsequents
-            // Due to the removal of branch roots!
-            removeRegisterInconsequent(ins_list, false);
-            removeMemoryInconsequent(ins_list, resolved_mem_addresses, false);
-            if (prev_size == (long long)ins_list.size())
-            {
-                break;
-            }
-            branch_inconsequent += prev_size - ins_list.size();
-        }
+        prev_size = ins_list.size();
+        // Remove all register and memory inconsequents
+        // Due to the removal of branch roots!
+        removeRegisterInconsequent(ins_list, false);
+        removeMemoryInconsequent(ins_list, resolved_mem_addresses, false);
+        branch_inconsequent += prev_size - ins_list.size();
     }
 
     void inconsequentCounter(list<InstructionInfo *> ins_list,
@@ -349,21 +334,11 @@ public:
                              list<bool> predicted)
     {
         long long prev_size = ins_list.size();
+        removeMemoryInconsequent(ins_list, resolved_mem_addresses, true);
         removeBranchInconsequent(ins_list, predicted, true);
+        removeRegisterInconsequent(ins_list, false);
         long long changed_size = prev_size - ins_list.size();
         inconsequent_count += changed_size;
-        while (true)
-        {
-            long long prev_size = ins_list.size();
-            removeRegisterInconsequent(ins_list, false);
-            removeMemoryInconsequent(ins_list, resolved_mem_addresses, false);
-            long long changed_size = prev_size - ins_list.size();
-            if (changed_size == 0)
-            {
-                break;
-            }
-            inconsequent_count += changed_size;
-        }
     }
 
     void collect(ADDRINT instr_ptr, vector<long long unsigned> &effective_mem_addresses)
