@@ -48,13 +48,14 @@ public:
     list<bool> branch_predictions;
 
     long long register_root;
+    long long instructions_sampled;
     long long register_inconsequent;
     long long memory_root;
     long long memory_inconsequent;
     long long branch_root;
     long long branch_inconsequent;
     long long inconsequent_count;
-    const long long unsigned STEP_SIZE = 1e10, RANGE = 1e4;
+    const long long unsigned STEP_SIZE = 1e10, RANGE = 2 * 1e4;
 
     InconsequentCounter()
     {
@@ -65,6 +66,7 @@ public:
         memory_inconsequent = 0;
         branch_root = 0;
         branch_inconsequent = 0;
+        instructions_sampled = 0;
     }
 
     void removeInstructions(list<InstructionInfo *> &arr, const vector<Iterator> &indices)
@@ -163,6 +165,10 @@ public:
         {
             --it;
             auto ins = *it;
+            if (ins->write_1)
+            {
+                continue;
+            }
             bool all_unused = true;
             for (auto &reg_write : ins->reg_write)
             {
@@ -209,7 +215,7 @@ public:
             auto mem_resolved = *mit;
             if (ins->write_1)
             {
-                if (unused.find(mem_resolved[2]) != unused.end())
+                if (unused.find(mem_resolved[2]) != unused.end() && mem_resolved[2] != 0)
                 {
                     if (is_root)
                     {
@@ -259,10 +265,6 @@ public:
                 bit++;
             }
         }
-        else
-        {
-            removeRegisterInconsequent(ins_list, false);
-        }
     }
 
     void registerInconsequentCounter(list<InstructionInfo *> ins_list)
@@ -287,6 +289,16 @@ public:
     void memoryInconsequentCounter(list<InstructionInfo *> ins_list,
                                    list<vector<long long unsigned>> resolved_mem_addresses)
     {
+        // Remove all register Inconsequent
+        while (true)
+        {
+            long long prev_size = ins_list.size();
+            removeRegisterInconsequent(ins_list, false);
+            if (prev_size == (long long)ins_list.size())
+            {
+                break;
+            }
+        }
         long long prev_size = ins_list.size();
         removeMemoryInconsequent(ins_list, resolved_mem_addresses, true);
         long long changed_size = prev_size - ins_list.size();
@@ -295,7 +307,10 @@ public:
         while (true)
         {
             prev_size = ins_list.size();
+            // Once memory roots are removed, remove all memory as well as register
+            // dependencies due to that memory instruction
             removeMemoryInconsequent(ins_list, resolved_mem_addresses, false);
+            removeRegisterInconsequent(ins_list, false);
             if (prev_size == (long long)ins_list.size())
             {
                 break;
@@ -304,8 +319,21 @@ public:
         }
     }
 
-    void branchInconsequentCounter(list<InstructionInfo *> ins_list, list<bool> predicted)
+    void branchInconsequentCounter(list<InstructionInfo *> ins_list,
+                                   list<vector<long long unsigned>> resolved_mem_addresses,
+                                   list<bool> predicted)
     {
+        // Remove all register and memory Inconsequent
+        while (true)
+        {
+            long long prev_size = ins_list.size();
+            removeRegisterInconsequent(ins_list, false);
+            removeMemoryInconsequent(ins_list, resolved_mem_addresses, false);
+            if (prev_size == (long long)ins_list.size())
+            {
+                break;
+            }
+        }
         long long prev_size = ins_list.size();
         removeBranchInconsequent(ins_list, predicted, true);
         long long changed_size = prev_size - ins_list.size();
@@ -314,7 +342,10 @@ public:
         while (true)
         {
             prev_size = ins_list.size();
-            removeBranchInconsequent(ins_list, predicted, false);
+            // Remove all register and memory inconsequents
+            // Due to the removal of branch roots!
+            removeRegisterInconsequent(ins_list, false);
+            removeMemoryInconsequent(ins_list, resolved_mem_addresses, false);
             if (prev_size == (long long)ins_list.size())
             {
                 break;
@@ -356,19 +387,27 @@ public:
         }
         else if (instr_count % STEP_SIZE == RANGE - 1)
         {
+            instructions_sampled += instructions.size();
             cerr << "-------------------------------\n";
             cerr << "Count Starting... Dynamic Instruction: " << 10 * (instr_count / STEP_SIZE) << " Billion" << endl;
             registerInconsequentCounter(instructions);
             memoryInconsequentCounter(instructions, resolved_mem_addresses);
-            branchInconsequentCounter(instructions, branch_predictions);
+            branchInconsequentCounter(instructions, resolved_mem_addresses, branch_predictions);
             inconsequentCounter(instructions, resolved_mem_addresses, branch_predictions);
             cerr << "Register Root Count: " << register_root << endl;
+            cerr << "Register Root Percentage: " << 100 * (double)register_root / instructions_sampled << endl;
             cerr << "Register Inconsequent Count: " << register_inconsequent << endl;
+            cerr << "Register Inconsequent Percentage: " << 100 * (double)register_inconsequent / instructions_sampled << endl;
             cerr << "Memory Root Count: " << memory_root << endl;
+            cerr << "Memory Root Percentage: " << 100 * (double)memory_root / instructions_sampled << endl;
             cerr << "Memory Inconsequent Count: " << memory_inconsequent << endl;
+            cerr << "Memory Inconsequent Percentage: " << 100 * (double)memory_inconsequent / instructions_sampled << endl;
             cerr << "Branch Root Count: " << branch_root << endl;
+            cerr << "Branch Root Percentage: " << 100 * (double)branch_root / instructions_sampled << endl;
             cerr << "Branch Inconsequent Count: " << branch_inconsequent << endl;
+            cerr << "Branch Inconsequent Percentage: " << 100 * (double)branch_inconsequent / instructions_sampled << endl;
             cerr << "Inconsequent Count: " << inconsequent_count << endl;
+            cerr << "Inconsequent Percentage: " << 100 * (double)inconsequent_count / instructions_sampled << endl;
             cerr << "-------------------------------\n";
         }
         else
@@ -387,6 +426,10 @@ InconsequentCounter *insconsCounter = new InconsequentCounter();
 VOID doUpdate_1(ADDRINT instruction_address, long long unsigned ema_r1)
 {
     insconsCounter->instr_count++;
+    if (insconsCounter->instr_count % (insconsCounter->STEP_SIZE / 10) == 0)
+    {
+        cerr << "Ins Count: " << insconsCounter->instr_count / (insconsCounter->STEP_SIZE / 10) << " billion" << endl;
+    }
     if (insconsCounter->instr_count % insconsCounter->STEP_SIZE >= insconsCounter->RANGE)
     {
         return;
@@ -397,6 +440,10 @@ VOID doUpdate_1(ADDRINT instruction_address, long long unsigned ema_r1)
 VOID doUpdate_2(ADDRINT instruction_address, long long unsigned ema_r1, long long unsigned ema_r2)
 {
     insconsCounter->instr_count++;
+    if (insconsCounter->instr_count % (insconsCounter->STEP_SIZE / 10) == 0)
+    {
+        cerr << "Ins Count: " << insconsCounter->instr_count / (insconsCounter->STEP_SIZE / 10) << " billion" << endl;
+    }
     if (insconsCounter->instr_count % insconsCounter->STEP_SIZE >= insconsCounter->RANGE)
     {
         return;
@@ -407,6 +454,10 @@ VOID doUpdate_2(ADDRINT instruction_address, long long unsigned ema_r1, long lon
 VOID doUpdate_3(ADDRINT instruction_address, long long unsigned ema_r1, long long unsigned ema_w1)
 {
     insconsCounter->instr_count++;
+    if (insconsCounter->instr_count % (insconsCounter->STEP_SIZE / 10) == 0)
+    {
+        cerr << "Ins Count: " << insconsCounter->instr_count / (insconsCounter->STEP_SIZE / 10) << " billion" << endl;
+    }
     if (insconsCounter->instr_count % insconsCounter->STEP_SIZE >= insconsCounter->RANGE)
     {
         return;
@@ -417,6 +468,10 @@ VOID doUpdate_3(ADDRINT instruction_address, long long unsigned ema_r1, long lon
 VOID doUpdate_4(ADDRINT instruction_address, long long unsigned ema_r1, long long unsigned ema_r2, long long unsigned ema_w1)
 {
     insconsCounter->instr_count++;
+    if (insconsCounter->instr_count % (insconsCounter->STEP_SIZE / 10) == 0)
+    {
+        cerr << "Ins Count: " << insconsCounter->instr_count / (insconsCounter->STEP_SIZE / 10) << " billion" << endl;
+    }
     if (insconsCounter->instr_count % insconsCounter->STEP_SIZE >= insconsCounter->RANGE)
     {
         return;
@@ -427,6 +482,10 @@ VOID doUpdate_4(ADDRINT instruction_address, long long unsigned ema_r1, long lon
 VOID doUpdate_5(ADDRINT instruction_address, long long unsigned ema_w1)
 {
     insconsCounter->instr_count++;
+    if (insconsCounter->instr_count % (insconsCounter->STEP_SIZE / 10) == 0)
+    {
+        cerr << "Ins Count: " << insconsCounter->instr_count / (insconsCounter->STEP_SIZE / 10) << " billion" << endl;
+    }
     if (insconsCounter->instr_count % insconsCounter->STEP_SIZE >= insconsCounter->RANGE)
     {
         return;
@@ -437,6 +496,10 @@ VOID doUpdate_5(ADDRINT instruction_address, long long unsigned ema_w1)
 VOID doUpdate_6(ADDRINT instruction_address)
 {
     insconsCounter->instr_count++;
+    if (insconsCounter->instr_count % (insconsCounter->STEP_SIZE / 10) == 0)
+    {
+        cerr << "Ins Count: " << insconsCounter->instr_count / (insconsCounter->STEP_SIZE / 10) << " billion" << endl;
+    }
     if (insconsCounter->instr_count % insconsCounter->STEP_SIZE >= insconsCounter->RANGE)
     {
         return;
@@ -550,22 +613,28 @@ VOID Fini(INT32 code, VOID *v)
     OutFile << insconsCounter->getTopRoots(10, insconsCounter->inconsequence_info_mem);
     OutFile << "----------------------- Statistics -------------------\n";
     OutFile << "Register Root Count: " << insconsCounter->register_root << endl;
+    OutFile << "Register Root Percent: " << 100 * (double)insconsCounter->register_root / insconsCounter->instructions_sampled << endl;
     OutFile << "Register Inconsequent Count: " << insconsCounter->register_inconsequent << endl;
+    OutFile << "Register Inconsequent Percent: " << 100 * (double)insconsCounter->register_inconsequent / insconsCounter->instructions_sampled << endl;
     OutFile << "-----------------------------------------------\n";
     OutFile << "Memory Root Count: " << insconsCounter->memory_root << endl;
+    OutFile << "Memory Root Percent: " << 100 * (double)insconsCounter->memory_root / insconsCounter->instructions_sampled << endl;
     OutFile << "Memory Inconsequent Count: " << insconsCounter->memory_inconsequent << endl;
+    OutFile << "Memory Inconsequent Percent: " << 100 * (double)insconsCounter->memory_inconsequent / insconsCounter->instructions_sampled << endl;
     OutFile << "-----------------------------------------------\n";
     OutFile << "Branch Root Count: " << insconsCounter->branch_root << endl;
+    OutFile << "Branch Root Percent: " << 100 * (double)insconsCounter->branch_root / insconsCounter->instructions_sampled << endl;
     OutFile << "Branch Inconsequent Count: " << insconsCounter->branch_inconsequent << endl;
+    OutFile << "Branch Inconsequent Percent: " << 100 * (double)insconsCounter->branch_inconsequent / insconsCounter->instructions_sampled << endl;
     OutFile << "-----------------------------------------------\n";
     OutFile << "Inconsequent Count: " << insconsCounter->inconsequent_count << endl;
+    OutFile << "Inconsequent Percent: " << 100 * (double)insconsCounter->inconsequent_count / insconsCounter->instructions_sampled << endl;
     OutFile << "-----------------------------------------------\n";
     OutFile << "Dynamic Instructions Count: " << insconsCounter->instr_count << endl;
     OutFile << "Static Instructions Count: " << static_count << endl;
     OutFile << "-----------------------------------------------\n";
     OutFile.close();
 }
-
 /* ===================================================================== */
 /* Print Help Message                                                    */
 /* ===================================================================== */
