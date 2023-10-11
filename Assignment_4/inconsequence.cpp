@@ -306,16 +306,8 @@ public:
                                    list<bool> predicted)
     {
         // Remove all register and memory Inconsequent
-        while (true)
-        {
-            long long prev_size = ins_list.size();
-            removeRegisterInconsequent(ins_list, false);
-            removeMemoryInconsequent(ins_list, resolved_mem_addresses, false);
-            if (prev_size == (long long)ins_list.size())
-            {
-                break;
-            }
-        }
+        removeMemoryInconsequent(ins_list, resolved_mem_addresses, false);
+        removeRegisterInconsequent(ins_list, false);
         long long prev_size = ins_list.size();
         removeBranchInconsequent(ins_list, predicted, true);
         long long changed_size = prev_size - ins_list.size();
@@ -324,8 +316,8 @@ public:
         prev_size = ins_list.size();
         // Remove all register and memory inconsequents
         // Due to the removal of branch roots!
-        removeRegisterInconsequent(ins_list, false);
         removeMemoryInconsequent(ins_list, resolved_mem_addresses, false);
+        removeRegisterInconsequent(ins_list, false);
         branch_inconsequent += prev_size - ins_list.size();
     }
 
@@ -334,6 +326,7 @@ public:
                              list<bool> predicted)
     {
         long long prev_size = ins_list.size();
+        // Remove memory and branch root, then all the dependencies that follow
         removeMemoryInconsequent(ins_list, resolved_mem_addresses, true);
         removeBranchInconsequent(ins_list, predicted, true);
         removeRegisterInconsequent(ins_list, false);
