@@ -165,16 +165,14 @@ public:
         {
             --it;
             auto ins = *it;
-            if (ins->write_1)
-            {
-                continue;
-            }
-            bool all_unused = true;
+            bool is_incons = true;
             for (auto &reg_write : ins->reg_write)
             {
-                all_unused &= unused.find(reg_write) != unused.end();
+                is_incons &= unused.find(reg_write) != unused.end();
             }
-            if (all_unused)
+            // The instruction writes to memory -> not inconsequent
+            is_incons &= !(ins->write_1);
+            if (is_incons)
             {
                 for (auto &reg_write : ins->reg_write)
                 {
@@ -192,7 +190,7 @@ public:
                 last_produced[reg_write] = it;
                 unused.insert(reg_write);
             }
-            if (is_root || !all_unused)
+            if (is_root || !is_incons)
             {
                 for (auto &reg_read : ins->reg_read)
                 {
