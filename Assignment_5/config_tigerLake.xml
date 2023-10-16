@@ -87,7 +87,7 @@
 			<PipelineType>outOfOrder</PipelineType>	
 			
 			<BranchPredictor>
-				<Predictor_Mode>TAGE</Predictor_Mode>	
+				<Predictor_Mode>TAGE-SC-L</Predictor_Mode>	
 				<PCBits>8</PCBits>
 				<BHRsize>16</BHRsize>
 				<BranchMispredPenalty>17</BranchMispredPenalty>	
