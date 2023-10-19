@@ -18,6 +18,6 @@ benchmarks=(
 for benchmark in "${benchmarks[@]}"; do
     java -jar $resource_dir/Tejas/jars/tejas.jar \
         $assignment_dir/config_tigerLake.xml \
-        $assignment_dir/p4stats/$benchmark.$1.stat \
+        $assignment_dir/outputs/$benchmark.$1.stat \
         $resource_dir/CPU2017_benchmarks/tejas_traces/$benchmark
 done

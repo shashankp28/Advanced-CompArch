@@ -554,7 +554,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>None</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>16</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -669,7 +669,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>None</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>256</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -812,7 +812,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>None</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>8</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -928,7 +928,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>None</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>8</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -957,7 +957,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>None</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>8</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -986,7 +986,7 @@
 		<PortReadOccupancy>5</PortReadOccupancy>
 		<PortWriteOccupancy>5</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>None</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>8</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -1016,7 +1016,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>N</Coherence>			
-		<Prefetcher>None</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>16</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
