@@ -1,0 +1,335 @@
+[Configuration]
+
+EmulatorType: none
+Benchmark:  
+Schedule: Thu Oct 19 13:50:06 IST 2023
+
+[Translator Statistics]
+
+Java thread	=	0
+Data Read	=	0 bytes
+Number of micro-ops		=	0
+Number of handled CISC instructions	=	0
+Number of PIN CISC instructions	=	0
+Static coverage		=	0.0000 %
+Dynamic Coverage	=	NaN %
+
+
+[Timing Statistics]
+
+Total Execution Time		=	1438 microseconds
+
+Total Instructions per Second		=	0.0000		in terms of micro-ops
+Total Instructions per Second		=	0.0000		in terms of CISC instructions
+
+core		=	0
+Pipeline: outOfOrder
+instructions executed	=	4998495
+cycles taken	=	3595157 cycles
+IPC		=	1.3903		in terms of micro-ops
+IPC		=	0.0000		in terms of CISC instructions
+core frequency	=	2500 MHz
+time taken	=	1438.0628 microseconds
+
+number of micro-op cache accesses = 4998821
+micro-op cache hit rate = 0.9999
+
+number of branches	=	25278
+number of mispredicted branches	=	1159
+branch predictor accuracy	=	95.4150 %
+number of jumps	=	8182
+number of mispredicted jump targets	=	9
+target predictor accuracy	=	99.8900 %
+number of predicate instructions	=	0
+number of mispredicted predicate instructions	=	0
+predicate predictor accuracy	=	NaN %
+
+predictor type = TAGE_SC_L
+PC bits = 8
+BHR size = 16
+Saturating bits = 2
+
+
+IW Full stall = 1301
+rename stall = 0
+LSQ Full stall = 2313044
+ROB Full stall = 0
+Mispred stall = 19856
+Serialization instruction stall = 0
+Nothing executed on core 1
+
+
+[Memory System Statistics]
+
+[Per core statistics]
+
+core		=	0
+Memory Requests	=	1421607
+Loads		=	915545
+Stores		=	506062
+Software read prefetches		=	0
+Software write prefetches		=	0
+LSQ forwardings	=	515449
+
+
+iTLB[0] Hits	=	410
+iTLB[0] Misses	=	20
+iTLB[0] Accesses	=	430
+iTLB[0] Hit-Rate	=	0.9535
+iTLB[0] Miss-Rate	=	0.0465
+
+dTLB[0] Hits	=	1420221
+dTLB[0] Misses	=	1367
+dTLB[0] Accesses	=	1421588
+dTLB[0] Hit-Rate	=	0.9990
+dTLB[0] Miss-Rate	=	0.0010
+
+I1[0] Requests	=	430
+I1[0] Hits	=	115
+I1[0] Full-Misses	=	38
+I1[0] Half-Misses	=	277
+I1[0] Combined-Writes	=	0
+I1[0] Accesses	=	468
+I1[0] Hit-Rate	=	0.26744187
+I1[0] Miss-Rate	=	0.73255813
+I1[0] AvgNumEventsInMSHR	=	0.0240
+I1[0] AvgNumEventsInMSHREntry	=	7.8593
+
+
+L1[0] Requests	=	906087
+L1[0] Hits	=	649479
+L1[0] Full-Misses	=	141057
+L1[0] Half-Misses	=	115551
+L1[0] Combined-Writes	=	55
+L1[0] Accesses	=	1047141
+L1[0] Hit-Rate	=	0.7167954
+L1[0] Miss-Rate	=	0.2832046
+L1[0] AvgNumEventsInMSHR	=	13.1400
+L1[0] AvgNumEventsInMSHREntry	=	1.7666
+
+
+L2[0] Requests	=	647031
+L2[0] Hits	=	560753
+L2[0] Full-Misses	=	86278
+L2[0] Half-Misses	=	0
+L2[0] Combined-Writes	=	0
+L2[0] Accesses	=	733308
+L2[0] Hit-Rate	=	0.8666555
+L2[0] Miss-Rate	=	0.13334446
+L2[0] AvgNumEventsInMSHR	=	6.4994
+L2[0] AvgNumEventsInMSHREntry	=	1.0000
+
+core		=	1
+Memory Requests	=	0
+Loads		=	0
+Stores		=	0
+Software read prefetches		=	0
+Software write prefetches		=	0
+LSQ forwardings	=	0
+
+
+iTLB[1] Hits	=	0
+iTLB[1] Misses	=	0
+iTLB[1] Accesses	=	0
+iTLB[1] Hit-Rate	=	NaN
+iTLB[1] Miss-Rate	=	NaN
+
+dTLB[1] Hits	=	0
+dTLB[1] Misses	=	0
+dTLB[1] Accesses	=	0
+dTLB[1] Hit-Rate	=	NaN
+dTLB[1] Miss-Rate	=	NaN
+
+I1[1] Requests	=	0
+I1[1] Hits	=	0
+I1[1] Full-Misses	=	0
+I1[1] Half-Misses	=	0
+I1[1] Combined-Writes	=	0
+I1[1] Accesses	=	0
+I1[1] Hit-Rate	=	NaN
+I1[1] Miss-Rate	=	NaN
+I1[1] AvgNumEventsInMSHR	=	0.0000
+I1[1] AvgNumEventsInMSHREntry	=	NaN
+
+
+L1[1] Requests	=	0
+L1[1] Hits	=	0
+L1[1] Full-Misses	=	0
+L1[1] Half-Misses	=	0
+L1[1] Combined-Writes	=	0
+L1[1] Accesses	=	0
+L1[1] Hit-Rate	=	NaN
+L1[1] Miss-Rate	=	NaN
+L1[1] AvgNumEventsInMSHR	=	0.0000
+L1[1] AvgNumEventsInMSHREntry	=	NaN
+
+
+L2[1] Requests	=	0
+L2[1] Hits	=	0
+L2[1] Full-Misses	=	0
+L2[1] Half-Misses	=	0
+L2[1] Combined-Writes	=	0
+L2[1] Accesses	=	0
+L2[1] Hit-Rate	=	NaN
+L2[1] Miss-Rate	=	NaN
+L2[1] AvgNumEventsInMSHR	=	0.0000
+L2[1] AvgNumEventsInMSHREntry	=	NaN
+
+
+
+[Shared Caches]
+
+
+
+L3[0] Requests	=	86277
+L3[0] Hits	=	3
+L3[0] Full-Misses	=	86274
+L3[0] Half-Misses	=	0
+L3[0] Combined-Writes	=	0
+L3[0] Accesses	=	172551
+L3[0] Hit-Rate	=	3.4771725E-5
+L3[0] Miss-Rate	=	0.99996525
+L3[0] AvgNumEventsInMSHR	=	4.7418
+L3[0] AvgNumEventsInMSHREntry	=	1.0000
+
+
+[Consolidated Stats For Caches]
+
+
+
+L3 Requests	=	86277
+L3 Hits	=	3
+L3 Full-Misses	=	86274
+L3 Half-Misses	=	0
+L3 Combined-Writes	=	0
+L3 Accesses	=	172551
+L3 Hit-Rate	=	3.4771725E-5
+L3 Miss-Rate	=	0.99996525
+L3 AvgNumEventsInMSHR	=	4.7418
+L3 AvgNumEventsInMSHREntry	=	1.0000
+
+
+L2 Requests	=	647031
+L2 Hits	=	560753
+L2 Full-Misses	=	86278
+L2 Half-Misses	=	0
+L2 Combined-Writes	=	0
+L2 Accesses	=	0
+L2 Hit-Rate	=	0.8666555
+L2 Miss-Rate	=	0.13334446
+L2 AvgNumEventsInMSHR	=	6.4994
+L2 AvgNumEventsInMSHREntry	=	1.0000
+
+
+L1 Requests	=	906087
+L1 Hits	=	649479
+L1 Full-Misses	=	141057
+L1 Half-Misses	=	115551
+L1 Combined-Writes	=	55
+L1 Accesses	=	0
+L1 Hit-Rate	=	0.7167954
+L1 Miss-Rate	=	0.2832046
+L1 AvgNumEventsInMSHR	=	13.1400
+L1 AvgNumEventsInMSHREntry	=	1.7666
+
+
+I1 Requests	=	430
+I1 Hits	=	115
+I1 Full-Misses	=	38
+I1 Half-Misses	=	277
+I1 Combined-Writes	=	0
+I1 Accesses	=	0
+I1 Hit-Rate	=	0.26744187
+I1 Miss-Rate	=	0.73255813
+I1 AvgNumEventsInMSHR	=	0.0240
+I1 AvgNumEventsInMSHREntry	=	7.8593
+
+
+NOC Topology		=	TORUS
+NOC Routing Algorithm	=	SIMPLE
+
+
+
+Directory Access due to ReadMiss	=	0
+Directory Access due to WriteMiss	=	0
+Directory Access due to WriteHit	=	0
+Directory Access due to EvictionFromCoherentCache	=	0
+Directory Access due to EvictionFromSharedCache	=	0
+Directory Hits	=	0
+Directory Misses	=	0
+
+[Simulator Time]
+Time Taken		=	0 : 41 minutes
+Instructions per Second	=	0.0000 KIPS		in terms of micro-ops
+Instructions per Second	=	0.0000 KIPS		in terms of CISC instructions
+
+
+
+[ComponentName LeakageEnergy DynamicEnergy TotalEnergy NumDynamicAccesses] : 
+
+
+core[0].iCache	9422187.4656	158.9528	9422346.4184	468
+core[0].iTLB	471346.6536	30.5678	471377.2215	450
+core[0].dCache	9422187.4656	355653.7411	9777841.2067	1047141
+core[0].dTLB	471346.6536	96659.2406	568005.8942	1422955
+core[0].pipeline.bPred	1535851.0704	4863.4872	1540714.5576	50556
+core[0].pipeline.decode	5159769.3264	173458.0477	5333227.3741	4998791
+core[0].pipeline.rename.Int.RAT	388276.9560	67022.1000	455299.0560	4468140
+core[0].pipeline.rename.Int.FreeList	138054.0288	25752.6540	163806.6828	3029724
+core[0].pipeline.rename.Int	526330.9848	92774.7540	619105.7388	0
+core[0].pipeline.rename.Float.RAT	146682.4056	97826.9890	244509.3946	7525153
+core[0].pipeline.rename.Float.FreeList	258851.3040	26498.5290	285349.8330	5888562
+core[0].pipeline.rename.Float	405533.7096	124325.5180	529859.2276	0
+core[0].pipeline.rename	931864.6944	217100.2720	1148964.9664	0
+core[0].pipeline.LSQ	2743823.8224	245227.2075	2989051.0299	1421607
+core[0].pipeline.intRegFile	931864.6944	342225.3692	1274090.0636	5982961
+core[0].pipeline.floatRegFile	647128.2600	216715.2759	863843.5359	10469337
+core[0].pipeline.InstrWindow	396905.3328	219390.2840	616295.6168	15450020
+core[0].pipeline.ROB	500445.8544	440494.2368	940940.0912	14489942
+core[0].pipeline.resultsBroadcastBus	2062182.0552	2652329.7808	4714511.8360	4459196
+core[0].pipeline.total	106103149.5096	10570460.7046	116673610.2142	0
+core[0].total	125890217.7481	11022963.2068	136913180.9549	0
+
+
+core[1].iCache	9422187.4656	0.0000	9422187.4656	0
+core[1].iTLB	471346.6536	0.0000	471346.6536	0
+core[1].dCache	9422187.4656	0.0000	9422187.4656	0
+core[1].dTLB	471346.6536	0.0000	471346.6536	0
+core[1].pipeline.bPred	1535851.0704	0.0000	1535851.0704	0
+core[1].pipeline.decode	5159769.3264	0.0000	5159769.3264	0
+core[1].pipeline.rename.Int.RAT	388276.9560	0.0000	388276.9560	0
+core[1].pipeline.rename.Int.FreeList	138054.0288	0.0000	138054.0288	0
+core[1].pipeline.rename.Int	526330.9848	0.0000	526330.9848	0
+core[1].pipeline.rename.Float.RAT	146682.4056	0.0000	146682.4056	0
+core[1].pipeline.rename.Float.FreeList	258851.3040	0.0000	258851.3040	0
+core[1].pipeline.rename.Float	405533.7096	0.0000	405533.7096	0
+core[1].pipeline.rename	931864.6944	0.0000	931864.6944	0
+core[1].pipeline.LSQ	2743823.8224	0.0000	2743823.8224	0
+core[1].pipeline.intRegFile	931864.6944	0.0000	931864.6944	0
+core[1].pipeline.floatRegFile	647128.2600	0.0000	647128.2600	0
+core[1].pipeline.InstrWindow	396905.3328	0.0000	396905.3328	0
+core[1].pipeline.ROB	500445.8544	0.0000	500445.8544	0
+core[1].pipeline.resultsBroadcastBus	2062182.0552	0.0000	2062182.0552	0
+core[1].pipeline.total	106103149.5096	0.0000	106103149.5096	0
+core[1].total	125890217.7481	0.0000	125890217.7481	0
+
+
+coreEnergy.total	251780435.4962	11022963.2068	262803398.7030	0
+
+
+L3[0]	16324888.9056	105194.4484	16430083.3540	172551
+
+
+sharedCacheEnergy.total	16324888.9056	105194.4484	16430083.3540	0
+
+
+MainMemoryDRAMController[0]	629871.5064	4693.3056	634564.8120	86274
+
+mainMemoryControllerEnergy.total	629871.5064	4693.3056	634564.8120	0
+Coherence[0]	9422187.4656	0.0000	9422187.4656	0
+
+
+coherenceEnergy.total	9422187.4656	0.0000	9422187.4656	0
+
+
+TotalEnergy	375330162.8954	12592929.9240	387923092.8194	0

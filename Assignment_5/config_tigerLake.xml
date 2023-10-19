@@ -53,7 +53,7 @@
 		<pinpointsFile>/mnt/srishtistr0/scratch/rajshekar/tejas/PinPoints_working_directory/soplex.test.Data/t.sorted</pinpointsFile>
 		<NumInsToIgnore>00000000</NumInsToIgnore>	
 		<subsetSim>true</subsetSim>
-		<subsetSimSize>10000000</subsetSimSize>
+		<subsetSimSize>5000000</subsetSimSize>
 		<markerFunctions>false</markerFunctions>
 		<startSimMarker>add</startSimMarker>
 		<endSimMarker>sub</endSimMarker>
