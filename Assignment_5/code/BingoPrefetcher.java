@@ -25,10 +25,11 @@ public class BingoPrefetcher extends Prefetcher {
     float prefetchThreshold;
 
     int pageSizeBits;
-    LRU<Long, ArrayList<Boolean>> auxillarySpace;
+    LRU<Long, ArrayList<Integer>> auxillarySpace;
     HashMap<Long, String> pageTrigger;
     HashMap<Long, Integer> pageOffset;
-    ArrayList<LRU<String, ArrayList<Boolean>>> historyTable;
+    ArrayList<ArrayList<Integer>> footprintTotal;
+    ArrayList<LRU<String, ArrayList<Integer>>> historyTable;
 
     public BingoPrefetcher(Cache associatedCache) {
         auxillarySize = 50; // General Value
@@ -38,13 +39,21 @@ public class BingoPrefetcher extends Prefetcher {
         pageSizeBits = Util.logbase2(pageSize);
         this.associatedCache = associatedCache;
         blockSizeBits = associatedCache.blockSizeBits;
-        auxillarySpace = new LRU<Long, ArrayList<Boolean>>(auxillarySize);
+        auxillarySpace = new LRU<Long, ArrayList<Integer>>(auxillarySize);
         noOfBlocks = (int) pageSize / associatedCache.blockSize;
-        historyTable = new ArrayList<LRU<String, ArrayList<Boolean>>>();
+        historyTable = new ArrayList<LRU<String, ArrayList<Integer>>>();
         pageTrigger = new HashMap<Long, String>();
         pageOffset = new HashMap<Long, Integer>();
         for (int i = 0; i < noOfBlocks; i++) {
-            historyTable.add(new LRU<String, ArrayList<Boolean>>(setSize));
+            historyTable.add(new LRU<String, ArrayList<Integer>>(setSize));
+        }
+        footprintTotal = new ArrayList<ArrayList<Integer>>();
+        for (int i = 0; i < noOfBlocks; i++) {
+            ArrayList<Integer> footprint = new ArrayList<Integer>();
+            for (int j = 0; j < noOfBlocks; j++) {
+                footprint.add(0);
+            }
+            footprintTotal.add(footprint);
         }
     }
 
@@ -56,41 +65,56 @@ public class BingoPrefetcher extends Prefetcher {
         String trigger = Long.toString(addr);
 
         // Training Steps
-        ArrayList<Boolean> oldFootPrint = auxillarySpace.get(pageNumber);
+        ArrayList<Integer> oldFootPrint = auxillarySpace.get(pageNumber);
         if (oldFootPrint != null) {
-            oldFootPrint.set(blockOffset, true);
+            oldFootPrint.set(blockOffset, 1);
         } else {
-            ArrayList<Boolean> newFootPrint = new ArrayList<Boolean>();
+            ArrayList<Integer> newFootPrint = new ArrayList<Integer>();
             for (int i = 0; i < noOfBlocks; i++) {
-                newFootPrint.add(false);
+                newFootPrint.add(0);
             }
             pageTrigger.put(pageNumber, trigger);
             pageOffset.put(pageNumber, blockOffset);
-            HashMap<Long, ArrayList<Boolean>> replaced_element = auxillarySpace.put(pageNumber, newFootPrint);
-            if (!replaced_element.isEmpty()) {
+            HashMap<Long, ArrayList<Integer>> replacedElement = auxillarySpace.put(pageNumber, newFootPrint);
+            if (!replacedElement.isEmpty()) {
                 Long oldPageNumber = null;
-                for (Long key : replaced_element.keySet()) {
+                for (Long key : replacedElement.keySet()) {
                     oldPageNumber = key;
                 }
-                ArrayList<Boolean> oldFootprint = replaced_element.get(oldPageNumber);
+                ArrayList<Integer> oldFootprint = replacedElement.get(oldPageNumber);
                 String oldTrigger = pageTrigger.get(oldPageNumber);
                 int oldOffset = pageOffset.get(oldPageNumber);
                 pageTrigger.remove(oldPageNumber);
                 pageOffset.remove(oldPageNumber);
-                historyTable.get(oldOffset).put(oldTrigger, oldFootprint);
+                HashMap<String, ArrayList<Integer>> kickedHistory = historyTable.get(oldOffset).put(oldTrigger,
+                        oldFootprint);
+                for (int i = 0; i < noOfBlocks; i++) {
+                    int oldCount = oldFootprint.get(i);
+                    footprintTotal.get(oldOffset).set(i, footprintTotal.get(oldOffset).get(i) + oldCount);
+                }
+                if (!kickedHistory.isEmpty()) {
+                    ArrayList<Integer> kickedFootprint = null;
+                    for (String key : kickedHistory.keySet()) {
+                        kickedFootprint = kickedHistory.get(key);
+                    }
+                    for (int i = 0; i < noOfBlocks; i++) {
+                        int kickedCount = kickedFootprint.get(i);
+                        footprintTotal.get(oldOffset).set(i, footprintTotal.get(oldOffset).get(i) - kickedCount);
+                    }
+                }
             }
         }
 
         // Prediction Steps
         boolean longEventHit = false;
-        LRU<String, ArrayList<Boolean>> offsetHistory = historyTable.get(blockOffset);
+        LRU<String, ArrayList<Integer>> offsetHistory = historyTable.get(blockOffset);
 
         // Prediction Long Event
-        ArrayList<Boolean> footprint = offsetHistory.get(trigger);
+        ArrayList<Integer> footprint = offsetHistory.get(trigger);
         if (footprint != null) {
             longEventHit = true;
             for (int i = 0; i < noOfBlocks; i++) {
-                if (footprint.get(i)) {
+                if (footprint.get(i) == 1) {
                     int diffSize = pageSizeBits - blockSizeBits;
                     long prefetchAddr = ((pageNumber << diffSize) + i) << blockSizeBits;
                     issuePrefetchRequest(prefetchAddr);
@@ -100,14 +124,9 @@ public class BingoPrefetcher extends Prefetcher {
         }
         // Prediction Short Event
         if (!longEventHit) {
-            HashMap<String, ArrayList<Boolean>> currOffsetData = offsetHistory.getMap();
             for (int i = 0; i < noOfBlocks; i++) {
-                int footPrintCount = 0;
-                for (String key : currOffsetData.keySet()) {
-                    ArrayList<Boolean> currFootPrint = currOffsetData.get(key);
-                    footPrintCount += currFootPrint.get(i) ? 1 : 0;
-                }
-                float footPrintRatio = (float) footPrintCount / (float) currOffsetData.size();
+                int footprintCount = footprintTotal.get(blockOffset).get(i);
+                float footPrintRatio = (float) footprintCount / (float) historyTable.get(blockOffset).size();
                 if (footPrintRatio >= prefetchThreshold) {
                     int diffSize = pageSizeBits - blockSizeBits;
                     long prefetchAddr = ((pageNumber << diffSize) + i) << blockSizeBits;
