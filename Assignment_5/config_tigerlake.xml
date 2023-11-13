@@ -1,37 +1,23 @@
 <Configuration>
 	<Emulator>
-		
-		
-		
-		
 		<EmulatorType>none</EmulatorType> 
-		
-		
-		
-		
-		<CommunicationType>file</CommunicationType>  
-		
-		
-		
-		
-		
+
+		<CommunicationType>file</CommunicationType>
+		<isVISATrace>false</isVISATrace>
+
 		<StoreExecutionTraceInAFile>false</StoreExecutionTraceInAFile>
-		
-		
-		
-		
-		<BasenameForTraceFiles>/mnt/remote_scratch1/rajshekar/projects/lean_trace_cache//traces/ISCA2023Revision//100M/dropBranchWithLoad/xalancbmk</BasenameForTraceFiles>
+
+		<BasenameForTraceFiles>/home/omp/Documents/B_Tech/Semester_7/ACA/Assignments/Assignment_3/traces</BasenameForTraceFiles>
 		
 		<StoreExecutionTraceInADynamicFile>false</StoreExecutionTraceInADynamicFile> 
 		
-		<PinTool>/home/rajshekar/softwares/pin-97554/</PinTool>
+		<PinTool>/home/omp/Documents/B_Tech/Semester_7/ACA/Assignments/pin-3.28-98749/</PinTool>
 		<PinInstrumentor>/home/rajshekar/projects/tejas/workspace/Tejas/src/emulator/pin/obj-pin/causalityTool_threadsWithoutCoresIgnored.so</PinInstrumentor>
 		<QemuTool>TODO/home/prathmesh/workspace/qemu/x86_64-linux-user/qemu-x86_64 /home/prathmesh/tmp/testQemu.o</QemuTool>
 		<ShmLibDirectory>/home/rajshekar/projects/eviction/workspace/Tejas/src/emulator/pin/obj-comm</ShmLibDirectory>
 		<GetBenchmarkPIDScript>/home/rajshekar/projects/tejas/workspace/Tejas/src/simulator/main/getBenchmarkPID.sh</GetBenchmarkPIDScript>
 		<KillEmulatorScript>/home/rajshekar/projects/tejas/workspace/Tejas/src/simulator/main/killAllDescendents.sh</KillEmulatorScript>
 	</Emulator>
-	
 	
 	<Simulation>
 		<CollectInsnWorkingSet>false</CollectInsnWorkingSet> 
@@ -53,13 +39,19 @@
 		<pinpointsFile>/mnt/srishtistr0/scratch/rajshekar/tejas/PinPoints_working_directory/soplex.test.Data/t.sorted</pinpointsFile>
 		<NumInsToIgnore>00000000</NumInsToIgnore>	
 		<subsetSim>true</subsetSim>
-		<subsetSimSize>5000000</subsetSimSize>
+		<subsetSimSize>100000000</subsetSimSize>
 		<markerFunctions>false</markerFunctions>
 		<startSimMarker>add</startSimMarker>
 		<endSimMarker>sub</endSimMarker>
-		<NumCores>2</NumCores>
+		<NumCores>8</NumCores>
 	</Simulation>
-
+	
+	<Applications>
+	    <Benchmark>
+			<BenchmarkPath>/home/om/Documents/phoronix_short_traces/blender_8/blender</BenchmarkPath>
+			<Threads>8</Threads>
+		</Benchmark>
+   	</Applications>
 	
 	<System>
 		<MainMemory>
@@ -82,26 +74,26 @@
 			
 		
 		<Core>
-			<CoreNumber>0-1</CoreNumber>
+			<CoreNumber>0-7</CoreNumber>
 			<CoreFrequency>2500</CoreFrequency>		
 			<PipelineType>outOfOrder</PipelineType>	
 			
 			<BranchPredictor>
-				<Predictor_Mode>TAGE-SC-L</Predictor_Mode>	
+				<Predictor_Mode>TAGE-SC-L</Predictor_Mode>
 				<PCBits>8</PCBits>
 				<BHRsize>16</BHRsize>
-				<BranchMispredPenalty>17</BranchMispredPenalty>	
+				<BranchMispredPenalty>17</BranchMispredPenalty>
 				<SaturatingBits>2</SaturatingBits>
-				<TAGESCLLibDirectory>/home/shashankp/Desktop/GitHub_S/Advanced-CompArch/cs810_resources/Tejas/src/simulator/pipeline/branchpredictor/TAGESCL</TAGESCLLibDirectory>
+				<TAGESCLLibDirectory>/home/om/Documents/Tejas/src/simulator/pipeline/branchpredictor/TAGESCL</TAGESCLLibDirectory>
 				<LeakageEnergy>0.0178</LeakageEnergy>
 				<DynamicEnergy>0.0962</DynamicEnergy>
-			</BranchPredictor>			
+			</BranchPredictor>
 			
 			<LSQ>
 				<NumLoadEntries>128</NumLoadEntries>
 				<NumStoreEntries>72</NumStoreEntries>				
-				<LSQLatency>0</LSQLatency>			
-				<LSQPortType>UL</LSQPortType>			
+				<LSQLatency>0</LSQLatency>
+				<LSQPortType>UL</LSQPortType>
 				<LSQAccessPorts>-1</LSQAccessPorts>		
 				<LSQPortOccupancy>-1</LSQPortOccupancy>		
 				<LeakageEnergy>0.0318</LeakageEnergy>
@@ -142,8 +134,8 @@
 			</STLB>
 
 			<MicroOpCache>
-                <NumberOfMicroOps>2304</NumberOfMicroOps>
-            </MicroOpCache>
+				<NumberOfMicroOps>2304</NumberOfMicroOps>
+			</MicroOpCache>
 			
 			<Decode>								
 				<Width>6</Width>			
@@ -426,7 +418,26 @@
 			
 			<TreeBarrier>false</TreeBarrier>			
 			<BarrierLatency>2</BarrierLatency>
-			<BarrierUnit>Distributed</BarrierUnit>
+			<BarrierUnit>Distributed</BarrierUnit>			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+						
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			<Cache firstLevel="true" name="I1" nextLevel="L2" type="ICache_32K_8" />
 			<Cache firstLevel="true" name="L1" nextLevel="L2" type="L1Cache_48K_12" />
@@ -460,14 +471,14 @@
 		</Core>
 		
 		<SharedCaches>
-			<Cache name="L3" type="L3Cache_3M_12" />
+			<Cache name="L3" type="L3Cache_12M_16" />
 			<Cache name="D1" type="Directory1" />
 		</SharedCaches>
 		
 		<Interconnect>NOC</Interconnect>
 		
 		<NOC>
-			<NocConfigFile>/home/shashankp/Desktop/GitHub_S/Advanced-CompArch/cs810_resources/Tejas/src/simulator/config/NocConfig.txt</NocConfigFile>
+			<NocConfigFile>/home/om/Documents/Tejas/NocConfig.txt</NocConfigFile>
 			<NocSelScheme>STATIC</NocSelScheme>
 			<NocNumberOfBuffers>4</NocNumberOfBuffers>
 			<NocPortType>FCFS</NocPortType>
@@ -554,7 +565,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>None</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>16</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -583,7 +594,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>16</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -612,7 +623,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>2</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>16</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -641,7 +652,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>2</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>16</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -669,7 +680,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>None</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>256</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -698,7 +709,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>256</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -727,7 +738,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>256</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -752,11 +763,11 @@
 		<PortType>FCFS</PortType>				
 		<ReadPorts>0</ReadPorts>
 		<WritePorts>0</WritePorts>
-		<ReadWritePorts>1</ReadWritePorts>
+		<ReadWritePorts>2</ReadWritePorts>
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
-		<Coherence>None</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Coherence>NONE</Coherence>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>256</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -783,7 +794,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>D1</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>256</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -812,7 +823,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>None</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>8</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -841,7 +852,7 @@
 		<PortReadOccupancy>2</PortReadOccupancy>
 		<PortWriteOccupancy>2</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>8</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -870,7 +881,7 @@
 		<PortReadOccupancy>2</PortReadOccupancy>
 		<PortWriteOccupancy>2</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>8</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -899,7 +910,7 @@
 		<PortReadOccupancy>2</PortReadOccupancy>
 		<PortWriteOccupancy>2</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>8</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -914,7 +925,7 @@
 		
 	<L3Cache_12M_16>
 		<AMAT>-1</AMAT>
-		<Frequency>2000</Frequency>
+		<Frequency>2500</Frequency>
 		<WriteMode>WB</WriteMode>			
 		<BlockSize>64</BlockSize>			
 		<Associativity>16</Associativity>
@@ -924,13 +935,13 @@
 		<PortType>UL</PortType>				
 		<ReadPorts>0</ReadPorts>
 		<WritePorts>0</WritePorts>
-		<ReadWritePorts>1</ReadWritePorts>
+		<ReadWritePorts>4</ReadWritePorts>
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
-		<MSHRSize>8</MSHRSize>
+		<MSHRSize>256</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
 		<Nuca>NONE</Nuca>						
 		<ONuca>NONE</ONuca>						
@@ -957,7 +968,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>None</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>8</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -986,7 +997,7 @@
 		<PortReadOccupancy>5</PortReadOccupancy>
 		<PortWriteOccupancy>5</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>None</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>8</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -1016,7 +1027,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>N</Coherence>			
-		<Prefetcher>Bingo</Prefetcher>
+		<Prefetcher>None</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>16</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
