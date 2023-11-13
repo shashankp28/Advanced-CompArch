@@ -60,3 +60,4 @@ config
 metrics
 stats
 err
+phoronix_short_traces

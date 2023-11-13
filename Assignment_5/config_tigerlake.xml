@@ -39,7 +39,7 @@
 		<pinpointsFile>/mnt/srishtistr0/scratch/rajshekar/tejas/PinPoints_working_directory/soplex.test.Data/t.sorted</pinpointsFile>
 		<NumInsToIgnore>00000000</NumInsToIgnore>	
 		<subsetSim>true</subsetSim>
-		<subsetSimSize>100000000</subsetSimSize>
+		<subsetSimSize>5000000</subsetSimSize>
 		<markerFunctions>false</markerFunctions>
 		<startSimMarker>add</startSimMarker>
 		<endSimMarker>sub</endSimMarker>
@@ -48,7 +48,7 @@
 	
 	<Applications>
 	    <Benchmark>
-			<BenchmarkPath>/home/om/Documents/phoronix_short_traces/blender_8/blender</BenchmarkPath>
+			<BenchmarkPath>/home/shashankp/Desktop/GitHub_S/Advanced-CompArch/phoronix_short_traces/blender_8/blender</BenchmarkPath>
 			<Threads>8</Threads>
 		</Benchmark>
    	</Applications>
@@ -84,7 +84,7 @@
 				<BHRsize>16</BHRsize>
 				<BranchMispredPenalty>17</BranchMispredPenalty>
 				<SaturatingBits>2</SaturatingBits>
-				<TAGESCLLibDirectory>/home/om/Documents/Tejas/src/simulator/pipeline/branchpredictor/TAGESCL</TAGESCLLibDirectory>
+				<TAGESCLLibDirectory>/home/shashankp/Desktop/GitHub_S/Advanced-CompArch/cs810_resources/Tejas/src/simulator/pipeline/branchpredictor/TAGESCL</TAGESCLLibDirectory>
 				<LeakageEnergy>0.0178</LeakageEnergy>
 				<DynamicEnergy>0.0962</DynamicEnergy>
 			</BranchPredictor>
@@ -478,7 +478,7 @@
 		<Interconnect>NOC</Interconnect>
 		
 		<NOC>
-			<NocConfigFile>/home/om/Documents/Tejas/NocConfig.txt</NocConfigFile>
+			<NocConfigFile>/home/shashankp/Desktop/GitHub_S/Advanced-CompArch/cs810_resources/Tejas/src/simulator/config/NocConfig.txt</NocConfigFile>
 			<NocSelScheme>STATIC</NocSelScheme>
 			<NocNumberOfBuffers>4</NocNumberOfBuffers>
 			<NocPortType>FCFS</NocPortType>
