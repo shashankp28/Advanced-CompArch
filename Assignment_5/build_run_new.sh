@@ -8,7 +8,7 @@ echo "Successfully built Tejas"
 cd $assignment_dir
 
 
-java -jar $resource_dir/Tejas/jars/tejas.jar \
-    $assignment_dir/config_tigerlake.xml \
-    $assignment_dir/outputs/$1.stat \
+# java -jar $resource_dir/Tejas/jars/tejas.jar \
+#     $assignment_dir/config_tigerlake.xml \
+#     $assignment_dir/outputs/$1.stat \
 
