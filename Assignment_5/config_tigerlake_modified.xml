@@ -48,7 +48,7 @@
 	
 	<Applications>
 	    <Benchmark>
-			<BenchmarkPath>/home/shashankp/Desktop/GitHub_S/Advanced-CompArch/cs810_resources/CPU2017_benchmarks/tejas_traces/mcf</BenchmarkPath>
+			<BenchmarkPath>/home/shashankp/Desktop/GitHub_S/Advanced-CompArch/cs810_resources/CPU2017_benchmarks/tejas_traces/gcc</BenchmarkPath>
 			<Threads>8</Threads>
 		</Benchmark>
    	</Applications>
@@ -594,7 +594,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Simple</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>16</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -623,7 +623,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>2</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Simple</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>16</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -652,7 +652,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>2</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Simple</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>16</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -709,7 +709,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Simple</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>256</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -738,7 +738,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Simple</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>256</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -767,7 +767,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>NONE</Coherence>
-		<Prefetcher>Simple</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>256</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -794,7 +794,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>D1</Coherence>			
-		<Prefetcher>Simple</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>256</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -852,7 +852,7 @@
 		<PortReadOccupancy>2</PortReadOccupancy>
 		<PortWriteOccupancy>2</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Simple</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>8</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -881,7 +881,7 @@
 		<PortReadOccupancy>2</PortReadOccupancy>
 		<PortWriteOccupancy>2</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Simple</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>8</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -910,7 +910,7 @@
 		<PortReadOccupancy>2</PortReadOccupancy>
 		<PortWriteOccupancy>2</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Simple</Prefetcher>
+		<Prefetcher>Power4</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>8</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>
@@ -939,7 +939,7 @@
 		<PortReadOccupancy>1</PortReadOccupancy>
 		<PortWriteOccupancy>1</PortWriteOccupancy>
 		<Coherence>None</Coherence>			
-		<Prefetcher>Simple</Prefetcher>
+		<Prefetcher>None</Prefetcher>
 		<NumBuses>1</NumBuses>			
 		<MSHRSize>256</MSHRSize>
 		<BusOccupancy>0</BusOccupancy>

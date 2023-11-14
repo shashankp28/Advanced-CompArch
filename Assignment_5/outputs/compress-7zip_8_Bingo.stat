@@ -1,0 +1,122 @@
+[Configuration]
+
+EmulatorType: none
+Benchmark:  
+Schedule: Tue Nov 14 16:28:52 IST 2023
+
+[Translator Statistics]
+
+Java thread	=	0
+Data Read	=	0 bytes
+Number of micro-ops		=	0
+Number of handled CISC instructions	=	0
+Number of PIN CISC instructions	=	0
+Static coverage		=	0.0000 %
+Dynamic Coverage	=	NaN %
+
+
+[Timing Statistics]
+
+Total Execution Time		=	0 microseconds
+
+Total Instructions per Second		=	NaN		in terms of micro-ops
+Total Instructions per Second		=	NaN		in terms of CISC instructions
+
+Nothing executed on core 0
+Nothing executed on core 1
+Nothing executed on core 2
+Nothing executed on core 3
+Nothing executed on core 4
+Nothing executed on core 5
+Nothing executed on core 6
+Nothing executed on core 7
+
+
+[Memory System Statistics]
+
+[Per core statistics]
+
+Nothing executed on core 0
+Nothing executed on core 1
+Nothing executed on core 2
+Nothing executed on core 3
+Nothing executed on core 4
+Nothing executed on core 5
+Nothing executed on core 6
+Nothing executed on core 7
+
+
+[Shared Caches]
+
+
+
+L3[0] Requests	=	0
+L3[0] Hits	=	0
+L3[0] Full-Misses	=	0
+L3[0] Half-Misses	=	0
+L3[0] Combined-Writes	=	0
+L3[0] Accesses	=	0
+L3[0] Hit-Rate	=	NaN
+L3[0] Miss-Rate	=	NaN
+L3[0] AvgNumEventsInMSHR	=	NaN
+L3[0] AvgNumEventsInMSHREntry	=	NaN
+
+
+[Consolidated Stats For Caches]
+
+
+
+L3 Requests	=	0
+L3 Hits	=	0
+L3 Full-Misses	=	0
+L3 Half-Misses	=	0
+L3 Combined-Writes	=	0
+L3 Accesses	=	0
+L3 Hit-Rate	=	NaN
+L3 Miss-Rate	=	NaN
+L3 AvgNumEventsInMSHR	=	NaN
+L3 AvgNumEventsInMSHREntry	=	NaN
+
+
+NOC Topology		=	TORUS
+NOC Routing Algorithm	=	SIMPLE
+
+
+
+Directory Access due to ReadMiss	=	0
+Directory Access due to WriteMiss	=	0
+Directory Access due to WriteHit	=	0
+Directory Access due to EvictionFromCoherentCache	=	0
+Directory Access due to EvictionFromSharedCache	=	0
+Directory Hits	=	0
+Directory Misses	=	0
+
+[Simulator Time]
+Time Taken		=	0 : 0 minutes
+Instructions per Second	=	NaN KIPS		in terms of micro-ops
+Instructions per Second	=	NaN KIPS		in terms of CISC instructions
+
+
+
+[ComponentName LeakageEnergy DynamicEnergy TotalEnergy NumDynamicAccesses] : 
+
+
+coreEnergy.total	0.0000	0.0000	0.0000	0
+
+
+L3[0]	0.0000	0.0000	0.0000	0
+
+
+sharedCacheEnergy.total	0.0000	0.0000	0.0000	0
+
+
+MainMemoryDRAMController[0]	0.0000	0.0000	0.0000	0
+
+mainMemoryControllerEnergy.total	0.0000	0.0000	0.0000	0
+Coherence[0]	0.0000	0.0000	0.0000	0
+
+
+coherenceEnergy.total	0.0000	0.0000	0.0000	0
+
+
+TotalEnergy	0.0000	0.0000	0.0000	0
