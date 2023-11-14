@@ -3,7 +3,7 @@
 		<EmulatorType>none</EmulatorType> 
 
 		<CommunicationType>file</CommunicationType>
-		<isVISATrace>false</isVISATrace>
+		<isVISATrace>true</isVISATrace>
 
 		<StoreExecutionTraceInAFile>false</StoreExecutionTraceInAFile>
 
@@ -11,7 +11,7 @@
 		
 		<StoreExecutionTraceInADynamicFile>false</StoreExecutionTraceInADynamicFile> 
 		
-		<PinTool>/home/omp/Documents/B_Tech/Semester_7/ACA/Assignments/pin-3.28-98749/</PinTool>
+		<PinTool>/home/shashankp/pin-3.28-98749-g6643ecee5-gcc-linux/</PinTool>
 		<PinInstrumentor>/home/rajshekar/projects/tejas/workspace/Tejas/src/emulator/pin/obj-pin/causalityTool_threadsWithoutCoresIgnored.so</PinInstrumentor>
 		<QemuTool>TODO/home/prathmesh/workspace/qemu/x86_64-linux-user/qemu-x86_64 /home/prathmesh/tmp/testQemu.o</QemuTool>
 		<ShmLibDirectory>/home/rajshekar/projects/eviction/workspace/Tejas/src/emulator/pin/obj-comm</ShmLibDirectory>
@@ -48,7 +48,7 @@
 	
 	<Applications>
 	    <Benchmark>
-			<BenchmarkPath>/home/shashankp/Desktop/GitHub_S/Advanced-CompArch/phoronix_short_traces/stream_8/stream</BenchmarkPath>
+			<BenchmarkPath>/home/shashankp/Desktop/GitHub_S/Advanced-CompArch/cs810_resources/CPU2017_benchmarks/tejas_traces/mcf</BenchmarkPath>
 			<Threads>8</Threads>
 		</Benchmark>
    	</Applications>
