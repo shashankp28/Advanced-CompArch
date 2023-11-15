@@ -7,7 +7,7 @@ json_file_path = './results.json'
 
 # Benchmarks and prefetchers
 benchmarks = ['gcc', 'lbm', 'mcf', 'namd', 'xalancbmk', 'numenta-nab_8', 'gimp_8', 'blender_8', 'openssl_8']
-prefetchers = ['Simple', 'Power4', 'Bingo', 'None']
+prefetchers = ['None', 'Simple', 'Power4', 'Bingo']
 
 metrics = ["Micro Ops IPC", "I1 Hit Rate", "L1 Hit Rate", "L2 Hit Rate", "L3 Hit Rate"]
 

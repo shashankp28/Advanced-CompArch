@@ -48,7 +48,7 @@
 	
 	<Applications>
 	    <Benchmark>
-			<BenchmarkPath>/home/shashankp/Desktop/GitHub_S/Advanced-CompArch/cs810_resources/CPU2017_benchmarks/tejas_traces/gcc</BenchmarkPath>
+			<BenchmarkPath>/home/shashankp/Desktop/GitHub_S/Advanced-CompArch/cs810_resources/CPU2017_benchmarks/tejas_traces/mcf</BenchmarkPath>
 			<Threads>8</Threads>
 		</Benchmark>
    	</Applications>

@@ -2,7 +2,7 @@
 
 EmulatorType: none
 Benchmark:  
-Schedule: Tue Nov 14 16:31:23 IST 2023
+Schedule: Wed Nov 15 21:06:01 IST 2023
 
 [Translator Statistics]
 
@@ -832,9 +832,9 @@ Directory Hits	=	0
 Directory Misses	=	0
 
 [Simulator Time]
-Time Taken		=	1 : 38 minutes
-Instructions per Second	=	82.3127 KIPS		in terms of micro-ops
-Instructions per Second	=	48.4853 KIPS		in terms of CISC instructions
+Time Taken		=	2 : 2 minutes
+Instructions per Second	=	65.7140 KIPS		in terms of micro-ops
+Instructions per Second	=	38.7081 KIPS		in terms of CISC instructions
 
 
 
