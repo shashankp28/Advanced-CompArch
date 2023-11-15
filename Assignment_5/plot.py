@@ -6,14 +6,17 @@ import numpy as np
 json_file_path = './results.json'
 
 # Benchmarks and prefetchers
-benchmarks = ['gcc', 'lbm', 'mcf', 'namd', 'xalancbmk', 'numenta-nab_8', 'gimp_8', 'blender_8', 'openssl_8']
+benchmarks = ['gcc', 'lbm', 'mcf', 'namd', 'xalancbmk',
+              'numenta-nab_8', 'gimp_8', 'blender_8', 'openssl_8']
 prefetchers = ['None', 'Simple', 'Power4', 'Bingo']
 
-metrics = ["Micro Ops IPC", "I1 Hit Rate", "L1 Hit Rate", "L2 Hit Rate", "L3 Hit Rate"]
+metrics = ["Micro Ops IPC", "I1 Hit Rate",
+           "L1 Hit Rate", "L2 Hit Rate", "L3 Hit Rate"]
 
 # Read data from the JSON file
 with open(json_file_path, 'r') as file:
     data = json.load(file)
+
 
 # Plotting
 for i, metric in enumerate(metrics):
@@ -23,10 +26,10 @@ for i, metric in enumerate(metrics):
 
     ax.set_xlabel('Benchmarks')
     if metric == 'Micro Ops IPC':
-        i=1
+        i = 1
         ax.set_ylabel('IPC')
     else:
-        i=100
+        i = 100
         ax.set_ylabel('Percentage %')
     ax.set_title(f'{metric} Across Benchmarks for Different Prefetchers')
 
@@ -34,11 +37,31 @@ for i, metric in enumerate(metrics):
     ax.set_xticklabels(benchmarks)
 
     for j, prefetcher in enumerate(prefetchers):
-        values = np.array([data[benchmark][prefetcher][metric]*i for benchmark in benchmarks])
+        values = np.array([data[benchmark][prefetcher]
+                          [metric]*i for benchmark in benchmarks])
         ax.bar(index + j * bar_width, values, bar_width, label=prefetcher)
-    
+
     ax.legend()
 
     plt.tight_layout()
     plt.savefig(f'./plots/{metric}_across_benchmarks.png')
     plt.close()  # Close the figure to avoid overlapping in the next iteration
+
+
+average_values = {}
+
+for prefetcher in prefetchers:
+    average = {
+        "Micro Ops IPC": 0,
+        "CISC IPC": 0,
+        "I1 Hit Rate": 0,
+        "L1 Hit Rate": 0,
+        "L2 Hit Rate": 0,
+        "L3 Hit Rate": 0
+    }
+    for benchmark in benchmarks:
+        for metric in metrics:
+            average[metric] += data[benchmark][prefetcher][metric]/len(benchmarks)
+    average_values[prefetcher] = average
+print("Average Values:")
+print(average_values)
