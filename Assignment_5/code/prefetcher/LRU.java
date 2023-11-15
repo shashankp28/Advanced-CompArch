@@ -2,6 +2,16 @@ package memorysystem.prefetcher;
 
 import java.util.HashMap;
 
+class Pair<K, V> {
+    public K key;
+    public V value;
+
+    public Pair(K key, V value) {
+        this.key = key;
+        this.value = value;
+    }
+}
+
 class LRU<K, V> {
     class Node<T, U> {
         T key;
@@ -60,20 +70,21 @@ class LRU<K, V> {
         return null;
     }
 
-    public HashMap<K, V> put(K key, V value) {
-        HashMap<K, V> replacedValue = new HashMap<K, V>();
+    public Pair<K, V> put(K key, V value) {
+        Pair<K, V> replacedValue = null;
         if (nodeMap.containsKey(key)) {
             Node<K, V> curr = nodeMap.get(key);
             nodeMap.remove(key);
             deleteNode(curr);
         } else if (nodeMap.size() == cap) {
-            replacedValue.put(tail.prev.key, tail.prev.val);
+            replacedValue = new Pair<K, V>(tail.prev.key, tail.prev.val);
             nodeMap.remove(tail.prev.key);
             deleteNode(tail.prev);
         }
 
         addNode(new Node<K, V>(key, value));
         nodeMap.put(key, head.next);
+
         return replacedValue;
     }
 

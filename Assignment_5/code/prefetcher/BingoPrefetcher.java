@@ -5,7 +5,6 @@ import misc.Util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import generic.RequestType;
 
 /*
@@ -17,12 +16,15 @@ import generic.RequestType;
 
 public class BingoPrefetcher extends Prefetcher {
 
+    Cache associatedCache;
     int auxillarySize;
     int setSize;
     int pageSize;
     int noOfBlocks;
     int blockSizeBits;
     float prefetchThreshold;
+    Long numberOfPrefetchesIssued;
+    boolean isNewPageAccess;
 
     int pageSizeBits;
     LRU<Long, ArrayList<Integer>> auxillarySpace;
@@ -32,8 +34,9 @@ public class BingoPrefetcher extends Prefetcher {
     ArrayList<LRU<String, ArrayList<Integer>>> historyTable;
 
     public BingoPrefetcher(Cache associatedCache) {
-        auxillarySize = 50; // General Value
-        setSize = 50; // General Value
+        numberOfPrefetchesIssued = 0L;
+        auxillarySize = 100; // General Value
+        setSize = 100; // General Value
         pageSize = 4096; // General Value
         prefetchThreshold = 0.20f; // [Bingo Spatial Data Prefetcher]
         pageSizeBits = Util.logbase2(pageSize);
@@ -58,7 +61,7 @@ public class BingoPrefetcher extends Prefetcher {
     }
 
     @Override
-    public void handleMissAtAddress(long addr) {
+    public void handleAccess(long addr) {
         long blockAddr = addr & (pageSize - 1);
         long pageNumber = addr >>> pageSizeBits;
         int blockOffset = (int) associatedCache.getLineAddress(blockAddr);
@@ -67,36 +70,33 @@ public class BingoPrefetcher extends Prefetcher {
         // Training Steps
         ArrayList<Integer> oldFootPrint = auxillarySpace.get(pageNumber);
         if (oldFootPrint != null) {
+            // Page number already in auxillary space
+            // Then update the offset history
             oldFootPrint.set(blockOffset, 1);
         } else {
+            isNewPageAccess = true;
             ArrayList<Integer> newFootPrint = new ArrayList<Integer>();
             for (int i = 0; i < noOfBlocks; i++) {
                 newFootPrint.add(0);
             }
             pageTrigger.put(pageNumber, trigger);
             pageOffset.put(pageNumber, blockOffset);
-            HashMap<Long, ArrayList<Integer>> replacedElement = auxillarySpace.put(pageNumber, newFootPrint);
-            if (!replacedElement.isEmpty()) {
-                Long oldPageNumber = null;
-                for (Long key : replacedElement.keySet()) {
-                    oldPageNumber = key;
-                }
-                ArrayList<Integer> oldFootprint = replacedElement.get(oldPageNumber);
+            Pair<Long, ArrayList<Integer>> replacedElement = auxillarySpace.put(pageNumber, newFootPrint);
+            if (replacedElement != null) {
+                Long oldPageNumber = replacedElement.key;
+                ArrayList<Integer> oldFootprint = replacedElement.value;
                 String oldTrigger = pageTrigger.get(oldPageNumber);
                 int oldOffset = pageOffset.get(oldPageNumber);
                 pageTrigger.remove(oldPageNumber);
                 pageOffset.remove(oldPageNumber);
-                HashMap<String, ArrayList<Integer>> kickedHistory = historyTable.get(oldOffset).put(oldTrigger,
+                Pair<String, ArrayList<Integer>> kickedHistory = historyTable.get(oldOffset).put(oldTrigger,
                         oldFootprint);
                 for (int i = 0; i < noOfBlocks; i++) {
                     int oldCount = oldFootprint.get(i);
                     footprintTotal.get(oldOffset).set(i, footprintTotal.get(oldOffset).get(i) + oldCount);
                 }
-                if (!kickedHistory.isEmpty()) {
-                    ArrayList<Integer> kickedFootprint = null;
-                    for (String key : kickedHistory.keySet()) {
-                        kickedFootprint = kickedHistory.get(key);
-                    }
+                if (kickedHistory != null) {
+                    ArrayList<Integer> kickedFootprint = kickedHistory.value;
                     for (int i = 0; i < noOfBlocks; i++) {
                         int kickedCount = kickedFootprint.get(i);
                         footprintTotal.get(oldOffset).set(i, footprintTotal.get(oldOffset).get(i) - kickedCount);
@@ -104,42 +104,57 @@ public class BingoPrefetcher extends Prefetcher {
                 }
             }
         }
+    }
+
+    @Override
+    public void handleMissAtAddress(long addr) {
+        long blockAddr = addr & (pageSize - 1);
+        long pageNumber = addr >>> pageSizeBits;
+        int blockOffset = (int) associatedCache.getLineAddress(blockAddr);
+        String trigger = Long.toString(addr);
 
         // Prediction Steps
-        boolean longEventHit = false;
-        LRU<String, ArrayList<Integer>> offsetHistory = historyTable.get(blockOffset);
+        if (isNewPageAccess) {
+            boolean longEventHit = false;
+            LRU<String, ArrayList<Integer>> offsetHistory = historyTable.get(blockOffset);
 
-        // Prediction Long Event
-        ArrayList<Integer> footprint = offsetHistory.get(trigger);
-        if (footprint != null) {
-            longEventHit = true;
-            for (int i = 0; i < noOfBlocks; i++) {
-                if (footprint.get(i) == 1) {
-                    int diffSize = pageSizeBits - blockSizeBits;
-                    long prefetchAddr = ((pageNumber << diffSize) + i) << blockSizeBits;
-                    issuePrefetchRequest(prefetchAddr);
-                }
+            // Prediction Long Event
+            ArrayList<Integer> footprint = offsetHistory.get(trigger);
+            if (footprint != null) {
+                longEventHit = true;
+                for (int i = 0; i < noOfBlocks; i++) {
+                    if (footprint.get(i) == 1) {
+                        int diffSize = pageSizeBits - blockSizeBits;
+                        long prefetchAddr = ((pageNumber << diffSize) + i) << blockSizeBits;
+                        issuePrefetchRequest(prefetchAddr);
+                    }
 
-            }
-        }
-        // Prediction Short Event
-        if (!longEventHit) {
-            for (int i = 0; i < noOfBlocks; i++) {
-                int footprintCount = footprintTotal.get(blockOffset).get(i);
-                float footPrintRatio = (float) footprintCount / (float) historyTable.get(blockOffset).size();
-                if (footPrintRatio >= prefetchThreshold) {
-                    int diffSize = pageSizeBits - blockSizeBits;
-                    long prefetchAddr = ((pageNumber << diffSize) + i) << blockSizeBits;
-                    issuePrefetchRequest(prefetchAddr);
                 }
             }
+            // Prediction Short Event
+            if (!longEventHit) {
+                for (int i = 0; i < noOfBlocks; i++) {
+                    int footprintCount = footprintTotal.get(blockOffset).get(i);
+                    float footPrintRatio = (float) footprintCount / (float) setSize;
+                    if (footPrintRatio >= prefetchThreshold) {
+                        int diffSize = pageSizeBits - blockSizeBits;
+                        long prefetchAddr = ((pageNumber << diffSize) + i) << blockSizeBits;
+                        issuePrefetchRequest(prefetchAddr);
+                    }
+                }
+            }
         }
+        isNewPageAccess = false;
     }
 
     private void issuePrefetchRequest(long addr) {
         if (associatedCache.accessValid(addr) == null) {
             associatedCache.sendRequestToNextLevel(addr, RequestType.Cache_Read);
             numberOfPrefetchesIssued++;
+            if (numberOfPrefetchesIssued % 10000 == 0) {
+                System.out
+                        .println("Prefetches Issued: " + numberOfPrefetchesIssued + " at " + associatedCache.cacheName);
+            }
         }
     }
 }
